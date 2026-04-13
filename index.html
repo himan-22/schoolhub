@@ -445,10 +445,11 @@
       border-radius: var(--r-md);
       padding: 1.25rem;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
       position: relative;
       overflow: hidden;
       -webkit-user-select: none;
+      transform-style: preserve-3d;
     }
 
     .idea-card::before {
@@ -459,7 +460,8 @@
       border-radius: var(--r-md) var(--r-md) 0 0;
     }
 
-    .idea-card:active { transform: scale(0.98); }
+    /* 3D press effect */
+    .idea-card:active { transform: perspective(400px) scale(0.97) rotateX(1.5deg) rotateY(1deg); }
 
     .idea-card[data-color="orange"]::before { background: var(--accent); }
     .idea-card[data-color="pink"]::before   { background: var(--pink); }
@@ -638,13 +640,14 @@
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       overflow: hidden;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
       cursor: pointer;
       display: flex;
       flex-direction: column;
+      transform-style: preserve-3d;
     }
 
-    .listing-card:active { transform: scale(0.97); }
+    .listing-card:active { transform: perspective(400px) scale(0.97) rotateX(1.5deg) rotateY(1deg); }
 
     .listing-img {
       height: 90px;
@@ -705,10 +708,13 @@
       gap: 12px;
       align-items: flex-start;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
     }
+
+    .opp-card:active { transform: perspective(400px) scale(0.98) rotateX(1deg) rotateY(1deg); }
 
     .opp-card::after {
       content: '';
@@ -721,7 +727,6 @@
       transition: opacity 0.2s;
     }
 
-    .opp-card:active { background: #fafaf7; }
     .opp-card:active::after { opacity: 1; }
 
     .opp-type {
@@ -1000,9 +1005,10 @@
       border-radius: var(--r-md);
       padding: 1rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
     }
 
     .quick-card::before {
@@ -1012,7 +1018,7 @@
       height: 3px;
     }
 
-    .quick-card:active { transform: scale(0.96); }
+    .quick-card:active { transform: perspective(400px) scale(0.96) rotateX(1.5deg) rotateY(1deg); }
 
     .quick-card[data-color="orange"]::before { background: var(--accent); }
     .quick-card[data-color="pink"]::before   { background: var(--pink); }
@@ -1150,6 +1156,8 @@
       border-radius: 16px;
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
+      background: #f5f5f2;  /* simpler background */
+      border: 1px solid var(--border);
     }
     .cat-chip-label {
       font-size: 10px;
@@ -1245,38 +1253,38 @@
       </div>
     </div>
 
-    <!-- CATEGORY QUICK CHIPS -->
+    <!-- CATEGORY QUICK CHIPS (simplified icons) -->
     <div class="section" style="padding-bottom: 0.5rem;">
       <div class="section-header">
         <div class="section-title">Browse Categories</div>
       </div>
       <div class="category-chips">
         <div class="cat-chip" onclick="showPage('marketplace'); filterListings('tutoring', document.querySelectorAll('#marketplace .filter-chip')[1])">
-          <div class="cat-chip-icon" style="background:#fff7ed">📚</div>
+          <div class="cat-chip-icon">📚</div>
           <div class="cat-chip-label">Tutoring</div>
         </div>
         <div class="cat-chip" onclick="showPage('marketplace'); filterListings('freelance', document.querySelectorAll('#marketplace .filter-chip')[2])">
-          <div class="cat-chip-icon" style="background:#fff1f2">💻</div>
+          <div class="cat-chip-icon">💻</div>
           <div class="cat-chip-label">Freelance</div>
         </div>
         <div class="cat-chip" onclick="showPage('marketplace'); filterListings('events', document.querySelectorAll('#marketplace .filter-chip')[3])">
-          <div class="cat-chip-icon" style="background:#f0fdf4">📸</div>
+          <div class="cat-chip-icon">📸</div>
           <div class="cat-chip-label">Events</div>
         </div>
         <div class="cat-chip" onclick="showPage('marketplace'); filterListings('fitness', document.querySelectorAll('#marketplace .filter-chip')[4])">
-          <div class="cat-chip-icon" style="background:#f5f3ff">🧘</div>
+          <div class="cat-chip-icon">🧘</div>
           <div class="cat-chip-label">Fitness</div>
         </div>
         <div class="cat-chip" onclick="showPage('marketplace'); filterListings('academic', document.querySelectorAll('#marketplace .filter-chip')[5])">
-          <div class="cat-chip-icon" style="background:#eff6ff">📝</div>
+          <div class="cat-chip-icon">📝</div>
           <div class="cat-chip-label">Academic</div>
         </div>
         <div class="cat-chip" onclick="showPage('marketplace'); filterListings('merch', document.querySelectorAll('#marketplace .filter-chip')[6])">
-          <div class="cat-chip-icon" style="background:#f0fdf4">👕</div>
+          <div class="cat-chip-icon">👕</div>
           <div class="cat-chip-label">Merch</div>
         </div>
         <div class="cat-chip" onclick="showPage('opportunities')">
-          <div class="cat-chip-icon" style="background:#fffbeb">📣</div>
+          <div class="cat-chip-icon">📣</div>
           <div class="cat-chip-label">Opps</div>
         </div>
       </div>
@@ -1715,22 +1723,22 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  /* ===== DATA ===== */
+  /* ===== DATA (names removed, replaced with generic descriptors) ===== */
   const listings = [
-    { id:1,  cat:'tutoring',  icon:'📚', bg:'#fff7ed', name:'JEE Physics Crash Course',       by:'Ankit Borah',         price:'₹300/session',  meta:'4.9★ · 42 sessions' },
-    { id:2,  cat:'tutoring',  icon:'📐', bg:'#fff7ed', name:'UPSC Prelims Coaching',           by:'Priya Deka',          price:'₹400/session',  meta:'4.8★ · 68 sessions' },
-    { id:3,  cat:'tutoring',  icon:'🧬', bg:'#fff7ed', name:'NEET Biology Prep',               by:'Riya Gogoi',          price:'₹250/session',  meta:'5.0★ · 29 sessions' },
-    { id:4,  cat:'freelance', icon:'🎨', bg:'#fff1f2', name:'Logo & Brand Design',             by:'Deepak Saikia',       price:'₹1,500/project',meta:'4.7★ · 18 projects' },
-    { id:5,  cat:'freelance', icon:'💻', bg:'#fff1f2', name:'React Web App Dev',               by:'Mridul Das',          price:'₹5,000/project',meta:'4.9★ · 11 projects' },
-    { id:6,  cat:'freelance', icon:'✍️', bg:'#fff1f2', name:'Content Writing & SEO',           by:'Ankita Bhuyan',       price:'₹800/article',  meta:'4.6★ · 35 articles' },
-    { id:7,  cat:'events',    icon:'📸', bg:'#f0fdf4', name:'College Fest Photography',        by:'Suraj Events Squad',  price:'₹5,000/event',  meta:'4.9★ · 23 events' },
-    { id:8,  cat:'events',    icon:'🎤', bg:'#f0fdf4', name:'MC Hosting & Decoration',         by:'Campus Vibes Crew',   price:'₹3,500/event',  meta:'4.8★ · 15 events' },
-    { id:9,  cat:'fitness',   icon:'🧘', bg:'#f5f3ff', name:'Morning Yoga (5–8 AM)',           by:'Pallabi Sharma',      price:'₹200/class',    meta:'4.9★ · 120 sessions' },
-    { id:10, cat:'fitness',   icon:'💪', bg:'#f5f3ff', name:'Zumba Fitness Group',             by:'Neha Borah',          price:'₹250/class',    meta:'5.0★ · 90 sessions' },
-    { id:11, cat:'academic',  icon:'📝', bg:'#eff6ff', name:'Lab Record Formatting',           by:'Ranjit Hazarika',     price:'₹150/record',   meta:'4.9★ · 55 records' },
-    { id:12, cat:'academic',  icon:'📄', bg:'#eff6ff', name:'Full Project Report Writing',     by:'Divya Nath',          price:'₹400/report',   meta:'4.7★ · 30 reports' },
-    { id:13, cat:'merch',     icon:'👕', bg:'#f0fdf4', name:'Custom College Hoodies',          by:'PrintCampus Store',   price:'₹549/piece',    meta:'200+ sold' },
-    { id:14, cat:'merch',     icon:'☕', bg:'#f0fdf4', name:'College Mugs & ID Holders',       by:'MemoraBatch Co.',     price:'₹149/piece',    meta:'1,200+ sold' },
+    { id:1,  cat:'tutoring',  icon:'📚', bg:'#fff7ed', name:'JEE Physics Crash Course',       by:'Student Tutor',         price:'₹300/session',  meta:'4.9★ · 42 sessions' },
+    { id:2,  cat:'tutoring',  icon:'📐', bg:'#fff7ed', name:'UPSC Prelims Coaching',           by:'Senior Mentor',         price:'₹400/session',  meta:'4.8★ · 68 sessions' },
+    { id:3,  cat:'tutoring',  icon:'🧬', bg:'#fff7ed', name:'NEET Biology Prep',               by:'Med Student',           price:'₹250/session',  meta:'5.0★ · 29 sessions' },
+    { id:4,  cat:'freelance', icon:'🎨', bg:'#fff1f2', name:'Logo & Brand Design',             by:'Design Student',        price:'₹1,500/project',meta:'4.7★ · 18 projects' },
+    { id:5,  cat:'freelance', icon:'💻', bg:'#fff1f2', name:'React Web App Dev',               by:'CS Senior',             price:'₹5,000/project',meta:'4.9★ · 11 projects' },
+    { id:6,  cat:'freelance', icon:'✍️', bg:'#fff1f2', name:'Content Writing & SEO',           by:'Communications Major',  price:'₹800/article',  meta:'4.6★ · 35 articles' },
+    { id:7,  cat:'events',    icon:'📸', bg:'#f0fdf4', name:'College Fest Photography',        by:'Event Crew',            price:'₹5,000/event',  meta:'4.9★ · 23 events' },
+    { id:8,  cat:'events',    icon:'🎤', bg:'#f0fdf4', name:'MC Hosting & Decoration',         by:'Campus Vibes',          price:'₹3,500/event',  meta:'4.8★ · 15 events' },
+    { id:9,  cat:'fitness',   icon:'🧘', bg:'#f5f3ff', name:'Morning Yoga (5–8 AM)',           by:'Certified Coach',       price:'₹200/class',    meta:'4.9★ · 120 sessions' },
+    { id:10, cat:'fitness',   icon:'💪', bg:'#f5f3ff', name:'Zumba Fitness Group',             by:'Dance & Fitness',       price:'₹250/class',    meta:'5.0★ · 90 sessions' },
+    { id:11, cat:'academic',  icon:'📝', bg:'#eff6ff', name:'Lab Record Formatting',           by:'Engineering Senior',    price:'₹150/record',   meta:'4.9★ · 55 records' },
+    { id:12, cat:'academic',  icon:'📄', bg:'#eff6ff', name:'Full Project Report Writing',     by:'Research Scholar',      price:'₹400/report',   meta:'4.7★ · 30 reports' },
+    { id:13, cat:'merch',     icon:'👕', bg:'#f0fdf4', name:'Custom College Hoodies',          by:'PrintCampus Store',     price:'₹549/piece',    meta:'200+ sold' },
+    { id:14, cat:'merch',     icon:'☕', bg:'#f0fdf4', name:'College Mugs & ID Holders',       by:'MemoraBatch Co.',       price:'₹149/piece',    meta:'1,200+ sold' },
   ];
 
   const opportunities = [
@@ -1741,7 +1749,8 @@
     { type:'scholarship', icon:'🏆', bg:'#f0fdf4', title:'Inspire Scholarship (DST)',       desc:'For top 1% in Class 12 boards. Monthly scholarship for science.',    deadline:'Open',   reward:'₹80k/year',  tag:'scholarship' },
     { type:'hackathon',   icon:'🚀', bg:'#fff7ed', title:'Assam Startup Hackathon',         desc:'State-level for student entrepreneurs. Pitching, mentoring, funding.',deadline:'5 May',  reward:'₹50k grant', tag:'hackathon' },
     { type:'internship',  icon:'🏗️', bg:'#eff6ff', title:'BHEL Engineering Internship',    desc:'Industrial exposure at BHEL Guwahati. EEE, ECE, Civil preferred.',   deadline:'30 Apr', reward:'Stipend+Cert',tag:'internship' },
-    { type:'fest',        icon:'🎭', bg:'#fff1f2', title:'Spandan — AEC Cultural Fest',     desc:'Annual cultural fest by AEC. Dance, music, art, drama.',            deadline:'Jun 2025',reward:'Cert + Cash', tag:'fest' },
+    // renamed "AEC Spandan" removed, replaced with generic cultural fest
+    { type:'fest',        icon:'🎭', bg:'#fff1f2', title:'Annual Cultural Fest',            desc:'Dance, music, art, drama competitions. Open to all colleges.',      deadline:'Jun 2025',reward:'Cert + Cash', tag:'fest' },
   ];
 
   /* ===== RENDER LISTINGS ===== */
@@ -1815,7 +1824,6 @@
       document.getElementById(bnavIds[idx])?.classList.add('active');
     }
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (id === 'marketplace') renderListings('all');
@@ -1862,12 +1870,10 @@
     `).join('');
   }
 
-  // Close search on overlay tap
   document.getElementById('searchOverlay').addEventListener('click', function(e) {
     if (e.target === this) closeSearch();
   });
 
-  // ESC to close search
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeSearch();
   });
@@ -1880,7 +1886,7 @@
     t.textContent = msg;
     t.style.display = 'block';
     t.style.animation = 'none';
-    t.offsetHeight; // reflow
+    t.offsetHeight;
     t.style.animation = 'toastIn 0.3s ease forwards';
     toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3000);
   }
