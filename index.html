@@ -3,734 +3,339 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<meta name="theme-color" content="#0b0c10"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#080a0f"/>
 <title>StudentHub — NE India's Student Economy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
 :root{
-  --ink:       #0b0c10;
-  --ink-mid:   #13151c;
-  --ink-deep:  #1c1e28;
-  --gold:      #c9a84c;
-  --gold-pale: rgba(201,168,76,0.12);
-  --gold-bdr:  rgba(201,168,76,0.3);
-  --cream:     #f5f3ee;
-  --parchment: #ece9e1;
+  --bg:        #080a0f;
+  --bg2:       #0d1018;
+  --bg3:       #12151e;
   --surface:   #ffffff;
-  --text:      #0b0c10;
-  --muted:     #7a7870;
-  --border:    #e2e0d8;
-  --r-sm:      8px;
-  --r-md:      14px;
-  --r-lg:      20px;
-  --r-xl:      28px;
-  --nav-h:     64px;
-  --bottom-h:  70px;
-  --safe-b:    env(safe-area-inset-bottom,0px);
+  --cream:     #f7f5f0;
+  --parchment: #ece9e1;
+  --border:    #e4e1d8;
+  --text:      #0d0e12;
+  --muted:     #8a8880;
+  --gold:      #c8a84b;
+  --gold2:     #e2c46d;
+  --gold-pale: rgba(200,168,75,0.10);
+  --gold-bdr:  rgba(200,168,75,0.28);
+  --teal:      #2d9b8a;
+  --teal-pale: rgba(45,155,138,0.10);
+  --teal-bdr:  rgba(45,155,138,0.28);
+  --purple:    #7c5cbf;
+  --purple-pale:rgba(124,92,191,0.10);
+  --r-sm:6px;--r-md:12px;--r-lg:18px;--r-xl:24px;
+  --nav-h:62px;--bot-h:68px;
+  --safe-b:env(safe-area-inset-bottom,0px);
 }
 
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100dvh;overscroll-behavior:none}
-img{display:block;max-width:100%}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);min-height:100dvh;overscroll-behavior:none}
+img,svg{display:block}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,select,textarea{font-family:inherit}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-thumb{background:#ccc9bf;border-radius:2px}
 
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#ccc9bf;border-radius:4px}
-
-/* ===== SVG ICONS ===== */
-.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-
-/* ===== TOP NAV ===== */
-.top-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;height:var(--nav-h);
-  background:var(--ink);position:sticky;top:0;z-index:200;
-  border-bottom:1px solid rgba(201,168,76,0.15);
-}
-
-.nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:24px;font-weight:600;color:#fff;
-  letter-spacing:0.5px;user-select:none;
-  display:flex;align-items:baseline;gap:1px;
-}
-.nav-logo span{color:var(--gold)}
-
-.top-nav-links{display:flex;gap:2px}
-
-.nav-pill{
-  font-size:12px;font-weight:500;letter-spacing:0.4px;
-  padding:7px 18px;border-radius:40px;
-  color:rgba(255,255,255,0.5);background:transparent;
-  border:1px solid transparent;
-  transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  white-space:nowrap;
-}
-.nav-pill:hover{color:rgba(255,255,255,0.85);border-color:rgba(201,168,76,0.25)}
-.nav-pill.active{
-  background:var(--gold-pale);color:var(--gold);
-  border-color:var(--gold-bdr);font-weight:600;
-}
-
-/* ===== MOBILE HEADER ===== */
-.mobile-header{
-  display:none;align-items:center;justify-content:space-between;
-  padding:0 1.25rem;height:var(--nav-h);
-  background:var(--ink);position:sticky;top:0;z-index:200;
-  border-bottom:1px solid rgba(201,168,76,0.15);
-}
-.mobile-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff}
-.mobile-logo span{color:var(--gold)}
-.mobile-search-btn{
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(255,255,255,0.07);border:1px solid rgba(201,168,76,0.2);
-  display:flex;align-items:center;justify-content:center;
-  transition:background 0.2s;
-}
-.mobile-search-btn:active{background:rgba(255,255,255,0.12)}
-
-/* ===== BOTTOM NAV ===== */
-.bottom-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;
-  height:calc(var(--bottom-h) + var(--safe-b));
-  padding-bottom:var(--safe-b);
-  background:var(--ink);
-  border-top:1px solid rgba(201,168,76,0.12);
-  z-index:200;justify-content:space-around;align-items:center;
-}
-.bnav-item{
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  flex:1;padding:8px 0;color:rgba(255,255,255,0.35);
-  transition:color 0.25s;position:relative;
-}
-.bnav-item.active{color:var(--gold)}
-.bnav-icon{line-height:1;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
-.bnav-item.active .bnav-icon{transform:scale(1.1) translateY(-1px)}
-.bnav-label{font-size:10px;font-weight:500;letter-spacing:0.3px}
-.bnav-dot{
-  position:absolute;top:6px;right:calc(50% - 12px);
-  width:6px;height:6px;background:#e05a5a;border-radius:50%;
-  border:1.5px solid var(--ink);
-  animation:pulse-dot 2.5s ease infinite;
-}
-@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.85)}}
-
-/* ===== PAGES ===== */
-#app{padding-bottom:0}
-.page{display:none}
-.page.active{display:block;animation:pageIn 0.4s cubic-bezier(0.22,1,0.36,1)}
-
-@keyframes pageIn{
-  from{opacity:0;transform:translateY(16px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* ===== SEARCH OVERLAY ===== */
-.search-overlay{
-  display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(11,12,16,0.9);backdrop-filter:blur(10px);
-  padding:1.25rem;flex-direction:column;gap:12px;
-}
-.search-overlay.open{display:flex;animation:fadeIn 0.2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-.search-bar-wrap{
-  display:flex;align-items:center;gap:10px;
-  background:var(--surface);border-radius:var(--r-lg);
-  padding:12px 16px;border:1px solid var(--gold-bdr);
-}
-.search-bar-wrap input{flex:1;border:none;font-size:15px;outline:none;color:var(--text);background:transparent}
-.search-bar-wrap input::placeholder{color:var(--muted)}
-.search-cancel{font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap;letter-spacing:0.2px}
-
+/* ══ SEARCH OVERLAY ══ */
+.search-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,10,15,0.93);backdrop-filter:blur(12px);padding:1.5rem;flex-direction:column;gap:10px}
+.search-overlay.open{display:flex;animation:fd .2s ease}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+.search-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:var(--r-lg);padding:12px 16px;border:1px solid var(--gold-bdr)}
+.search-bar input{flex:1;border:none;font-size:15px;outline:none;color:var(--text);background:transparent}
+.search-bar input::placeholder{color:var(--muted)}
+.search-cancel{font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap}
 .search-results{background:var(--surface);border-radius:var(--r-md);overflow:hidden;max-height:60vh;overflow-y:auto;border:1px solid var(--border)}
-.search-result-item{
-  display:flex;align-items:center;gap:12px;padding:13px 16px;
-  border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;
-}
-.search-result-item:last-child{border-bottom:none}
-.search-result-item:active{background:var(--cream)}
-.sri-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--cream);flex-shrink:0}
-.sri-text{flex:1}
+.sri{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.sri:last-child{border-bottom:none}
+.sri:active{background:var(--cream)}
+.sri-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--cream);flex-shrink:0}
 .sri-name{font-size:13px;font-weight:600;color:var(--text)}
 .sri-meta{font-size:11px;color:var(--muted);margin-top:1px}
 .sri-price{font-size:13px;font-weight:700;color:var(--gold)}
 
-/* ===== HERO ===== */
-.hero{
-  background:var(--ink);padding:4rem 1.5rem 4.5rem;
-  text-align:center;position:relative;overflow:hidden;
-}
+/* ══ TOP NAV ══ */
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:var(--nav-h);background:var(--bg);position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(200,168,75,0.12)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:0.2px;user-select:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2px}
+.nav-pill{font-size:12px;font-weight:500;letter-spacing:0.3px;padding:7px 16px;border-radius:40px;color:rgba(255,255,255,0.45);border:1px solid transparent;transition:all .22s;white-space:nowrap}
+.nav-pill:hover{color:rgba(255,255,255,0.8);border-color:rgba(200,168,75,0.2)}
+.nav-pill.active{background:var(--gold-pale);color:var(--gold);border-color:var(--gold-bdr);font-weight:600}
 
-.hero-lines{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);
-  background-size:48px 48px;
-}
+/* ══ MOBILE HEADER ══ */
+.mob-header{display:none;align-items:center;justify-content:space-between;padding:0 1.25rem;height:var(--nav-h);background:var(--bg);position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(200,168,75,0.12)}
+.mob-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.mob-logo span{color:var(--gold)}
+.mob-search-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(200,168,75,0.18);display:flex;align-items:center;justify-content:center}
 
-.hero-vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 70% at 50% 100%, transparent 50%, var(--ink) 100%);
-}
+/* ══ BOTTOM NAV ══ */
+.bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:calc(var(--bot-h) + var(--safe-b));padding-bottom:var(--safe-b);background:var(--bg);border-top:1px solid rgba(200,168,75,0.1);z-index:300;justify-content:space-around;align-items:center}
+.bni{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;padding:8px 0;color:rgba(255,255,255,0.3);transition:color .22s;position:relative}
+.bni.active{color:var(--gold)}
+.bni-icon{line-height:1;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.bni.active .bni-icon{transform:scale(1.1) translateY(-1px)}
+.bni-label{font-size:10px;font-weight:500;letter-spacing:0.3px}
+.bni-dot{position:absolute;top:6px;right:calc(50% - 14px);width:5px;height:5px;background:#e05a5a;border-radius:50%;border:1.5px solid var(--bg);animation:pdot 2.5s ease infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
 
-.hero-glow{
-  position:absolute;left:50%;top:0;transform:translateX(-50%);
-  width:600px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  opacity:0.5;
-}
+/* ══ PAGES ══ */
+#app{padding-bottom:0}
+.page{display:none}
+.page.active{display:block;animation:pgIn .4s cubic-bezier(.22,1,.36,1)}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
+/* ══ HERO ══ */
+.hero{background:var(--bg);padding:5rem 1.5rem 5.5rem;text-align:center;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(200,168,75,.03)1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.03)1px,transparent 1px);background-size:52px 52px}
+.hero-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 80% at 50% 110%,transparent 40%,var(--bg) 100%)}
+.hero-glow{position:absolute;left:50%;top:0;transform:translateX(-50%);width:500px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4}
+.hero-orb{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,75,.06) 0%,transparent 70%);pointer-events:none}
 .hero-content{position:relative;z-index:1}
-
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1.5rem;
-  opacity:0;animation:fadeUp 0.7s 0.1s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-
-.hero-eyebrow::before,.hero-eyebrow::after{
-  content:'';display:block;height:1px;width:32px;background:currentColor;opacity:0.4;
-}
-
-.hero h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.8rem,9vw,5.5rem);
-  font-weight:600;color:#fff;
-  line-height:1.05;margin-bottom:1.25rem;
-  letter-spacing:-1px;
-  opacity:0;animation:fadeUp 0.8s 0.2s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem;opacity:0;animation:fu .7s .1s cubic-bezier(.22,1,.36,1) forwards}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;height:1px;width:28px;background:currentColor;opacity:.4}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,10vw,6rem);font-weight:700;color:#fff;line-height:1.02;margin-bottom:1.25rem;letter-spacing:-1.5px;opacity:0;animation:fu .8s .2s cubic-bezier(.22,1,.36,1) forwards}
 .hero h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.38);max-width:380px;margin:0 auto 2.75rem;line-height:1.8;font-weight:300;opacity:0;animation:fu .8s .3s cubic-bezier(.22,1,.36,1) forwards}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu .8s .4s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-.hero-sub{
-  font-size:15px;color:rgba(255,255,255,0.4);
-  max-width:360px;margin:0 auto 2.5rem;
-  line-height:1.75;font-weight:300;
-  opacity:0;animation:fadeUp 0.8s 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
-}
+.btn-primary{background:var(--gold);color:var(--bg);font-weight:700;font-size:13px;letter-spacing:0.5px;padding:14px 28px;border-radius:var(--r-sm);transition:all .22s;min-height:48px;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-primary:active{transform:scale(.97)}
+.btn-outline{background:transparent;color:rgba(255,255,255,.7);font-weight:500;font-size:13px;padding:14px 28px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);transition:all .22s;min-height:48px;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:var(--gold-bdr);color:var(--gold)}
+.btn-outline:active{background:rgba(255,255,255,.05)}
 
-.hero-btns{
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
-  opacity:0;animation:fadeUp 0.8s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
-}
+/* ══ STATS ══ */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg2);border-bottom:1px solid rgba(200,168,75,.08)}
+.stat{padding:1.25rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,.05)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:27px;font-weight:700;color:var(--gold);line-height:1}
+.stat-l{font-size:10px;color:rgba(255,255,255,.3);margin-top:5px;letter-spacing:.6px;text-transform:uppercase}
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:translateY(0)}
-}
+/* ══ SECTION ══ */
+.section{padding:2rem 1.5rem;max-width:1040px;margin:0 auto}
+.sh{margin-bottom:1.5rem}
+.st{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:-.3px;line-height:1.2;margin-bottom:.3rem}
+.ss{font-size:13px;color:var(--muted);line-height:1.6}
+.sdiv{height:1px;background:var(--border)}
 
-.btn-primary{
-  background:var(--gold);color:var(--ink);
-  font-weight:700;font-size:13px;letter-spacing:0.5px;
-  padding:14px 28px;border-radius:var(--r-sm);
-  transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  min-height:48px;display:inline-flex;align-items:center;gap:8px;
-  position:relative;overflow:hidden;
-}
-.btn-primary::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(rgba(255,255,255,0.15),transparent);
-  opacity:0;transition:opacity 0.2s;
-}
-.btn-primary:hover::after{opacity:1}
-.btn-primary:active{transform:scale(0.97)}
+/* ══ CAT CHIPS ══ */
+.cat-chips{display:flex;gap:10px;overflow-x:auto;padding:0 1.5rem .25rem;margin:0 -1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-chips::-webkit-scrollbar{display:none}
+.cc{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.cc:active{transform:scale(.92)}
+.cc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);transition:all .22s}
+.cc:hover .cc-icon{border-color:var(--gold-bdr);background:var(--gold-pale);transform:translateY(-2px)}
+.cc-label{font-size:10px;font-weight:500;color:var(--muted);white-space:nowrap;letter-spacing:.3px}
+.cc:hover .cc-label{color:var(--text)}
 
-.btn-outline{
-  background:transparent;color:rgba(255,255,255,0.75);
-  font-weight:500;font-size:13px;letter-spacing:0.3px;
-  padding:14px 28px;border-radius:var(--r-sm);
-  border:1px solid rgba(255,255,255,0.18);
-  transition:all 0.25s;
-  min-height:48px;display:inline-flex;align-items:center;gap:8px;
-}
-.btn-outline:hover{border-color:rgba(201,168,76,0.4);color:var(--gold)}
-.btn-outline:active{background:rgba(255,255,255,0.05)}
+/* ══ FEATURED CARD ══ */
+.featured-card{background:var(--bg);border-radius:var(--r-xl);padding:1.75rem;color:#fff;margin-bottom:1.5rem;position:relative;overflow:hidden;border:1px solid rgba(200,168,75,.14);transition:border-color .3s}
+.featured-card:hover{border-color:rgba(200,168,75,.28)}
+.featured-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.45}
+.fc-glow{position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,75,.1)0%,transparent 70%)}
+.fc-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold-pale);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:40px;margin-bottom:.875rem;border:1px solid var(--gold-bdr)}
+.fc-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pdot 2s ease infinite}
+.fc-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:.4rem;line-height:1.2}
+.fc-desc{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:1.25rem;line-height:1.65}
+.fc-btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--bg);font-weight:700;font-size:12px;letter-spacing:.3px;padding:10px 20px;border-radius:var(--r-sm);transition:all .2s}
+.fc-btn:hover{background:var(--gold2)}
 
-/* ===== STATS STRIP ===== */
-.stats-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  background:var(--ink-deep);
-  border-bottom:1px solid rgba(201,168,76,0.1);
-}
-.stat-item{
-  padding:1.25rem 1rem;text-align:center;
-  border-right:1px solid rgba(255,255,255,0.06);
-  position:relative;overflow:hidden;
-}
-.stat-item:last-child{border-right:none}
-.stat-item::after{
-  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:0;height:2px;background:var(--gold);opacity:0.6;
-  transition:width 0.4s cubic-bezier(0.22,1,0.36,1);
-}
-.stat-item:hover::after{width:60%}
-.stat-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:26px;font-weight:600;color:var(--gold);line-height:1;
-}
-.stat-label{font-size:10px;color:rgba(255,255,255,0.35);margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}
-
-/* ===== SECTION ===== */
-.section{padding:2rem 1.5rem;max-width:1000px;margin:0 auto}
-
-.section-header{margin-bottom:1.5rem}
-
-.section-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:28px;font-weight:600;color:var(--text);
-  margin-bottom:0.3rem;letter-spacing:-0.3px;
-  line-height:1.2;
-}
-
-.section-sub{font-size:13px;color:var(--muted);line-height:1.6}
-
-/* ===== CATEGORY CHIPS ===== */
-.category-chips{
-  display:flex;gap:10px;overflow-x:auto;
-  padding:0 1.5rem 0.25rem;margin:0 -1.5rem;
-  scrollbar-width:none;-webkit-overflow-scrolling:touch;
-}
-.category-chips::-webkit-scrollbar{display:none}
-
-.cat-chip{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  flex-shrink:0;cursor:pointer;
-  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-}
-.cat-chip:active{transform:scale(0.92)}
-
-.cat-chip-icon{
-  width:54px;height:54px;border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--surface);
-  border:1px solid var(--border);
-  transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  position:relative;overflow:hidden;
-}
-.cat-chip:hover .cat-chip-icon{
-  border-color:var(--gold-bdr);background:var(--gold-pale);
-  transform:translateY(-2px);
-}
-.cat-chip-label{font-size:10px;font-weight:500;color:var(--muted);text-align:center;white-space:nowrap;letter-spacing:0.3px}
-.cat-chip:hover .cat-chip-label{color:var(--text)}
-
-/* ===== DIVIDER ===== */
-.section-divider{height:1px;background:var(--border);margin:0}
-
-/* ===== FEATURED CARD ===== */
-.featured-card{
-  background:var(--ink);border-radius:var(--r-xl);
-  padding:1.75rem;color:#fff;margin-bottom:1.5rem;
-  position:relative;overflow:hidden;
-  border:1px solid rgba(201,168,76,0.15);
-  transition:border-color 0.3s;
-}
-.featured-card:hover{border-color:rgba(201,168,76,0.3)}
-.featured-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  opacity:0.5;
-}
-.featured-card-corner{
-  position:absolute;right:-30px;top:-30px;
-  width:140px;height:140px;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,168,76,0.12) 0%,transparent 70%);
-}
-.featured-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:var(--gold-pale);color:var(--gold);
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:5px 12px;border-radius:40px;margin-bottom:0.875rem;
-  border:1px solid var(--gold-bdr);
-}
-.featured-badge::before{
-  content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--gold);animation:pulse-dot 2s ease infinite;
-}
-.featured-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:0.4rem;line-height:1.2}
-.featured-desc{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:1.25rem;line-height:1.6}
-.featured-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  background:var(--gold);color:var(--ink);
-  font-weight:700;font-size:12px;letter-spacing:0.3px;
-  padding:10px 20px;border-radius:var(--r-sm);
-  transition:all 0.2s;
-}
-.featured-btn:hover{opacity:0.9}
-
-/* ===== IDEAS GRID ===== */
-.ideas-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;
-  background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;
-}
-
-.idea-card{
-  background:var(--surface);padding:1.5rem;cursor:pointer;
-  transition:background 0.25s;position:relative;overflow:hidden;
-}
-.idea-card:hover{background:#faf9f5}
-.idea-card::after{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(120deg,transparent 0%,rgba(201,168,76,0.04) 50%,transparent 100%);
-  transition:left 0.5s ease;
-}
+/* ══ 7-IDEAS GRID (desktop) ══ */
+.ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden}
+.idea-card{background:var(--surface);padding:1.5rem;cursor:pointer;transition:background .22s;position:relative;overflow:hidden}
+.idea-card:hover{background:#faf9f4}
+.idea-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent 0%,rgba(200,168,75,.04) 50%,transparent 100%);transition:left .5s ease}
 .idea-card:hover::after{left:100%}
-
-.idea-card-accent{
-  position:absolute;top:0;left:0;right:0;height:2px;
-  opacity:0;transition:opacity 0.25s;
-}
+.idea-card-accent{position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .22s}
 .idea-card:hover .idea-card-accent{opacity:1}
-.idea-card[data-color="gold"] .idea-card-accent{background:var(--gold)}
-.idea-card[data-color="slate"] .idea-card-accent{background:#64748b}
-.idea-card[data-color="sage"] .idea-card-accent{background:#6b8f6b}
-.idea-card[data-color="mauve"] .idea-card-accent{background:#9e7f8b}
-.idea-card[data-color="steel"] .idea-card-accent{background:#5a7a9f}
-.idea-card[data-color="moss"] .idea-card-accent{background:#7a8f64}
-.idea-card[data-color="sienna"] .idea-card-accent{background:#a07050}
+.idea-card[data-c="gold"] .idea-card-accent{background:var(--gold)}
+.idea-card[data-c="teal"] .idea-card-accent{background:var(--teal)}
+.idea-card[data-c="purple"] .idea-card-accent{background:var(--purple)}
+.idea-card[data-c="slate"] .idea-card-accent{background:#64748b}
+.idea-card[data-c="rose"] .idea-card-accent{background:#b06070}
+.idea-card[data-c="moss"] .idea-card-accent{background:#7a8f64}
+.idea-card[data-c="amber"] .idea-card-accent{background:#c07030}
+.iw{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--border);margin-bottom:.875rem;transition:all .22s}
+.idea-card:hover .iw{border-color:var(--gold-bdr);background:var(--gold-pale)}
+.i-cat{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.i-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.5rem}
+.i-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.875rem}
+.i-foot{display:flex;align-items:center;justify-content:space-between}
+.earn-badge{font-size:11px;font-weight:600;color:var(--gold);background:var(--gold-pale);border:1px solid var(--gold-bdr);padding:4px 10px;border-radius:4px}
+.idea-arr{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;transition:all .22s}
+.idea-card:hover .idea-arr{border-color:var(--gold-bdr);color:var(--gold);transform:translateX(2px)}
 
-.idea-icon-wrap{
-  width:44px;height:44px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--cream);border:1px solid var(--border);
-  margin-bottom:1rem;transition:all 0.25s;
-}
-.idea-card:hover .idea-icon-wrap{border-color:var(--gold-bdr);background:var(--gold-pale)}
+/* ══ MOBILE H-SCROLL ══ */
+.h-scroll{overflow-x:auto;margin:0 -1.5rem;padding:0 1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.h-scroll::-webkit-scrollbar{display:none}
+.h-row{display:flex;gap:10px;padding-bottom:4px}
+.qc{flex-shrink:0;width:140px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.125rem;cursor:pointer;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);border-top:2px solid transparent}
+.qc[data-c="gold"]{border-top-color:var(--gold)}
+.qc[data-c="teal"]{border-top-color:var(--teal)}
+.qc[data-c="purple"]{border-top-color:var(--purple)}
+.qc[data-c="slate"]{border-top-color:#64748b}
+.qc[data-c="rose"]{border-top-color:#b06070}
+.qc[data-c="moss"]{border-top-color:#7a8f64}
+.qc[data-c="amber"]{border-top-color:#c07030}
+.qc:active{transform:scale(.95)}
+.qc-iw{width:34px;height:34px;border-radius:9px;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
+.qc-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
+.qc-earn{font-size:10px;font-weight:600;color:var(--gold)}
 
-.idea-category{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.idea-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--text);line-height:1.25;margin-bottom:0.6rem}
-.idea-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:0.875rem}
-
-.idea-footer{display:flex;align-items:center;justify-content:space-between}
-.earn-badge{
-  font-size:11px;font-weight:600;color:var(--gold);
-  background:var(--gold-pale);border:1px solid var(--gold-bdr);
-  padding:4px 10px;border-radius:4px;letter-spacing:0.2px;
-}
-.idea-arrow{
-  width:26px;height:26px;border-radius:50%;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--muted);font-size:11px;
-  transition:all 0.25s;
-}
-.idea-card:hover .idea-arrow{border-color:var(--gold-bdr);color:var(--gold);transform:translateX(2px)}
-
-/* ===== HORIZONTAL SCROLL (Mobile ideas) ===== */
-.h-scroll-wrap{overflow-x:auto;margin:0 -1.5rem;padding:0 1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.h-scroll-wrap::-webkit-scrollbar{display:none}
-.h-scroll-row{display:flex;gap:10px;padding-bottom:4px}
-
-.quick-card{
-  flex-shrink:0;width:144px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-md);padding:1.125rem;
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
-  border-top:2px solid transparent;
-}
-.quick-card[data-color="gold"]{border-top-color:var(--gold)}
-.quick-card[data-color="slate"]{border-top-color:#64748b}
-.quick-card[data-color="sage"]{border-top-color:#6b8f6b}
-.quick-card[data-color="mauve"]{border-top-color:#9e7f8b}
-.quick-card[data-color="steel"]{border-top-color:#5a7a9f}
-.quick-card[data-color="moss"]{border-top-color:#7a8f64}
-.quick-card[data-color="sienna"]{border-top-color:#a07050}
-.quick-card:active{transform:scale(0.96)}
-
-.quick-card-icon-wrap{
-  width:36px;height:36px;border-radius:9px;
-  background:var(--cream);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:0.6rem;
-}
-.quick-card-name{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
-.quick-card-earn{font-size:10px;font-weight:600;color:var(--gold)}
-
-/* ===== FILTER BAR ===== */
-.filter-bar{
-  display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;
-  margin-bottom:1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-}
+/* ══ FILTER BAR ══ */
+.filter-bar{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:1.5rem;scrollbar-width:none}
 .filter-bar::-webkit-scrollbar{display:none}
+.fchip{font-size:12px;font-weight:500;padding:7px 18px;border-radius:40px;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all .2s;white-space:nowrap;flex-shrink:0;min-height:36px;display:flex;align-items:center;gap:5px}
+.fchip.active,.fchip:active{background:var(--bg);color:rgba(255,255,255,.85);border-color:var(--bg)}
+.fchip:hover:not(.active){border-color:var(--gold-bdr);color:var(--text)}
 
-.filter-chip{
-  font-size:12px;font-weight:500;letter-spacing:0.2px;
-  padding:7px 18px;border-radius:40px;
-  border:1px solid var(--border);background:var(--surface);
-  color:var(--muted);transition:all 0.2s;white-space:nowrap;
-  flex-shrink:0;min-height:36px;display:flex;align-items:center;gap:5px;
-}
-.filter-chip.active,.filter-chip:active{
-  background:var(--ink);color:rgba(255,255,255,0.85);border-color:var(--ink);
-}
-.filter-chip:hover:not(.active){border-color:var(--gold-bdr);color:var(--text)}
+/* ══ LISTING CARDS ══ */
+.listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.lcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;display:flex;flex-direction:column}
+.lcard:hover{transform:translateY(-3px);border-color:var(--gold-bdr);box-shadow:0 10px 28px rgba(0,0,0,.06),0 0 0 1px rgba(200,168,75,.08)}
+.lcard-img{height:84px;display:flex;align-items:center;justify-content:center;background:var(--cream);border-bottom:1px solid var(--border)}
+.lcard-body{padding:1rem;flex:1;display:flex;flex-direction:column}
+.lcard-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.3}
+.lcard-by{font-size:10px;color:var(--muted);margin-bottom:2px}
+.lcard-meta{font-size:10px;color:var(--muted);margin-bottom:6px}
+.lcard-price{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;font-family:'Playfair Display',serif}
+.lcard-tag{display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;margin-bottom:8px;letter-spacing:.3px}
+.lcard-tag.new{background:var(--teal-pale);color:#1a6b5e;border:1px solid var(--teal-bdr)}
+.lcard-tag.swap{background:var(--purple-pale);color:#5a3f9a;border:1px solid rgba(124,92,191,.28)}
+.lcard-action{width:100%;background:var(--bg);color:rgba(255,255,255,.85);border-radius:6px;padding:9px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;transition:all .2s;min-height:36px;margin-top:auto}
+.lcard-action:hover{background:var(--bg2);color:#fff}
+.lcard-action.swap-btn{background:var(--purple-pale);color:var(--purple);border:1px solid rgba(124,92,191,.28)}
+.lcard-action.swap-btn:hover{background:var(--purple);color:#fff}
 
-/* ===== LISTINGS GRID ===== */
-.listings-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;
-}
-
-.listing-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-md);overflow:hidden;
-  transition:all 0.35s cubic-bezier(0.22,1,0.36,1);
-  cursor:pointer;display:flex;flex-direction:column;
-}
-.listing-card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(201,168,76,0.3);
-  box-shadow:0 10px 30px rgba(0,0,0,0.07),0 0 0 1px rgba(201,168,76,0.1);
-}
-
-.listing-img{
-  height:88px;display:flex;align-items:center;justify-content:center;
-  background:var(--cream);border-bottom:1px solid var(--border);
-}
-.listing-body{padding:1rem;flex:1;display:flex;flex-direction:column}
-.listing-name{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;line-height:1.3}
-.listing-by{font-size:10px;color:var(--muted);margin-bottom:3px;letter-spacing:0.2px}
-.listing-meta{font-size:10px;color:var(--muted);margin-bottom:7px}
-.listing-price{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:9px;font-family:'Cormorant Garamond',serif}
-.listing-action{
-  width:100%;background:var(--ink);color:rgba(255,255,255,0.85);
-  border-radius:6px;padding:9px;font-size:11px;font-weight:600;
-  letter-spacing:0.4px;text-transform:uppercase;
-  transition:all 0.2s;min-height:38px;margin-top:auto;
-}
-.listing-action:hover{background:var(--ink-deep);color:#fff}
-.listing-action:active{opacity:0.85}
-
-/* ===== OPPORTUNITIES ===== */
+/* ══ OPPORTUNITIES ══ */
 .opp-grid{display:grid;gap:8px}
+.ocard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1rem 1.125rem;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:all .22s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.ocard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.ocard:hover{border-color:var(--gold-bdr);transform:translateX(2px)}
+.ocard:hover::before{transform:scaleY(1)}
+.otype{min-width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--border);flex-shrink:0}
+.o-body{flex:1;min-width:0}
+.o-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.o-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:7px}
+.o-tags{display:flex;gap:5px;flex-wrap:wrap}
+.otag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px}
+.tag-dl{background:#fdf6ed;color:#7a5a1a;border:1px solid #e8d4a0}
+.tag-rw{background:#f0f4f0;color:#3a5a3a;border:1px solid #bcd3bc}
+.tag-ty{background:#eff2f7;color:#2a3f6a;border:1px solid #b8c6df}
+.ochev{color:var(--muted);font-size:16px;flex-shrink:0;align-self:center;transition:transform .22s}
+.ocard:hover .ochev{transform:translateX(3px);color:var(--gold)}
 
-.opp-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-md);padding:1rem 1.125rem;
-  display:flex;gap:12px;align-items:flex-start;
-  cursor:pointer;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  position:relative;overflow:hidden;
-}
-.opp-card::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
-  background:var(--gold);transform:scaleY(0);transform-origin:bottom;
-  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
-}
-.opp-card:hover{border-color:var(--gold-bdr);transform:translateX(2px)}
-.opp-card:hover::before{transform:scaleY(1)}
+/* ══ PORTFOLIO SECTION ══ */
+.portfolio-card{background:var(--bg);border-radius:var(--r-xl);padding:2rem;border:1px solid rgba(200,168,75,.12);position:relative;overflow:hidden;margin-bottom:1.5rem}
+.portfolio-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:.4}
+.portfolio-glow{position:absolute;left:-40px;bottom:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(45,155,138,.1)0%,transparent 70%)}
+.pc-badge{display:inline-flex;align-items:center;gap:5px;background:var(--teal-pale);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;border-radius:40px;margin-bottom:.75rem;border:1px solid var(--teal-bdr)}
+.pc-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:.4rem;line-height:1.2}
+.pc-desc{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:1.25rem;line-height:1.65}
+.pc-btn{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;font-weight:700;font-size:12px;letter-spacing:.3px;padding:10px 20px;border-radius:var(--r-sm);transition:all .2s}
+.pc-btn:hover{filter:brightness(1.1)}
 
-.opp-type{
-  min-width:40px;height:40px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--cream);border:1px solid var(--border);flex-shrink:0;
-}
-.opp-body{flex:1;min-width:0}
-.opp-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.opp-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:7px}
-.opp-tags{display:flex;gap:5px;flex-wrap:wrap}
-.opp-tag{font-size:10px;font-weight:600;padding:3px 8px;border-radius:3px;letter-spacing:0.2px}
-.tag-deadline{background:#fdf6ed;color:#7a5a1a;border:1px solid #e8d4a0}
-.tag-reward{background:#f0f4f0;color:#3a5a3a;border:1px solid #bcd3bc}
-.tag-type{background:#eff2f7;color:#2a3f6a;border:1px solid #b8c6df}
-.opp-chevron{color:var(--muted);font-size:16px;flex-shrink:0;align-self:center;transition:transform 0.25s}
-.opp-card:hover .opp-chevron{transform:translateX(3px);color:var(--gold)}
+/* ══ SKILLSWAP BANNER ══ */
+.swap-banner{background:linear-gradient(135deg,rgba(124,92,191,.12),rgba(45,155,138,.08));border:1px solid rgba(124,92,191,.2);border-radius:var(--r-xl);padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.swap-banner::after{content:'⇄';position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:48px;color:rgba(124,92,191,.08);pointer-events:none}
+.sb-badge{display:inline-flex;align-items:center;gap:5px;background:var(--purple-pale);color:var(--purple);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;border-radius:40px;margin-bottom:.75rem;border:1px solid rgba(124,92,191,.28)}
+.sb-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:.35rem;line-height:1.2}
+.sb-desc{font-size:12px;color:var(--muted);margin-bottom:1rem;line-height:1.65}
+.sb-btn{display:inline-flex;align-items:center;gap:6px;background:var(--bg);color:rgba(255,255,255,.85);font-weight:700;font-size:12px;letter-spacing:.3px;padding:10px 20px;border-radius:var(--r-sm);transition:all .2s;border:1px solid rgba(124,92,191,.3)}
+.sb-btn:hover{border-color:var(--purple);color:#fff}
 
-/* ===== REGISTER ===== */
-.register-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;max-width:920px;margin:0 auto}
-
+/* ══ REGISTER ══ */
+.register-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;max-width:960px;margin:0 auto}
 .form-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem}
-.form-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:1.5rem}
-.form-group{margin-bottom:1rem}
-.form-label{display:block;font-size:11px;font-weight:600;color:var(--text);margin-bottom:5px;letter-spacing:0.5px;text-transform:uppercase}
-.form-input,.form-select{
-  width:100%;padding:12px 14px;
-  border:1px solid var(--border);border-radius:var(--r-sm);
-  font-size:14px;color:var(--text);background:#fafaf8;
-  outline:none;transition:all 0.2s;-webkit-appearance:none;min-height:48px;
-}
-.form-input:focus,.form-select:focus{border-color:var(--gold);background:var(--surface);box-shadow:0 0 0 3px var(--gold-pale)}
-.form-select{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
-}
-.form-submit{
-  width:100%;background:var(--ink);color:rgba(255,255,255,0.9);
-  font-weight:600;font-size:14px;letter-spacing:0.5px;
-  padding:15px;border-radius:var(--r-sm);
-  transition:all 0.25s;min-height:52px;margin-top:0.5rem;
-  position:relative;overflow:hidden;
-}
-.form-submit::before{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);
-  transition:left 0.6s;
-}
-.form-submit:hover::before{left:100%}
-.form-submit:hover{background:var(--ink-deep);color:#fff}
-.form-submit:active{transform:scale(0.98)}
+.form-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:1.5rem}
+.fg{margin-bottom:.875rem}
+.flabel{display:block;font-size:11px;font-weight:600;color:var(--text);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase}
+.finput,.fselect{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:14px;color:var(--text);background:#fafaf8;outline:none;transition:all .2s;-webkit-appearance:none;min-height:46px}
+.finput:focus,.fselect:focus{border-color:var(--gold);background:var(--surface);box-shadow:0 0 0 3px var(--gold-pale)}
+.fselect{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.fsubmit{width:100%;background:var(--bg);color:rgba(255,255,255,.9);font-weight:600;font-size:14px;letter-spacing:.4px;padding:15px;border-radius:var(--r-sm);transition:all .22s;min-height:50px;margin-top:.4rem}
+.fsubmit:hover{background:var(--bg2);color:#fff}
+.fsubmit:active{transform:scale(.98)}
 
-.perk-card{background:var(--ink);border-radius:var(--r-lg);padding:1.75rem;color:#fff;border:1px solid rgba(201,168,76,0.12)}
-.perk-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:1.5rem}
-.perk-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:1.125rem;
-  opacity:0;transform:translateX(-12px);
-  animation:slideIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.perk-item:nth-child(2){animation-delay:0.05s}
-.perk-item:nth-child(3){animation-delay:0.1s}
-.perk-item:nth-child(4){animation-delay:0.15s}
-.perk-item:nth-child(5){animation-delay:0.2s}
-.perk-item:nth-child(6){animation-delay:0.25s}
-@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
+.perk-card{background:var(--bg);border-radius:var(--r-lg);padding:1.75rem;color:#fff;border:1px solid rgba(200,168,75,.1)}
+.perk-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:1.5rem}
+.pitem{display:flex;gap:12px;align-items:flex-start;margin-bottom:1.125rem;opacity:0;transform:translateX(-10px);animation:sI .5s cubic-bezier(.22,1,.36,1) forwards}
+.pitem:nth-child(2){animation-delay:.05s}.pitem:nth-child(3){animation-delay:.1s}.pitem:nth-child(4){animation-delay:.15s}.pitem:nth-child(5){animation-delay:.2s}.pitem:nth-child(6){animation-delay:.25s}
+@keyframes sI{to{opacity:1;transform:translateX(0)}}
+.pdot{width:30px;height:30px;border-radius:8px;background:var(--gold-pale);border:1px solid var(--gold-bdr);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ptext{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5}
+.ptext strong{color:rgba(255,255,255,.9);font-weight:600;display:block;margin-bottom:2px}
 
-.perk-dot{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--gold-pale);border:1px solid var(--gold-bdr);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.perk-text{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5}
-.perk-text strong{color:rgba(255,255,255,0.9);font-weight:600;display:block;margin-bottom:2px;letter-spacing:0.2px}
-
-/* ===== STEPS ===== */
-.steps-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin-bottom:2rem}
-
-.step-card{
-  background:var(--surface);padding:1.5rem;text-align:center;
-  position:relative;overflow:hidden;
-  opacity:0;animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
-  transition:background 0.25s;
-}
-.step-card:hover{background:#faf9f5}
-.step-card:nth-child(1){animation-delay:0s}
-.step-card:nth-child(2){animation-delay:0.07s}
-.step-card:nth-child(3){animation-delay:0.14s}
-.step-card:nth-child(4){animation-delay:0.21s}
-
-.step-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:48px;font-weight:400;
-  color:var(--parchment);line-height:1;margin-bottom:0.3rem;
-  transition:color 0.25s;
-}
-.step-card:hover .step-num{color:var(--gold-pale)}
-.step-icon-wrap{
-  width:40px;height:40px;border-radius:12px;
-  background:var(--cream);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 0.6rem;transition:all 0.25s;
-}
-.step-card:hover .step-icon-wrap{border-color:var(--gold-bdr);background:var(--gold-pale)}
-.step-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+/* ══ HOW IT WORKS ══ */
+.steps-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin-bottom:2rem}
+.step-card{background:var(--surface);padding:1.5rem;text-align:center;position:relative;overflow:hidden;transition:background .22s;opacity:0;animation:fu .6s cubic-bezier(.22,1,.36,1) forwards}
+.step-card:hover{background:#faf9f4}
+.step-card:nth-child(1){animation-delay:0s}.step-card:nth-child(2){animation-delay:.07s}.step-card:nth-child(3){animation-delay:.14s}.step-card:nth-child(4){animation-delay:.21s}
+.step-n{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--parchment);line-height:1;margin-bottom:.3rem}
+.step-iw{width:38px;height:38px;border-radius:11px;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto .5rem;transition:all .22s}
+.step-card:hover .step-iw{border-color:var(--gold-bdr);background:var(--gold-pale)}
+.step-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
 .step-desc{font-size:11px;color:var(--muted);line-height:1.5}
 
-/* ===== COMMISSION TABLE ===== */
-.commission-table{
-  width:100%;border-collapse:collapse;
-  background:var(--surface);border-radius:var(--r-lg);overflow:hidden;
-  border:1px solid var(--border);display:block;overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-}
-.commission-table th{
-  background:var(--ink);color:rgba(255,255,255,0.7);
-  font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:0.8px;text-transform:uppercase;
-  padding:12px 16px;text-align:left;white-space:nowrap;
-}
-.commission-table th:first-child{color:var(--gold)}
-.commission-table td{
-  padding:12px 16px;font-size:12px;color:var(--text);
-  border-bottom:1px solid #f0efe8;white-space:nowrap;
-}
-.commission-table tr:last-child td{border-bottom:none}
-.commission-table tr:hover td{background:#faf9f5}
-.commission-table td:nth-child(4){color:var(--gold);font-weight:700}
+.comm-table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.comm-table th{background:var(--bg);color:rgba(255,255,255,.6);font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:12px 16px;text-align:left;white-space:nowrap}
+.comm-table th:first-child{color:var(--gold)}
+.comm-table td{padding:11px 16px;font-size:12px;color:var(--text);border-bottom:1px solid #f0efe8;white-space:nowrap}
+.comm-table tr:last-child td{border-bottom:none}
+.comm-table tr:hover td{background:#faf9f4}
+.comm-table td:nth-child(4){color:var(--gold);font-weight:700}
 
-/* ===== HOW IT WORKS CTA ===== */
-.cta-band{
-  background:var(--ink);border-radius:var(--r-xl);
-  padding:2rem;text-align:center;
-  border:1px solid rgba(201,168,76,0.12);
-  position:relative;overflow:hidden;
-}
-.cta-band::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;
-}
-.cta-band-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:26px;font-weight:600;color:#fff;margin-bottom:0.4rem;
-}
-.cta-band-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:1.25rem}
+/* ══ CTA BAND ══ */
+.cta-band{background:var(--bg);border-radius:var(--r-xl);padding:2rem;text-align:center;border:1px solid rgba(200,168,75,.1);position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.35}
+.cta-band-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:.4rem}
+.cta-band-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:1.25rem}
 
-/* ===== TOAST ===== */
-.toast{
-  position:fixed;
-  bottom:calc(var(--bottom-h) + var(--safe-b) + 16px);
-  left:50%;transform:translateX(-50%) translateY(10px);
-  background:var(--ink);color:rgba(255,255,255,0.9);
-  padding:12px 22px;border-radius:40px;
-  font-size:12px;font-weight:500;letter-spacing:0.3px;
-  display:none;animation:toastIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
-  z-index:999;white-space:nowrap;
-  border:1px solid rgba(201,168,76,0.25);
-  max-width:calc(100vw - 2rem);overflow:hidden;text-overflow:ellipsis;
-}
-@keyframes toastIn{
-  from{opacity:0;transform:translateX(-50%) translateY(24px)}
-  to{opacity:1;transform:translateX(-50%) translateY(0)}
-}
+/* ══ TOAST ══ */
+.toast{position:fixed;bottom:calc(var(--bot-h) + var(--safe-b) + 14px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg);color:rgba(255,255,255,.9);padding:11px 20px;border-radius:40px;font-size:12px;font-weight:500;display:none;animation:toastIn .3s cubic-bezier(.22,1,.36,1) forwards;z-index:999;white-space:nowrap;border:1px solid rgba(200,168,75,.22);max-width:calc(100vw - 2rem);overflow:hidden;text-overflow:ellipsis}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-/* ===== EMPTY STATE ===== */
-.empty-state{text-align:center;padding:3rem 1rem;color:var(--muted)}
-.empty-state-icon{font-size:2.5rem;margin-bottom:1rem;opacity:0.4}
-.empty-state-text{font-size:13px}
-
-/* ===== SCROLL REVEAL ===== */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s cubic-bezier(0.22,1,0.36,1),transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:0.05s}
-.reveal-delay-2{transition-delay:0.1s}
-.reveal-delay-3{transition-delay:0.15s}
-.reveal-delay-4{transition-delay:0.2s}
+.reveal-1{transition-delay:.05s}.reveal-2{transition-delay:.1s}.reveal-3{transition-delay:.15s}.reveal-4{transition-delay:.2s}
 
-/* ===== MOBILE ===== */
+/* ══ NEW/SWAP TAGS ══ */
+.new-tag{font-size:9px;font-weight:700;background:var(--teal-pale);color:var(--teal);border:1px solid var(--teal-bdr);padding:2px 6px;border-radius:3px;letter-spacing:.3px;vertical-align:middle;margin-left:5px}
+.swap-tag{font-size:9px;font-weight:700;background:var(--purple-pale);color:var(--purple);border:1px solid rgba(124,92,191,.3);padding:2px 6px;border-radius:3px;letter-spacing:.3px;vertical-align:middle;margin-left:5px}
+
+/* ══ MOBILE ══ */
 @media(max-width:640px){
-  .top-nav{display:none}
-  .mobile-header{display:flex}
-  .bottom-nav{display:flex}
-  #app{padding-bottom:calc(var(--bottom-h) + var(--safe-b))}
-  .toast{bottom:calc(var(--bottom-h) + var(--safe-b) + 16px)}
-  .hero{padding:3rem 1.25rem 3.5rem}
+  .top-nav{display:none}.mob-header{display:flex}.bot-nav{display:flex}
+  #app{padding-bottom:calc(var(--bot-h) + var(--safe-b))}
+  .toast{bottom:calc(var(--bot-h) + var(--safe-b) + 14px)}
+  .hero{padding:3.5rem 1.25rem 4rem}
   .stats-strip{grid-template-columns:repeat(2,1fr)}
-  .stat-item:nth-child(2){border-right:none}
-  .stat-item:nth-child(3){border-top:1px solid rgba(255,255,255,0.06)}
-  .stat-item:nth-child(4){border-top:1px solid rgba(255,255,255,0.06);border-right:none}
-  .ideas-grid{display:none}
-  .ideas-mobile{display:block}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(3){border-top:1px solid rgba(255,255,255,.05)}
+  .stat:nth-child(4){border-top:1px solid rgba(255,255,255,.05);border-right:none}
+  .ideas-grid{display:none}.ideas-mobile{display:block}
   .listings-grid{grid-template-columns:repeat(2,1fr)}
   .register-wrap{grid-template-columns:1fr}
   .steps-row{grid-template-columns:repeat(2,1fr)}
   .section{padding:1.75rem 1.25rem}
-  .category-chips{padding:0 1.25rem 0.25rem;margin:0 -1.25rem}
-  .h-scroll-wrap{margin:0 -1.25rem;padding:0 1.25rem}
+  .cat-chips{padding:0 1.25rem .25rem;margin:0 -1.25rem}
+  .h-scroll{margin:0 -1.25rem;padding:0 1.25rem}
 }
 @media(min-width:641px){
   .ideas-mobile{display:none}
-  .mobile-header{display:none}
-  .bottom-nav{display:none !important}
+  .mob-header{display:none}
+  .bot-nav{display:none !important}
 }
 </style>
 </head>
@@ -738,26 +343,26 @@ input,select,textarea{font-family:inherit}
 
 <!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
-  <div class="search-bar-wrap">
-    <svg width="16" height="16" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input type="search" id="searchInput" placeholder="Search services, skills, opportunities…" autofocus oninput="doSearch(this.value)"/>
+  <div class="search-bar">
+    <svg width="15" height="15" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="search" id="searchInput" placeholder="Search services, skills, opportunities…" oninput="doSearch(this.value)"/>
     <button class="search-cancel" onclick="closeSearch()">Cancel</button>
   </div>
   <div class="search-results" id="searchResults"></div>
 </div>
 
 <!-- MOBILE HEADER -->
-<header class="mobile-header">
-  <div class="mobile-logo">Student<span>Hub</span></div>
-  <button class="mobile-search-btn" onclick="openSearch()" aria-label="Search">
-    <svg width="16" height="16" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+<header class="mob-header">
+  <div class="mob-logo">Student<span>Hub</span></div>
+  <button class="mob-search-btn" onclick="openSearch()">
+    <svg width="15" height="15" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
   </button>
 </header>
 
 <!-- TOP NAV -->
 <nav class="top-nav">
   <div class="nav-logo">Student<span>Hub</span></div>
-  <div class="top-nav-links">
+  <div class="nav-links">
     <button class="nav-pill active" onclick="showPage('home')">Home</button>
     <button class="nav-pill" onclick="showPage('marketplace')">Marketplace</button>
     <button class="nav-pill" onclick="showPage('opportunities')">Opportunities</button>
@@ -768,24 +373,25 @@ input,select,textarea{font-family:inherit}
 
 <div id="app">
 
-<!-- ======================== HOME ======================== -->
+<!-- ════════════════ HOME ════════════════ -->
 <div id="home" class="page active">
 
   <div class="hero">
-    <div class="hero-lines"></div>
+    <div class="hero-grid"></div>
     <div class="hero-vignette"></div>
     <div class="hero-glow"></div>
+    <div class="hero-orb"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Northeast India's Student Economy</div>
-      <h1>Earn While You<br><em>Learn</em></h1>
-      <p class="hero-sub">Seven curated paths to build real income as a student — tutoring, freelancing, events, merchandise & more.</p>
+      <h1>Earn While<br>You <em>Learn</em></h1>
+      <p class="hero-sub">Seven sustainable paths to real income as a student — tutoring, freelancing, fitness, merch, skills & more.</p>
       <div class="hero-btns">
         <button class="btn-primary" onclick="showPage('marketplace')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
           Browse Services
         </button>
         <button class="btn-outline" onclick="showPage('register')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Join Free
         </button>
       </div>
@@ -793,714 +399,468 @@ input,select,textarea{font-family:inherit}
   </div>
 
   <div class="stats-strip">
-    <div class="stat-item reveal">
-      <div class="stat-num">7</div>
-      <div class="stat-label">Startup Ideas</div>
-    </div>
-    <div class="stat-item reveal reveal-delay-1">
-      <div class="stat-num">₹500+</div>
-      <div class="stat-label">Avg / Session</div>
-    </div>
-    <div class="stat-item reveal reveal-delay-2">
-      <div class="stat-num">10%</div>
-      <div class="stat-label">Commission</div>
-    </div>
-    <div class="stat-item reveal reveal-delay-3">
-      <div class="stat-num">NE India</div>
-      <div class="stat-label">Our Market</div>
+    <div class="stat reveal"><div class="stat-n">7</div><div class="stat-l">Sustainable Ideas</div></div>
+    <div class="stat reveal reveal-1"><div class="stat-n">₹500+</div><div class="stat-l">Avg / Session</div></div>
+    <div class="stat reveal reveal-2"><div class="stat-n">10%</div><div class="stat-l">Platform Cut</div></div>
+    <div class="stat reveal reveal-3"><div class="stat-n">NE India</div><div class="stat-l">Our Focus</div></div>
+  </div>
+
+  <div class="section" style="padding-bottom:.5rem">
+    <div class="sh"><div class="st reveal">Browse Categories</div></div>
+    <div class="cat-chips">
+      <div class="cc" onclick="showPage('marketplace');filterListings('tutoring',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div class="cc-label">Tutoring</div></div>
+      <div class="cc" onclick="showPage('marketplace');filterListings('freelance',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="cc-label">Freelance</div></div>
+      <div class="cc" onclick="showPage('marketplace');filterListings('fitness',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg></div><div class="cc-label">Fitness</div></div>
+      <div class="cc" onclick="showPage('marketplace');filterListings('merch',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div><div class="cc-label">Merch</div></div>
+      <div class="cc" onclick="showPage('marketplace');filterListings('swap',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="cc-label">Skill Swap</div></div>
+      <div class="cc" onclick="showPage('marketplace');filterListings('portfolio',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="cc-label">Portfolio</div></div>
+      <div class="cc" onclick="showPage('opportunities')"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="cc-label">Opps</div></div>
     </div>
   </div>
 
-  <div class="section" style="padding-bottom:0.5rem">
-    <div class="section-header">
-      <div class="section-title reveal">Browse Categories</div>
-    </div>
-    <div class="category-chips">
-      <div class="cat-chip" onclick="showPage('marketplace');filterListings('tutoring',document.querySelectorAll('#marketplace .filter-chip')[1])">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-        </div>
-        <div class="cat-chip-label">Tutoring</div>
-      </div>
-      <div class="cat-chip" onclick="showPage('marketplace');filterListings('freelance',document.querySelectorAll('#marketplace .filter-chip')[2])">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div class="cat-chip-label">Freelance</div>
-      </div>
-      <div class="cat-chip" onclick="showPage('marketplace');filterListings('events',document.querySelectorAll('#marketplace .filter-chip')[3])">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        </div>
-        <div class="cat-chip-label">Events</div>
-      </div>
-      <div class="cat-chip" onclick="showPage('marketplace');filterListings('fitness',document.querySelectorAll('#marketplace .filter-chip')[4])">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>
-        </div>
-        <div class="cat-chip-label">Fitness</div>
-      </div>
-      <div class="cat-chip" onclick="showPage('marketplace');filterListings('academic',document.querySelectorAll('#marketplace .filter-chip')[5])">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <div class="cat-chip-label">Academic</div>
-      </div>
-      <div class="cat-chip" onclick="showPage('marketplace');filterListings('merch',document.querySelectorAll('#marketplace .filter-chip')[6])">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-        </div>
-        <div class="cat-chip-label">Merch</div>
-      </div>
-      <div class="cat-chip" onclick="showPage('opportunities')">
-        <div class="cat-chip-icon">
-          <svg width="22" height="22" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-        </div>
-        <div class="cat-chip-label">Opps</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-divider" style="margin-top:1.25rem"></div>
+  <div class="sdiv" style="margin-top:1.25rem"></div>
 
   <div class="section" style="padding-bottom:0">
     <div class="featured-card reveal">
-      <div class="featured-card-corner"></div>
-      <div class="featured-badge">Live Now</div>
-      <div class="featured-title">ISRO Summer Internship — Apply Now</div>
-      <div class="featured-desc">2-month research internship, ₹15,000/month stipend. Open to final-year B.Tech students across NE India. Deadline: April 20.</div>
-      <button class="featured-btn" onclick="showPage('opportunities')">
-        View Details
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      <div class="fc-glow"></div>
+      <div class="fc-badge">Live Now</div>
+      <div class="fc-title">ISRO Summer Internship — Apply Now</div>
+      <div class="fc-desc">2-month research internship, ₹15,000/month stipend. Open to final-year B.Tech students across NE India. Deadline: April 20.</div>
+      <button class="fc-btn" onclick="showPage('opportunities')">View Details <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
   </div>
 
-  <!-- MOBILE HORIZONTAL SCROLL -->
+  <!-- NEW: SkillSwap Banner -->
+  <div class="section" style="padding-bottom:0">
+    <div class="swap-banner reveal">
+      <div class="sb-badge">New Feature</div>
+      <div class="sb-title">SkillSwap — No Cash? No Problem.</div>
+      <div class="sb-desc">Teach what you know, earn credits, learn what you need. Design student teaches coding student — both win, no money changes hands.</div>
+      <button class="sb-btn" onclick="showPage('marketplace');filterListings('swap',null)">Explore Skill Swaps <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Mobile quick cards -->
   <div class="section ideas-mobile" style="padding-bottom:0">
-    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between">
-      <div class="section-title">7 Startup Ideas</div>
-      <button style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:0.3px" onclick="showPage('marketplace')">See all →</button>
+    <div class="sh" style="display:flex;align-items:center;justify-content:space-between">
+      <div class="st">7 Startup Ideas</div>
+      <button style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.3px" onclick="showPage('marketplace')">See all →</button>
     </div>
-    <div class="h-scroll-wrap">
-      <div class="h-scroll-row">
-        <div class="quick-card" data-color="gold" onclick="showPage('marketplace')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-          </div>
-          <div class="quick-card-name">Peer Tutoring</div>
-          <div class="quick-card-earn">₹100–500/session</div>
-        </div>
-        <div class="quick-card" data-color="slate" onclick="showPage('marketplace')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <div class="quick-card-name">Freelance Hub</div>
-          <div class="quick-card-earn">₹500–5k/project</div>
-        </div>
-        <div class="quick-card" data-color="sage" onclick="showPage('marketplace')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          </div>
-          <div class="quick-card-name">Event Squad</div>
-          <div class="quick-card-earn">₹500–3k/event</div>
-        </div>
-        <div class="quick-card" data-color="mauve" onclick="showPage('marketplace')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>
-          </div>
-          <div class="quick-card-name">Fitness Coach</div>
-          <div class="quick-card-earn">₹150–400/session</div>
-        </div>
-        <div class="quick-card" data-color="steel" onclick="showPage('marketplace')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="quick-card-name">Lab Reports</div>
-          <div class="quick-card-earn">₹100–500/record</div>
-        </div>
-        <div class="quick-card" data-color="moss" onclick="showPage('marketplace')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-          </div>
-          <div class="quick-card-name">Merch Store</div>
-          <div class="quick-card-earn">₹50–150/item</div>
-        </div>
-        <div class="quick-card" data-color="sienna" onclick="showPage('opportunities')">
-          <div class="quick-card-icon-wrap">
-            <svg width="16" height="16" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-          </div>
-          <div class="quick-card-name">Campus Alerts</div>
-          <div class="quick-card-earn">₹500–5k/listing</div>
-        </div>
-      </div>
-    </div>
+    <div class="h-scroll"><div class="h-row">
+      <div class="qc" data-c="gold" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div class="qc-name">Peer Tutoring</div><div class="qc-earn">₹100–500/session</div></div>
+      <div class="qc" data-c="slate" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="qc-name">Freelance Hub</div><div class="qc-earn">₹500–5k/project</div></div>
+      <div class="qc" data-c="rose" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg></div><div class="qc-name">Fitness Coach</div><div class="qc-earn">₹150–400/session</div></div>
+      <div class="qc" data-c="moss" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div><div class="qc-name">Merch Store</div><div class="qc-earn">₹50–150/item</div></div>
+      <div class="qc" data-c="purple" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="qc-name">Skill Swap</div><div class="qc-earn">Credits → Earnings</div></div>
+      <div class="qc" data-c="teal" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="qc-name">Portfolio</div><div class="qc-earn">Freemium upsell</div></div>
+      <div class="qc" data-c="amber" onclick="showPage('opportunities')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="qc-name">Campus Alerts</div><div class="qc-earn">₹500–5k/listing</div></div>
+    </div></div>
   </div>
 
-  <!-- DESKTOP IDEAS GRID -->
+  <!-- Desktop ideas grid -->
   <div class="section" style="padding-top:1.75rem">
-    <div class="section-header">
-      <div class="section-title reveal">All 7 Startup Ideas</div>
-      <div class="section-sub reveal">Pick one, master it, then expand. Designed for students with minimal capital.</div>
+    <div class="sh">
+      <div class="st reveal">All 7 Startup Ideas</div>
+      <div class="ss reveal">Carefully selected for long-term sustainability — each scales with time and student numbers.</div>
     </div>
 
     <div class="ideas-grid reveal">
-      <div class="idea-card" data-color="gold" onclick="showPage('marketplace')">
+      <div class="idea-card" data-c="gold" onclick="showPage('marketplace')">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-        </div>
-        <div class="idea-category">Education · Web/App</div>
-        <div class="idea-title">Peer Tutoring Marketplace</div>
-        <div class="idea-desc">Tutor juniors in subjects you excel at. High demand for NEET, JEE, APSC & UPSC coaching.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹100–500 / session</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="i-cat">Education · Web/App</div>
+        <div class="i-title">Peer Tutoring Marketplace</div>
+        <div class="i-desc">Tutor juniors in subjects you excel at. Constant demand for NEET, JEE, APSC & UPSC.</div>
+        <div class="i-foot"><div class="earn-badge">₹100–500 / session</div><div class="idea-arr">→</div></div>
       </div>
 
-      <div class="idea-card" data-color="slate" onclick="showPage('marketplace')">
+      <div class="idea-card" data-c="slate" onclick="showPage('marketplace')">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div class="idea-category">Freelance · Skill-Based</div>
-        <div class="idea-title">Student Freelance Hub</div>
-        <div class="idea-desc">Design, coding, content writing, video editing — connect students with local businesses.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹500–5,000 / project</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="i-cat">Freelance · Skill-Based</div>
+        <div class="i-title">Student Freelance Hub</div>
+        <div class="i-desc">Design, coding, content, video editing — connect student talent with local businesses.</div>
+        <div class="i-foot"><div class="earn-badge">₹500–5,000 / project</div><div class="idea-arr">→</div></div>
       </div>
 
-      <div class="idea-card" data-color="sage" onclick="showPage('marketplace')">
+      <div class="idea-card" data-c="rose" onclick="showPage('marketplace')">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#4a6a4a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        </div>
-        <div class="idea-category">Events · Creative</div>
-        <div class="idea-title">Event & Photography Squad</div>
-        <div class="idea-desc">College fests, birthdays, corporate events — photography, MC, decoration, editing.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹500–3,000 / event</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg></div>
+        <div class="i-cat">Health · Coaching</div>
+        <div class="i-title">Fitness & Yoga Coaching</div>
+        <div class="i-desc">Certified students coach small groups online or on campus. Zero equipment to start.</div>
+        <div class="i-foot"><div class="earn-badge">₹150–400 / session</div><div class="idea-arr">→</div></div>
       </div>
 
-      <div class="idea-card" data-color="mauve" onclick="showPage('marketplace')">
+      <div class="idea-card" data-c="moss" onclick="showPage('marketplace')">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>
-        </div>
-        <div class="idea-category">Health · Coaching</div>
-        <div class="idea-title">Fitness & Yoga Coaching</div>
-        <div class="idea-desc">Certified students coach small groups on campus or online. Zero equipment needed.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹150–400 / session</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div>
+        <div class="i-cat">E-Commerce · Print-on-Demand</div>
+        <div class="i-title">College Merchandise Store</div>
+        <div class="i-desc">Custom hoodies, tees, mugs with college branding. Pre-order = zero inventory risk.</div>
+        <div class="i-foot"><div class="earn-badge">₹50–150 / item</div><div class="idea-arr">→</div></div>
       </div>
 
-      <div class="idea-card" data-color="steel" onclick="showPage('marketplace')">
+      <div class="idea-card" data-c="amber" onclick="showPage('opportunities')">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#3a5a7a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-        <div class="idea-category">Academic · Seasonal</div>
-        <div class="idea-title">Lab Report Writing Aid</div>
-        <div class="idea-desc">Help peers format lab records and reports. Demand spikes before submission deadlines.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹100–500 / record</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+        <div class="i-cat">Aggregator · Freemium</div>
+        <div class="i-title">Campus Opportunity Alerts</div>
+        <div class="i-desc">Scholarships, hackathons, internships, fests — all aggregated for NE students daily.</div>
+        <div class="i-foot"><div class="earn-badge">₹500–5,000 / listing</div><div class="idea-arr">→</div></div>
       </div>
 
-      <div class="idea-card" data-color="moss" onclick="showPage('marketplace')">
+      <div class="idea-card" data-c="purple" onclick="showPage('marketplace');filterListings('swap',null)">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-        </div>
-        <div class="idea-category">E-Commerce · Print-on-Demand</div>
-        <div class="idea-title">College Merchandise Store</div>
-        <div class="idea-desc">Custom hoodies, t-shirts, mugs with college names. Peaks during fresher week.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹50–150 / item</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+        <div class="i-cat">Barter · Skill Exchange</div>
+        <div class="i-title">SkillSwap<span class="new-tag">New</span></div>
+        <div class="i-desc">Teach one skill, earn credits, spend credits to learn another. No cash needed to start.</div>
+        <div class="i-foot"><div class="earn-badge">Credits → Real Earnings</div><div class="idea-arr">→</div></div>
       </div>
 
-      <div class="idea-card" data-color="sienna" onclick="showPage('opportunities')">
+      <div class="idea-card" data-c="teal" onclick="showPage('marketplace');filterListings('portfolio',null)">
         <div class="idea-card-accent"></div>
-        <div class="idea-icon-wrap">
-          <svg width="20" height="20" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-        </div>
-        <div class="idea-category">Aggregator · Freemium</div>
-        <div class="idea-title">Campus Opportunity Alerts</div>
-        <div class="idea-desc">Aggregates scholarships, hackathons, internships, fest registrations for NE students.</div>
-        <div class="idea-footer">
-          <div class="earn-badge">₹500–5,000 / listing</div>
-          <div class="idea-arrow">→</div>
-        </div>
+        <div class="iw"><svg width="19" height="19" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+        <div class="i-cat">Tool · Freemium</div>
+        <div class="i-title">Student Portfolio Builder<span class="new-tag">New</span></div>
+        <div class="i-desc">Free resume & portfolio page for every student. Premium exports and custom domains.</div>
+        <div class="i-foot"><div class="earn-badge">Freemium Upsell</div><div class="idea-arr">→</div></div>
       </div>
     </div>
   </div>
 
-  <div class="section-divider"></div>
+  <div class="sdiv"></div>
 
   <div class="section">
-    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <div class="section-title reveal">How It Works</div>
-        <div class="section-sub reveal">Start earning in four steps.</div>
-      </div>
-      <button style="font-size:12px;color:var(--gold);font-weight:600;white-space:nowrap;letter-spacing:0.3px" onclick="showPage('howto')">Full guide →</button>
+    <div class="sh" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="st reveal">How It Works</div><div class="ss reveal">Start earning in four steps.</div></div>
+      <button style="font-size:12px;color:var(--gold);font-weight:600;white-space:nowrap" onclick="showPage('howto')">Full guide →</button>
     </div>
-
     <div class="steps-row">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <div class="step-title">Register</div>
-        <div class="step-desc">List your skill in under 3 minutes.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </div>
-        <div class="step-title">Get Found</div>
-        <div class="step-desc">Appear in search and WhatsApp.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <div class="step-title">Accept</div>
-        <div class="step-desc">Confirm time and price.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">04</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        </div>
-        <div class="step-title">Earn</div>
-        <div class="step-desc">Get paid. Build reviews.</div>
-      </div>
+      <div class="step-card"><div class="step-n">01</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="step-title">Register</div><div class="step-desc">List your skill in under 3 minutes.</div></div>
+      <div class="step-card"><div class="step-n">02</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="step-title">Get Found</div><div class="step-desc">Appear in search and WhatsApp.</div></div>
+      <div class="step-card"><div class="step-n">03</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="step-title">Accept</div><div class="step-desc">Confirm time and price.</div></div>
+      <div class="step-card"><div class="step-n">04</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="step-title">Earn</div><div class="step-desc">Get paid. Build reviews.</div></div>
     </div>
-
     <div class="cta-band reveal">
       <div class="cta-band-title">Ready to Start Earning?</div>
-      <div class="cta-band-sub">Join 1,000+ students already on the platform.</div>
-      <button class="btn-primary" onclick="showPage('register')">
-        Create Your Profile
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      <div class="cta-band-sub">Join students already on the platform.</div>
+      <button class="btn-primary" onclick="showPage('register')">Create Your Profile <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
   </div>
 </div>
 
-<!-- ======================== MARKETPLACE ======================== -->
+<!-- ════════════════ MARKETPLACE ════════════════ -->
 <div id="marketplace" class="page">
   <div class="section">
-    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <div class="section-title">Browse Services</div>
-        <div class="section-sub">Find student talent or list your own skills.</div>
-      </div>
-      <button onclick="openSearch()" style="display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:12px;font-weight:500;color:var(--muted);transition:all 0.2s" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        Search
+    <div class="sh" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="st">Browse Services</div><div class="ss">Find student talent or list your own skills.</div></div>
+      <button onclick="openSearch()" style="display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:40px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--muted);transition:all .2s" onmouseover="this.style.borderColor='rgba(200,168,75,.28)'" onmouseout="this.style.borderColor='var(--border)'">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search
       </button>
     </div>
 
-    <div class="filter-bar">
-      <button class="filter-chip active" onclick="filterListings('all',this)">All</button>
-      <button class="filter-chip" onclick="filterListings('tutoring',this)">Tutoring</button>
-      <button class="filter-chip" onclick="filterListings('freelance',this)">Freelance</button>
-      <button class="filter-chip" onclick="filterListings('events',this)">Events</button>
-      <button class="filter-chip" onclick="filterListings('fitness',this)">Fitness</button>
-      <button class="filter-chip" onclick="filterListings('academic',this)">Academic</button>
-      <button class="filter-chip" onclick="filterListings('merch',this)">Merch</button>
+    <!-- SkillSwap Banner in Marketplace -->
+    <div class="swap-banner" style="margin-bottom:1.25rem">
+      <div class="sb-badge">No Cash Needed</div>
+      <div class="sb-title">SkillSwap is Live</div>
+      <div class="sb-desc">Browse swap offers below — or post your skill and request what you need in return.</div>
+    </div>
+
+    <div class="filter-bar" id="mkt-filters">
+      <button class="fchip active" onclick="filterListings('all',this)">All</button>
+      <button class="fchip" onclick="filterListings('tutoring',this)">Tutoring</button>
+      <button class="fchip" onclick="filterListings('freelance',this)">Freelance</button>
+      <button class="fchip" onclick="filterListings('fitness',this)">Fitness</button>
+      <button class="fchip" onclick="filterListings('merch',this)">Merch</button>
+      <button class="fchip" onclick="filterListings('swap',this)">⇄ SkillSwap</button>
+      <button class="fchip" onclick="filterListings('portfolio',this)">Portfolio</button>
+      <button class="fchip" onclick="filterListings('alerts',this)">Alerts</button>
     </div>
 
     <div class="listings-grid" id="listings-grid"></div>
   </div>
 </div>
 
-<!-- ======================== OPPORTUNITIES ======================== -->
+<!-- ════════════════ OPPORTUNITIES ════════════════ -->
 <div id="opportunities" class="page">
   <div class="section">
-    <div class="section-header">
-      <div class="section-title">Campus Opportunities</div>
-      <div class="section-sub">Scholarships, hackathons, internships and fests — all in one place.</div>
-    </div>
-
+    <div class="sh"><div class="st">Campus Opportunities</div><div class="ss">Scholarships, hackathons, internships and fests — all in one place.</div></div>
     <div class="filter-bar">
-      <button class="filter-chip active" onclick="filterOpps('all',this)">All</button>
-      <button class="filter-chip" onclick="filterOpps('scholarship',this)">Scholarships</button>
-      <button class="filter-chip" onclick="filterOpps('hackathon',this)">Hackathons</button>
-      <button class="filter-chip" onclick="filterOpps('internship',this)">Internships</button>
-      <button class="filter-chip" onclick="filterOpps('fest',this)">Fests</button>
+      <button class="fchip active" onclick="filterOpps('all',this)">All</button>
+      <button class="fchip" onclick="filterOpps('scholarship',this)">Scholarships</button>
+      <button class="fchip" onclick="filterOpps('hackathon',this)">Hackathons</button>
+      <button class="fchip" onclick="filterOpps('internship',this)">Internships</button>
+      <button class="fchip" onclick="filterOpps('fest',this)">Fests</button>
     </div>
-
     <div class="opp-grid" id="opp-grid"></div>
   </div>
 </div>
 
-<!-- ======================== REGISTER ======================== -->
+<!-- ════════════════ REGISTER ════════════════ -->
 <div id="register" class="page">
   <div class="section">
-    <div class="section-header">
-      <div class="section-title">Join StudentHub</div>
-      <div class="section-sub">Register as a service provider and start earning today.</div>
-    </div>
-
+    <div class="sh"><div class="st">Join StudentHub</div><div class="ss">Register as a service provider and start earning today.</div></div>
     <div class="register-wrap">
       <div class="form-card">
         <div class="form-title">Create Your Profile</div>
-        <div class="form-group">
-          <label class="form-label">Full Name</label>
-          <input class="form-input" type="text" placeholder="e.g. Tanaya Borah" id="reg-name" autocomplete="name"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">College / University</label>
-          <input class="form-input" type="text" placeholder="e.g. Jorhat Engineering College" id="reg-college" autocomplete="organization"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Service Category</label>
-          <select class="form-select" id="reg-category">
+        <div class="fg"><label class="flabel">Full Name</label><input class="finput" type="text" placeholder="e.g. Priyanka Borah" id="reg-name" autocomplete="name"/></div>
+        <div class="fg"><label class="flabel">College / University</label><input class="finput" type="text" placeholder="e.g. Jorhat Engineering College" id="reg-college" autocomplete="organization"/></div>
+        <div class="fg">
+          <label class="flabel">Service Category</label>
+          <select class="fselect" id="reg-category">
             <option value="">Select a category</option>
             <option>Peer Tutoring</option>
-            <option>Freelance Skills (Design/Code/Writing)</option>
-            <option>Event &amp; Photography</option>
+            <option>Freelance Skills (Design / Code / Writing)</option>
             <option>Fitness &amp; Yoga Coaching</option>
-            <option>Lab Report / Academic Aid</option>
             <option>College Merchandise</option>
             <option>Campus Alert Channel</option>
+            <option>SkillSwap (Barter your skills)</option>
+            <option>Student Portfolio Builder</option>
           </select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Your Skill / Offering</label>
-          <input class="form-input" type="text" placeholder="e.g. Physics tutoring for JEE" id="reg-skill"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">WhatsApp Number</label>
-          <input class="form-input" type="tel" placeholder="+91 98765 43210" id="reg-phone" autocomplete="tel" inputmode="tel"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Rate / Price</label>
-          <input class="form-input" type="text" placeholder="e.g. ₹300 per session" id="reg-rate" inputmode="decimal"/>
-        </div>
-        <button class="form-submit" onclick="submitRegistration()">Submit &amp; Join Platform</button>
+        <div class="fg"><label class="flabel">Your Skill / Offering</label><input class="finput" type="text" placeholder="e.g. Physics tutoring for JEE" id="reg-skill"/></div>
+        <div class="fg"><label class="flabel">WhatsApp Number</label><input class="finput" type="tel" placeholder="+91 98765 43210" id="reg-phone" autocomplete="tel" inputmode="tel"/></div>
+        <div class="fg"><label class="flabel">Rate / Price</label><input class="finput" type="text" placeholder="e.g. ₹300 per session" id="reg-rate" inputmode="decimal"/></div>
+        <button class="fsubmit" onclick="submitRegistration()">Submit &amp; Join Platform</button>
       </div>
 
       <div class="perk-card">
         <div class="perk-title">Why Join StudentHub?</div>
-        <div class="perk-item">
-          <div class="perk-dot">
-            <svg width="15" height="15" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          </div>
-          <div class="perk-text"><strong>Instant Visibility</strong>Your profile is live to 1,000+ students and local businesses in NE India.</div>
-        </div>
-        <div class="perk-item">
-          <div class="perk-dot">
-            <svg width="15" height="15" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-          </div>
-          <div class="perk-text"><strong>Low Commission</strong>We only take 10–15% per booking — the rest is yours to keep.</div>
-        </div>
-        <div class="perk-item">
-          <div class="perk-dot">
-            <svg width="15" height="15" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-          <div class="perk-text"><strong>WhatsApp Integration</strong>Booking requests and client messages delivered straight to your phone.</div>
-        </div>
-        <div class="perk-item">
-          <div class="perk-dot">
-            <svg width="15" height="15" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <div class="perk-text"><strong>Scale at Your Pace</strong>Start with one service, add more as you grow. No lock-in, no pressure.</div>
-        </div>
-        <div class="perk-item">
-          <div class="perk-dot">
-            <svg width="15" height="15" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="perk-text"><strong>Top Earner Rewards</strong>Monthly recognition and featured listings for the highest-rated students.</div>
-        </div>
+        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="ptext"><strong>Instant Visibility</strong>Live to students and local businesses across NE India instantly.</div></div>
+        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="ptext"><strong>Low Commission</strong>Only 10–15% per booking — the rest is yours to keep.</div></div>
+        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="ptext"><strong>WhatsApp Integration</strong>Booking requests delivered straight to your phone.</div></div>
+        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="ptext"><strong>SkillSwap Access</strong>No cash? Start with credits. Trade skills, build experience first.</div></div>
+        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ptext"><strong>Top Earner Rewards</strong>Monthly recognition for the highest-rated students.</div></div>
+        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="ptext"><strong>Free Portfolio Page</strong>Every registered student gets a shareable portfolio link automatically.</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ======================== HOW IT WORKS ======================== -->
+<!-- ════════════════ HOW IT WORKS ════════════════ -->
 <div id="howto" class="page">
   <div class="section">
-    <div class="section-header">
-      <div class="section-title">How It Works</div>
-      <div class="section-sub">Four simple steps from signup to your first earning.</div>
-    </div>
-
+    <div class="sh"><div class="st">How It Works</div><div class="ss">Four simple steps from signup to your first earning.</div></div>
     <div class="steps-row">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <div class="step-title">Register Your Skill</div>
-        <div class="step-desc">Fill the form and list your service — takes less than 3 minutes.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </div>
-        <div class="step-title">Get Discovered</div>
-        <div class="step-desc">Your profile appears in search results and our WhatsApp network.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <div class="step-title">Accept a Booking</div>
-        <div class="step-desc">Client contacts you. Confirm time, mode, and price before starting.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">04</div>
-        <div class="step-icon-wrap">
-          <svg width="18" height="18" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        </div>
-        <div class="step-title">Earn &amp; Grow</div>
-        <div class="step-desc">Get paid directly. Build reviews. Expand into more categories.</div>
-      </div>
+      <div class="step-card"><div class="step-n">01</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="step-title">Register Your Skill</div><div class="step-desc">Fill the form and list your service — takes less than 3 minutes.</div></div>
+      <div class="step-card"><div class="step-n">02</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="step-title">Get Discovered</div><div class="step-desc">Profile appears in search results and our WhatsApp network.</div></div>
+      <div class="step-card"><div class="step-n">03</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="step-title">Accept a Booking</div><div class="step-desc">Client contacts you. Confirm time, mode, and price.</div></div>
+      <div class="step-card"><div class="step-n">04</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="step-title">Earn &amp; Grow</div><div class="step-desc">Get paid directly. Build reviews. Expand categories.</div></div>
     </div>
 
-    <div class="section-header" style="margin-top:0.5rem">
-      <div class="section-title">Commission Structure</div>
-      <div class="section-sub">Transparent pricing — no hidden charges.</div>
-    </div>
-
-    <table class="commission-table">
-      <thead>
-        <tr>
-          <th>Service</th>
-          <th>Typical Earning</th>
-          <th>Platform Cut</th>
-          <th>You Keep</th>
-        </tr>
-      </thead>
+    <div class="sh" style="margin-top:.5rem"><div class="st">Commission Structure</div><div class="ss">Transparent pricing — no hidden charges.</div></div>
+    <table class="comm-table">
+      <thead><tr><th>Service</th><th>Typical Earning</th><th>Platform Cut</th><th>You Keep</th></tr></thead>
       <tbody>
         <tr><td>Peer Tutoring</td><td>₹100–500/session</td><td>10%</td><td>90%</td></tr>
         <tr><td>Freelance Projects</td><td>₹500–5,000/project</td><td>15–20%</td><td>80–85%</td></tr>
-        <tr><td>Event &amp; Photography</td><td>₹3,000–15,000/event</td><td>30%</td><td>70%</td></tr>
         <tr><td>Fitness Coaching</td><td>₹150–400/session</td><td>10%</td><td>90%</td></tr>
-        <tr><td>Lab Report Aid</td><td>₹150–500/record</td><td>10%</td><td>90%</td></tr>
         <tr><td>College Merchandise</td><td>₹50–150/item</td><td>Vendor managed</td><td>Margin kept</td></tr>
         <tr><td>Opportunity Listing</td><td>₹500–5,000/listing</td><td>Platform revenue</td><td>N/A</td></tr>
+        <tr><td>SkillSwap</td><td>Credits → ₹ equivalent</td><td>5% on cash conversions</td><td>95%</td></tr>
+        <tr><td>Portfolio (Premium)</td><td>₹199–499/month</td><td>Platform revenue</td><td>Student keeps portfolio</td></tr>
       </tbody>
     </table>
+
+    <div style="margin-top:2rem">
+      <div class="sh"><div class="st">Why These 7 Ideas Work Long-Term</div></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.25rem;border-top:2px solid var(--gold)">
+          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px">Daily Habit</div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">OpportunityFeed</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5">Students open it every day for new scholarships and internships — highest retention of any module.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.25rem;border-top:2px solid var(--purple)">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px">Zero Barrier</div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">SkillSwap</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5">Students with no money can still participate. Credits convert to real earnings, making it a perfect onboarding funnel.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.25rem;border-top:2px solid var(--teal)">
+          <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px">Sticky Tool</div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Portfolio Builder</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5">Every student needs a resume. The free tier drives signups; premium exports drive revenue. Used even after graduation.</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.25rem;border-top:2px solid #c07030">
+          <div style="font-size:11px;font-weight:700;color:#c07030;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px">Local Moat</div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">NE India Focus</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5">National platforms ignore NE India. Local trust, language, and college relationships give you a defensible advantage.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-</div><!-- /app -->
+</div>
 
 <!-- BOTTOM NAV -->
-<nav class="bottom-nav" id="bottomNav">
-  <button class="bnav-item active" onclick="showPage('home')" id="bnav-home">
-    <div class="bnav-icon">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </div>
-    <div class="bnav-label">Home</div>
-  </button>
-  <button class="bnav-item" onclick="showPage('marketplace')" id="bnav-marketplace">
-    <div class="bnav-icon">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-    </div>
-    <div class="bnav-label">Market</div>
-  </button>
-  <button class="bnav-item" onclick="showPage('opportunities')" id="bnav-opportunities">
-    <div class="bnav-icon">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-    </div>
-    <div class="bnav-label">Opps</div>
-    <div class="bnav-dot"></div>
-  </button>
-  <button class="bnav-item" onclick="showPage('register')" id="bnav-register">
-    <div class="bnav-icon">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-    </div>
-    <div class="bnav-label">Join</div>
-  </button>
-  <button class="bnav-item" onclick="showPage('howto')" id="bnav-howto">
-    <div class="bnav-icon">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-    </div>
-    <div class="bnav-label">Guide</div>
-  </button>
+<nav class="bot-nav" id="botNav">
+  <button class="bni active" onclick="showPage('home')" id="bni-home"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bni-label">Home</div></button>
+  <button class="bni" onclick="showPage('marketplace')" id="bni-marketplace"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg></div><div class="bni-label">Market</div></button>
+  <button class="bni" onclick="showPage('opportunities')" id="bni-opportunities"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="bni-label">Opps</div><div class="bni-dot"></div></button>
+  <button class="bni" onclick="showPage('register')" id="bni-register"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div><div class="bni-label">Join</div></button>
+  <button class="bni" onclick="showPage('howto')" id="bni-howto"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg></div><div class="bni-label">Guide</div></button>
 </nav>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ---- Listings data with WhatsApp numbers ----
+// ── LISTINGS DATA ──
 const listings = [
-  {id:1,cat:'tutoring',phone:'919876543210',icon:'<svg width="28" height="28" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'JEE Physics Crash Course',by:'Student Tutor',price:'₹300/session',meta:'4.9 · 42 sessions'},
-  {id:2,cat:'tutoring',phone:'919876543211',icon:'<svg width="28" height="28" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'UPSC Prelims Coaching',by:'Senior Mentor',price:'₹400/session',meta:'4.8 · 68 sessions'},
-  {id:3,cat:'tutoring',phone:'919876543212',icon:'<svg width="28" height="28" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'NEET Biology Prep',by:'Med Student',price:'₹250/session',meta:'5.0 · 29 sessions'},
-  {id:4,cat:'freelance',phone:'919876543213',icon:'<svg width="28" height="28" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Logo & Brand Design',by:'Design Student',price:'₹1,500/project',meta:'4.7 · 18 projects'},
-  {id:5,cat:'freelance',phone:'919876543214',icon:'<svg width="28" height="28" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'React Web App Dev',by:'CS Senior',price:'₹5,000/project',meta:'4.9 · 11 projects'},
-  {id:6,cat:'freelance',phone:'919876543215',icon:'<svg width="28" height="28" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Content Writing & SEO',by:'Communications Major',price:'₹800/article',meta:'4.6 · 35 articles'},
-  {id:7,cat:'events',phone:'919876543216',icon:'<svg width="28" height="28" fill="none" stroke="#4a6a4a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>',name:'College Fest Photography',by:'Event Crew',price:'₹5,000/event',meta:'4.9 · 23 events'},
-  {id:8,cat:'events',phone:'919876543217',icon:'<svg width="28" height="28" fill="none" stroke="#4a6a4a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>',name:'MC Hosting & Decoration',by:'Campus Vibes',price:'₹3,500/event',meta:'4.8 · 15 events'},
-  {id:9,cat:'fitness',phone:'919876543218',icon:'<svg width="28" height="28" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Morning Yoga (5–8 AM)',by:'Certified Coach',price:'₹200/class',meta:'4.9 · 120 sessions'},
-  {id:10,cat:'fitness',phone:'919876543219',icon:'<svg width="28" height="28" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Zumba Fitness Group',by:'Dance & Fitness',price:'₹250/class',meta:'5.0 · 90 sessions'},
-  {id:11,cat:'academic',phone:'919876543220',icon:'<svg width="28" height="28" fill="none" stroke="#3a5a7a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',name:'Lab Record Formatting',by:'Engineering Senior',price:'₹150/record',meta:'4.9 · 55 records'},
-  {id:12,cat:'academic',phone:'919876543221',icon:'<svg width="28" height="28" fill="none" stroke="#3a5a7a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',name:'Full Project Report Writing',by:'Research Scholar',price:'₹400/report',meta:'4.7 · 30 reports'},
-  {id:13,cat:'merch',phone:'919876543222',icon:'<svg width="28" height="28" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'Custom College Hoodies',by:'PrintCampus Store',price:'₹549/piece',meta:'200+ sold'},
-  {id:14,cat:'merch',phone:'919876543223',icon:'<svg width="28" height="28" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'College Mugs & ID Holders',by:'MemoraBatch Co.',price:'₹149/piece',meta:'1,200+ sold'},
+  // Tutoring
+  {id:1,cat:'tutoring',phone:'919876543210',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'JEE Physics Crash Course',by:'Student Tutor',price:'₹300/session',meta:'4.9 · 42 sessions',tag:''},
+  {id:2,cat:'tutoring',phone:'919876543211',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'UPSC Prelims Coaching',by:'Senior Mentor',price:'₹400/session',meta:'4.8 · 68 sessions',tag:''},
+  {id:3,cat:'tutoring',phone:'919876543212',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'NEET Biology Prep',by:'Med Student',price:'₹250/session',meta:'5.0 · 29 sessions',tag:''},
+  {id:4,cat:'tutoring',phone:'919876543212',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'APSC GS Paper 1',by:'APSC Qualified',price:'₹350/session',meta:'4.9 · 51 sessions',tag:''},
+  // Freelance
+  {id:5,cat:'freelance',phone:'919876543213',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Logo & Brand Design',by:'Design Student',price:'₹1,500/project',meta:'4.7 · 18 projects',tag:''},
+  {id:6,cat:'freelance',phone:'919876543214',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'React Web App Dev',by:'CS Senior',price:'₹5,000/project',meta:'4.9 · 11 projects',tag:''},
+  {id:7,cat:'freelance',phone:'919876543215',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Content Writing & SEO',by:'Communications Major',price:'₹800/article',meta:'4.6 · 35 articles',tag:''},
+  {id:8,cat:'freelance',phone:'919876543216',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Video Editing & Reels',by:'Media Arts Student',price:'₹1,200/video',meta:'4.8 · 22 videos',tag:''},
+  // Fitness
+  {id:9,cat:'fitness',phone:'919876543218',icon:'<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Morning Yoga (5–8 AM)',by:'Certified Coach',price:'₹200/class',meta:'4.9 · 120 sessions',tag:''},
+  {id:10,cat:'fitness',phone:'919876543219',icon:'<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Zumba Fitness Group',by:'Dance & Fitness',price:'₹250/class',meta:'5.0 · 90 sessions',tag:''},
+  {id:11,cat:'fitness',phone:'919876543220',icon:'<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Strength & Conditioning',by:'Sports Dept. Senior',price:'₹300/session',meta:'4.7 · 45 sessions',tag:''},
+  // Merch
+  {id:12,cat:'merch',phone:'919876543222',icon:'<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'Custom College Hoodies',by:'PrintCampus Store',price:'₹549/piece',meta:'200+ sold',tag:''},
+  {id:13,cat:'merch',phone:'919876543223',icon:'<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'College Mugs & ID Holders',by:'MemoraBatch Co.',price:'₹149/piece',meta:'1,200+ sold',tag:''},
+  {id:14,cat:'merch',phone:'919876543224',icon:'<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'Batch Farewell Tees',by:'JEC PrintSquad',price:'₹299/piece',meta:'Pre-order open',tag:''},
+  // SkillSwap (NEW)
+  {id:15,cat:'swap',phone:'919876543225',icon:'<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',name:'Python Basics ↔ Graphic Design',by:'SkillSwap User',price:'30 Credits / swap',meta:'Barter · No cash needed',tag:'swap'},
+  {id:16,cat:'swap',phone:'919876543226',icon:'<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',name:'English Speaking ↔ Math Tutor',by:'SkillSwap User',price:'25 Credits / swap',meta:'Barter · No cash needed',tag:'swap'},
+  {id:17,cat:'swap',phone:'919876543227',icon:'<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',name:'Video Editing ↔ SEO Writing',by:'SkillSwap User',price:'20 Credits / swap',meta:'Barter · No cash needed',tag:'swap'},
+  // Portfolio (NEW)
+  {id:18,cat:'portfolio',phone:'919876543228',icon:'<svg width="26" height="26" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',name:'Student Resume Builder',by:'StudentHub Tool',price:'Free',meta:'Build in 5 minutes',tag:'new'},
+  {id:19,cat:'portfolio',phone:'919876543229',icon:'<svg width="26" height="26" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',name:'Portfolio Pro Export',by:'StudentHub Premium',price:'₹199/month',meta:'PDF + Custom domain',tag:'new'},
+  // Campus Alerts
+  {id:20,cat:'alerts',phone:'919876543230',icon:'<svg width="26" height="26" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>',name:'NE India Opportunities Feed',by:'Campus Alerts Team',price:'Free for students',meta:'3–5 new opps daily',tag:''},
+  {id:21,cat:'alerts',phone:'919876543231',icon:'<svg width="26" height="26" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>',name:'Featured Listing Slot',by:'For Coaching Centres',price:'₹500–2,000',meta:'Reach 1,000+ students',tag:''},
 ];
 
 const opportunities = [
-  {type:'scholarship',icon:'<svg width="20" height="20" fill="none" stroke="#3a5a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',title:'NEC Merit Scholarship 2025',desc:'For science & engineering students. Up to ₹1.2L/year.',deadline:'30 Apr',reward:'₹1.2L',tag:'scholarship'},
-  {type:'hackathon',icon:'<svg width="20" height="20" fill="none" stroke="#7a5a1a" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',title:'Smart India Hackathon 2025',desc:'National 36-hour hackathon. Build solutions for the government.',deadline:'15 May',reward:'₹1L prize',tag:'hackathon'},
-  {type:'internship',icon:'<svg width="20" height="20" fill="none" stroke="#2a3f6a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',title:'ISRO Summer Internship',desc:'2-month research internship. Open for final-year B.Tech students.',deadline:'20 Apr',reward:'₹15k/mo',tag:'internship'},
-  {type:'fest',icon:'<svg width="20" height="20" fill="none" stroke="#6a2a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',title:'Techniche — IIT Guwahati',desc:'Annual tech fest by IIT Guwahati. Competitions, workshops, pro-shows.',deadline:'12 Aug',reward:'Register Free',tag:'fest'},
-  {type:'scholarship',icon:'<svg width="20" height="20" fill="none" stroke="#3a5a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',title:'Inspire Scholarship (DST)',desc:'For top 1% in Class 12 boards. Monthly scholarship for science.',deadline:'Open',reward:'₹80k/year',tag:'scholarship'},
-  {type:'hackathon',icon:'<svg width="20" height="20" fill="none" stroke="#7a5a1a" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',title:'Assam Startup Hackathon',desc:'State-level for student entrepreneurs. Pitching, mentoring, funding.',deadline:'5 May',reward:'₹50k grant',tag:'hackathon'},
-  {type:'internship',icon:'<svg width="20" height="20" fill="none" stroke="#2a3f6a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',title:'BHEL Engineering Internship',desc:'Industrial exposure at BHEL Guwahati. EEE, ECE, Civil preferred.',deadline:'30 Apr',reward:'Stipend+Cert',tag:'internship'},
-  {type:'fest',icon:'<svg width="20" height="20" fill="none" stroke="#6a2a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',title:'Annual Cultural Fest',desc:'Dance, music, art, drama competitions. Open to all colleges.',deadline:'Jun 2025',reward:'Cert + Cash',tag:'fest'},
+  {type:'scholarship',icon:'<svg width="19" height="19" fill="none" stroke="#3a5a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',title:'NEC Merit Scholarship 2025',desc:'For science & engineering students across NE India. Up to ₹1.2L/year.',deadline:'30 Apr',reward:'₹1.2L/year',tag:'scholarship'},
+  {type:'hackathon',icon:'<svg width="19" height="19" fill="none" stroke="#7a5a1a" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',title:'Smart India Hackathon 2025',desc:'National 36-hour hackathon. Build solutions for government problems.',deadline:'15 May',reward:'₹1L prize',tag:'hackathon'},
+  {type:'internship',icon:'<svg width="19" height="19" fill="none" stroke="#2a3f6a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',title:'ISRO Summer Internship',desc:'2-month research internship. Open for final-year B.Tech students.',deadline:'20 Apr',reward:'₹15k/mo',tag:'internship'},
+  {type:'fest',icon:'<svg width="19" height="19" fill="none" stroke="#6a2a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',title:'Techniche — IIT Guwahati',desc:'Annual tech fest. Competitions, workshops, pro-shows. Open to all.',deadline:'12 Aug',reward:'Register Free',tag:'fest'},
+  {type:'scholarship',icon:'<svg width="19" height="19" fill="none" stroke="#3a5a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',title:'Inspire Scholarship (DST)',desc:'For top 1% in Class 12 boards. Monthly scholarship for science students.',deadline:'Open',reward:'₹80k/year',tag:'scholarship'},
+  {type:'hackathon',icon:'<svg width="19" height="19" fill="none" stroke="#7a5a1a" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',title:'Assam Startup Hackathon',desc:'State-level for student entrepreneurs. Pitching, mentoring, funding.',deadline:'5 May',reward:'₹50k grant',tag:'hackathon'},
+  {type:'internship',icon:'<svg width="19" height="19" fill="none" stroke="#2a3f6a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',title:'BHEL Engineering Internship',desc:'Industrial exposure at BHEL Guwahati. EEE, ECE, Civil preferred.',deadline:'30 Apr',reward:'Stipend+Cert',tag:'internship'},
+  {type:'fest',icon:'<svg width="19" height="19" fill="none" stroke="#6a2a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',title:'Annual Cultural Fest',desc:'Dance, music, art, drama competitions. Open to all NE colleges.',deadline:'Jun 2025',reward:'Cert + Cash',tag:'fest'},
 ];
 
-// ---- WhatsApp integration functions ----
-function openWhatsApp(phoneNumber, serviceName, price) {
-  const message = encodeURIComponent(`Hi! I'm interested in booking: *${serviceName}* (${price}). Is it available?`);
-  const url = `https://wa.me/${phoneNumber}?text=${message}`;
-  window.open(url, '_blank');
+// ── WHATSAPP ──
+function openWhatsApp(phone, name, price) {
+  const msg = encodeURIComponent(`Hi! I'm interested in: *${name}* (${price}). Is it available?`);
+  window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+}
+function openWhatsAppAdmin(adminPhone, userName) {
+  const msg = encodeURIComponent(`👋 Hi StudentHub! I just registered: *${userName}*. Please review my profile and confirm onboarding.`);
+  window.open(`https://wa.me/${adminPhone}?text=${msg}`, '_blank');
 }
 
-function openWhatsAppToAdmin(adminNumber, userName) {
-  const message = encodeURIComponent(`👋 Welcome to StudentHub, ${userName}! Your profile is under review. We'll notify you once approved. Stay tuned!`);
-  const url = `https://wa.me/${adminNumber}?text=${message}`;
-  window.open(url, '_blank');
-}
-
-// ---- Rendering functions ----
+// ── RENDER ──
 function renderListings(filter) {
   const grid = document.getElementById('listings-grid');
-  const f = filter === 'all' ? listings : listings.filter(l => l.cat === filter);
-  if (!f.length) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">—</div><div class="empty-state-text">No services found.</div></div>`;
-    return;
-  }
-  grid.innerHTML = f.map((l, i) => `
-    <div class="listing-card" style="animation:fadeUp 0.4s ${i*0.04}s cubic-bezier(0.22,1,0.36,1) both">
-      <div class="listing-img">${l.icon}</div>
-      <div class="listing-body">
-        <div class="listing-name">${l.name}</div>
-        <div class="listing-by">${l.by}</div>
-        <div class="listing-meta">${l.meta}</div>
-        <div class="listing-price">${l.price}</div>
-        <button class="listing-action" onclick="openWhatsApp('${l.phone}', '${l.name.replace(/'/g, "\\'")}', '${l.price}')">Book Now</button>
+  const all = [...listings, ...(JSON.parse(localStorage.getItem('customListings')||'[]'))];
+  const f = filter === 'all' ? all : all.filter(l => l.cat === filter);
+  if (!f.length) { grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--muted);font-size:13px">No services in this category yet.</div>`; return; }
+  grid.innerHTML = f.map((l,i) => {
+    const tagHtml = l.tag === 'new' ? `<span class="lcard-tag new">New</span>` : l.tag === 'swap' ? `<span class="lcard-tag swap">⇄ Swap</span>` : '';
+    const isSwap = l.cat === 'swap';
+    const isPortfolio = l.cat === 'portfolio';
+    const btnLabel = isSwap ? 'Request Swap' : (isPortfolio && l.price === 'Free') ? 'Build Free' : 'Book Now';
+    const btnClass = isSwap ? 'lcard-action swap-btn' : 'lcard-action';
+    return `<div class="lcard" style="animation:pgIn .35s ${i*.04}s cubic-bezier(.22,1,.36,1) both">
+      <div class="lcard-img">${l.icon}</div>
+      <div class="lcard-body">
+        ${tagHtml}
+        <div class="lcard-name">${l.name}</div>
+        <div class="lcard-by">${l.by}</div>
+        <div class="lcard-meta">${l.meta}</div>
+        <div class="lcard-price">${l.price}</div>
+        <button class="${btnClass}" onclick="openWhatsApp('${l.phone}','${l.name.replace(/'/g,"\\'")}','${l.price}')">${btnLabel}</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function filterListings(cat, btn) {
-  document.querySelectorAll('#marketplace .filter-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#mkt-filters .fchip').forEach(c => c.classList.remove('active'));
   if (btn) btn.classList.add('active');
+  else { const chips = document.querySelectorAll('#mkt-filters .fchip'); chips.forEach(c => { if (c.textContent.trim().toLowerCase().includes(cat) || (cat === 'all' && c.textContent.trim() === 'All')) c.classList.add('active'); }); }
   renderListings(cat);
 }
 
 function renderOpps(filter) {
   const grid = document.getElementById('opp-grid');
   const f = filter === 'all' ? opportunities : opportunities.filter(o => o.type === filter);
-  grid.innerHTML = f.map((o, i) => `
-    <div class="opp-card" style="animation:fadeUp 0.4s ${i*0.04}s cubic-bezier(0.22,1,0.36,1) both">
-      <div class="opp-type">${o.icon}</div>
-      <div class="opp-body">
-        <div class="opp-title">${o.title}</div>
-        <div class="opp-desc">${o.desc}</div>
-        <div class="opp-tags">
-          <span class="opp-tag tag-deadline">${o.deadline}</span>
-          <span class="opp-tag tag-reward">${o.reward}</span>
-          <span class="opp-tag tag-type">${o.tag}</span>
+  grid.innerHTML = f.map((o,i) => `
+    <div class="ocard" style="animation:pgIn .35s ${i*.04}s cubic-bezier(.22,1,.36,1) both">
+      <div class="otype">${o.icon}</div>
+      <div class="o-body">
+        <div class="o-title">${o.title}</div>
+        <div class="o-desc">${o.desc}</div>
+        <div class="o-tags">
+          <span class="otag tag-dl">${o.deadline}</span>
+          <span class="otag tag-rw">${o.reward}</span>
+          <span class="otag tag-ty">${o.tag}</span>
         </div>
       </div>
-      <div class="opp-chevron">›</div>
+      <div class="ochev">›</div>
     </div>`).join('');
 }
 
 function filterOpps(type, btn) {
-  document.querySelectorAll('#opportunities .filter-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#opportunities .fchip').forEach(c => c.classList.remove('active'));
   if (btn) btn.classList.add('active');
   renderOpps(type);
 }
 
-// ---- Navigation ----
-const pageNavMap = {home:0, marketplace:1, opportunities:2, register:3, howto:4};
-const bnavIds = ['bnav-home','bnav-marketplace','bnav-opportunities','bnav-register','bnav-howto'];
-
+// ── NAVIGATION ──
+const pages = ['home','marketplace','opportunities','register','howto'];
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-  bnavIds.forEach(b => document.getElementById(b)?.classList.remove('active'));
+  pages.forEach(p => document.getElementById('bni-'+p)?.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const idx = pageNavMap[id];
-  if (idx !== undefined) {
+  const idx = pages.indexOf(id);
+  if (idx >= 0) {
     document.querySelectorAll('.nav-pill')[idx]?.classList.add('active');
-    document.getElementById(bnavIds[idx])?.classList.add('active');
+    document.getElementById('bni-'+id)?.classList.add('active');
   }
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
   if (id === 'marketplace') renderListings('all');
   if (id === 'opportunities') renderOpps('all');
-  setTimeout(() => setupReveal(), 100);
+  setTimeout(setupReveal, 80);
 }
 
-// ---- Search ----
-function openSearch() {
-  document.getElementById('searchOverlay').classList.add('open');
-  document.getElementById('searchInput').focus();
+// ── SEARCH ──
+function openSearch() { document.getElementById('searchOverlay').classList.add('open'); setTimeout(()=>document.getElementById('searchInput').focus(),50); }
+function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); document.getElementById('searchInput').value=''; document.getElementById('searchResults').innerHTML=''; }
+function doSearch(q) {
+  q = q.toLowerCase().trim();
+  const cont = document.getElementById('searchResults');
+  if (!q) { cont.innerHTML=''; return; }
+  const res = listings.filter(l => l.name.toLowerCase().includes(q)||l.by.toLowerCase().includes(q)||l.cat.includes(q));
+  if (!res.length) { cont.innerHTML=`<div style="padding:1rem 1.25rem;font-size:13px;color:var(--muted)">No results for "${q}"</div>`; return; }
+  cont.innerHTML = res.map(l=>`<div class="sri" onclick="closeSearch();showPage('marketplace')"><div class="sri-icon">${l.icon}</div><div style="flex:1"><div class="sri-name">${l.name}</div><div class="sri-meta">${l.by} · ${l.meta}</div></div><div class="sri-price">${l.price}</div></div>`).join('');
 }
-function closeSearch() {
-  document.getElementById('searchOverlay').classList.remove('open');
-  document.getElementById('searchInput').value = '';
-  document.getElementById('searchResults').innerHTML = '';
-}
-function doSearch(query) {
-  const q = query.toLowerCase().trim();
-  const container = document.getElementById('searchResults');
-  if (!q) { container.innerHTML = ''; return; }
-  const results = listings.filter(l => l.name.toLowerCase().includes(q) || l.by.toLowerCase().includes(q) || l.cat.includes(q));
-  if (!results.length) {
-    container.innerHTML = `<div style="padding:1rem 1.25rem;font-size:13px;color:var(--muted)">No results for "${query}"</div>`;
-    return;
-  }
-  container.innerHTML = results.map(l => `
-    <div class="search-result-item" onclick="closeSearch();showPage('marketplace')">
-      <div class="sri-icon">${l.icon}</div>
-      <div class="sri-text"><div class="sri-name">${l.name}</div><div class="sri-meta">${l.by} · ${l.meta}</div></div>
-      <div class="sri-price">${l.price}</div>
-    </div>`).join('');
-}
-document.getElementById('searchOverlay').addEventListener('click', function(e) { if (e.target === this) closeSearch(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+document.getElementById('searchOverlay').addEventListener('click',function(e){if(e.target===this)closeSearch()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch()});
 
-// ---- Toast ----
+// ── TOAST ──
 let toastTimer;
 function showToast(msg) {
   clearTimeout(toastTimer);
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.style.display = 'block';
-  t.style.animation = 'none';
-  t.offsetHeight;
-  t.style.animation = 'toastIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards';
-  toastTimer = setTimeout(() => t.style.display = 'none', 3000);
+  t.textContent = msg; t.style.display='block';
+  t.style.animation='none'; t.offsetHeight;
+  t.style.animation='toastIn .3s cubic-bezier(.22,1,.36,1) forwards';
+  toastTimer = setTimeout(()=>t.style.display='none',3200);
 }
 
-// ---- Registration ----
+// ── REGISTER ──
 function submitRegistration() {
   const name = document.getElementById('reg-name').value.trim();
   const category = document.getElementById('reg-category').value;
@@ -1508,74 +868,42 @@ function submitRegistration() {
   const skill = document.getElementById('reg-skill').value.trim();
   const rate = document.getElementById('reg-rate').value.trim();
   const college = document.getElementById('reg-college').value.trim();
-
   if (!name) { showToast('Please enter your name.'); return; }
   if (!category) { showToast('Please select a category.'); return; }
   if (!phone) { showToast('Please enter your WhatsApp number.'); return; }
-
-  // Clean phone number (remove +, spaces, dashes)
-  const cleanPhone = phone.replace(/[+\-\s]/g, '');
-
-  // Optional: Save provider to localStorage (for future expansion)
-  const newListing = {
-    id: Date.now(),
-    cat: category.toLowerCase().includes('tutoring') ? 'tutoring' :
-         category.toLowerCase().includes('freelance') ? 'freelance' :
-         category.toLowerCase().includes('event') ? 'events' :
-         category.toLowerCase().includes('fitness') ? 'fitness' :
-         category.toLowerCase().includes('academic') ? 'academic' :
-         category.toLowerCase().includes('merch') ? 'merch' : 'freelance',
-    phone: cleanPhone,
-    icon: getIconForCategory(category),
-    name: skill || category,
-    by: name + (college ? ` · ${college}` : ''),
-    price: rate || 'Contact for price',
-    meta: 'New provider'
-  };
-  let stored = JSON.parse(localStorage.getItem('customListings')) || [];
-  stored.push(newListing);
-  localStorage.setItem('customListings', JSON.stringify(stored));
-
-  // Open WhatsApp to admin with welcome message
-  const adminNumber = '918399925904';
-  openWhatsAppToAdmin(adminNumber, name);
-
+  const cleanPhone = phone.replace(/[+\-\s]/g,'');
+  const catMap = {tutoring:'tutoring',freelance:'freelance',fitness:'fitness',merchandise:'merch','skillswap':'swap',portfolio:'portfolio',campus:'alerts'};
+  const catKey = Object.keys(catMap).find(k => category.toLowerCase().includes(k)) || 'freelance';
+  const newEntry = {id:Date.now(),cat:catMap[catKey],phone:cleanPhone,icon:getIcon(category),name:skill||category,by:name+(college?` · ${college}`:''),price:rate||'Contact for price',meta:'New provider',tag:''};
+  let stored = JSON.parse(localStorage.getItem('customListings')||'[]');
+  stored.push(newEntry); localStorage.setItem('customListings',JSON.stringify(stored));
+  openWhatsAppAdmin('918399925904', name);
   showToast(`Welcome, ${name}! Check WhatsApp to complete registration.`);
-
-  // Clear form
-  ['reg-name','reg-college','reg-skill','reg-phone','reg-rate'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('reg-category').value = '';
-
-  // Update listings array for immediate effect (optional)
-  window.listings = [...listings, ...stored];
+  ['reg-name','reg-college','reg-skill','reg-phone','reg-rate'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('reg-category').value='';
 }
 
-function getIconForCategory(cat) {
-  if (cat.toLowerCase().includes('tutoring')) return '<svg width="28" height="28" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>';
-  if (cat.toLowerCase().includes('freelance')) return '<svg width="28" height="28" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>';
-  if (cat.toLowerCase().includes('event')) return '<svg width="28" height="28" fill="none" stroke="#4a6a4a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
-  if (cat.toLowerCase().includes('fitness')) return '<svg width="28" height="28" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>';
-  if (cat.toLowerCase().includes('academic')) return '<svg width="28" height="28" fill="none" stroke="#3a5a7a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
-  if (cat.toLowerCase().includes('merch')) return '<svg width="28" height="28" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>';
-  return '<svg width="28" height="28" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>';
+function getIcon(cat) {
+  cat = cat.toLowerCase();
+  if (cat.includes('tutor')) return '<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>';
+  if (cat.includes('free')) return '<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>';
+  if (cat.includes('fit')||cat.includes('yoga')) return '<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>';
+  if (cat.includes('merch')) return '<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>';
+  if (cat.includes('swap')) return '<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>';
+  if (cat.includes('portfolio')) return '<svg width="26" height="26" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>';
+  return '<svg width="26" height="26" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>';
 }
 
-// ---- Scroll reveal ----
+// ── REVEAL ──
 function setupReveal() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, {threshold: 0.12});
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
 }
 
-// ---- Initialize ----
+// ── INIT ──
 setupReveal();
 renderListings('all');
 renderOpps('all');
-
-// Load custom listings from localStorage and merge
-const savedListings = JSON.parse(localStorage.getItem('customListings')) || [];
-window.listings = [...listings, ...savedListings];
 </script>
 </body>
 </html>
