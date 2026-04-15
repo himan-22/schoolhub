@@ -44,7 +44,6 @@ input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar{width:2px}
 ::-webkit-scrollbar-thumb{background:#ccc9bf;border-radius:2px}
 
-/* All your existing CSS styles (unchanged) */
 .search-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,10,15,0.93);backdrop-filter:blur(12px);padding:1.5rem;flex-direction:column;gap:10px}
 .search-overlay.open{display:flex;animation:fd .2s ease}
 @keyframes fd{from{opacity:0}to{opacity:1}}
@@ -243,20 +242,78 @@ input,select,textarea{font-family:inherit}
 .ptext{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5}
 .ptext strong{color:rgba(255,255,255,.9);font-weight:600;display:block;margin-bottom:2px}
 
-.steps-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin-bottom:2rem}
-.step-card{background:var(--surface);padding:1.5rem;text-align:center;position:relative;overflow:hidden;transition:background .22s;opacity:0;animation:fu .6s cubic-bezier(.22,1,.36,1) forwards}
-.step-card:hover{background:#faf9f4}
-.step-card:nth-child(1){animation-delay:0s}.step-card:nth-child(2){animation-delay:.07s}.step-card:nth-child(3){animation-delay:.14s}.step-card:nth-child(4){animation-delay:.21s}
+.steps-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.25rem;
+  background:transparent;
+  border:none;
+  border-radius:0;
+  overflow:visible;
+  margin-bottom:0.75rem;
+}
+.step-card{
+  background:var(--surface);
+  padding:1.5rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  transition:background .22s,box-shadow .22s;
+  opacity:0;
+  animation:fu .6s cubic-bezier(.22,1,.36,1) forwards;
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:0 4px 12px rgba(0,0,0,.04)
+}
+.step-card:hover{
+  background:#faf9f4;
+  box-shadow:0 8px 20px rgba(0,0,0,.08)
+}
+.step-card:nth-child(1){animation-delay:0s}
+.step-card:nth-child(2){animation-delay:.07s}
+.step-card:nth-child(3){animation-delay:.14s}
+.step-card:nth-child(4){animation-delay:.21s}
 .step-n{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--parchment);line-height:1;margin-bottom:.3rem}
 .step-iw{width:38px;height:38px;border-radius:11px;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto .5rem;transition:all .22s}
 .step-card:hover .step-iw{border-color:var(--gold-bdr);background:var(--gold-pale)}
 .step-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
 .step-desc{font-size:11px;color:var(--muted);line-height:1.5}
 
-.comm-table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.comm-table th{background:var(--bg);color:rgba(255,255,255,.6);font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:12px 16px;text-align:left;white-space:nowrap}
+/* Commission table – compact & edge-to-edge */
+.comm-section {
+  margin-top: 0;
+  padding: 0;
+}
+.comm-table{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--surface);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  border:1px solid var(--border);
+  display:table;
+  margin:0;
+}
+.comm-table th{
+  background:#111;
+  color:rgba(255,255,255,.85);
+  font-family:'Outfit',sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  padding:12px 16px;
+  text-align:left;
+  white-space:nowrap
+}
 .comm-table th:first-child{color:var(--gold)}
-.comm-table td{padding:11px 16px;font-size:12px;color:var(--text);border-bottom:1px solid #f0efe8;white-space:nowrap}
+.comm-table td{
+  padding:11px 16px;
+  font-size:12px;
+  color:var(--text);
+  border-bottom:1px solid #f0efe8;
+  white-space:nowrap
+}
 .comm-table tr:last-child td{border-bottom:none}
 .comm-table tr:hover td{background:#faf9f4}
 .comm-table td:nth-child(4){color:var(--gold);font-weight:700}
@@ -284,15 +341,17 @@ input,select,textarea{font-family:inherit}
   .ideas-grid{display:none}.ideas-mobile{display:block}
   .listings-grid{grid-template-columns:repeat(2,1fr)}
   .register-wrap{grid-template-columns:1fr}
-  .steps-row{grid-template-columns:repeat(2,1fr)}
+  .steps-row{grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:0.75rem}
   .section{padding:1.75rem 1.25rem}
   .cat-chips{padding:0 1.25rem .25rem;margin:0 -1.25rem}
   .h-scroll{margin:0 -1.25rem;padding:0 1.25rem}
+  .comm-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 }
 @media(min-width:641px){
   .ideas-mobile{display:none}
   .mob-header{display:none}
   .bot-nav{display:none !important}
+  .comm-table{display:table;overflow-x:visible}
 }
 </style>
 </head>
@@ -587,28 +646,61 @@ input,select,textarea{font-family:inherit}
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
+<!-- HOW IT WORKS (Commission table only, no extra spacing) -->
 <div id="howto" class="page">
   <div class="section">
     <div class="sh"><div class="st">How It Works</div><div class="ss">Four simple steps from signup to your first earning.</div></div>
+    
     <div class="steps-row">
-      <div class="step-card"><div class="step-n">01</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="step-title">Register Your Skill</div><div class="step-desc">Fill the form and list your service — takes less than 3 minutes.</div></div>
-      <div class="step-card"><div class="step-n">02</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="step-title">Get Discovered</div><div class="step-desc">Profile appears in search results and our WhatsApp network.</div></div>
-      <div class="step-card"><div class="step-n">03</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="step-title">Accept a Booking</div><div class="step-desc">Client contacts you. Confirm time, mode, and details.</div></div>
-      <div class="step-card"><div class="step-n">04</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="step-title">Earn &amp; Grow</div><div class="step-desc">Get paid directly. Build reviews. Expand categories.</div></div>
+      <div class="step-card">
+        <div class="step-n">01</div>
+        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="step-title">Register Your Skill</div>
+        <div class="step-desc">Fill the form and list your service — takes less than 3 minutes.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-n">02</div>
+        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <div class="step-title">Get Discovered</div>
+        <div class="step-desc">Profile appears in search results and our WhatsApp network.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-n">03</div>
+        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="step-title">Accept a Booking</div>
+        <div class="step-desc">Client contacts you. Confirm time, mode, and details.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-n">04</div>
+        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="step-title">Earn &amp; Grow</div>
+        <div class="step-desc">Get paid directly. Build reviews. Expand categories.</div>
+      </div>
     </div>
 
-    <div class="sh" style="margin-top:.5rem"><div class="st">Commission Structure</div><div class="ss">Transparent pricing — no hidden charges.</div></div>
+    <!-- Commission Structure — no extra whitespace; table fills container -->
+    <div class="sh" style="margin-top:0; margin-bottom:0.5rem;">
+      <div class="st">Commission Structure</div>
+      <div class="ss">Transparent pricing — no hidden charges.</div>
+    </div>
+    
     <table class="comm-table">
-      <thead><tr><th>Service</th><th>Typical Earning</th><th>Platform Cut</th><th>You Keep</th></tr></thead>
+      <thead>
+        <tr>
+          <th>SERVICE</th>
+          <th>TYPICAL EARNING</th>
+          <th>PLATFORM CUT</th>
+          <th>YOU KEEP</th>
+        </tr>
+      </thead>
       <tbody>
         <tr><td>Peer Tutoring</td><td>Earn per session</td><td>10%</td><td>90%</td></tr>
         <tr><td>Freelance Projects</td><td>Earn per project</td><td>15–20%</td><td>80–85%</td></tr>
         <tr><td>Fitness Coaching</td><td>Earn per session</td><td>10%</td><td>90%</td></tr>
-        <tr><td>College Merchandise</td><td>Earn per item</td><td>Vendor managed</td><td>Margin kept</td></tr>
+        <tr><td>College Merchandise</td><td>Earn per item</td><td>Vendor managed</td><td><span style="color:var(--gold)">Margin kept</span></td></tr>
         <tr><td>Opportunity Listing</td><td>Various rewards</td><td>Platform revenue</td><td>N/A</td></tr>
         <tr><td>SkillSwap</td><td>Credits → earnings</td><td>5% on cash conversions</td><td>95%</td></tr>
-        <tr><td>Portfolio (Premium)</td><td>Freemium upsell</td><td>Platform revenue</td><td>Student keeps portfolio</td></tr>
+        <tr><td>Portfolio (Premium)</td><td>Freemium upsell</td><td>Platform revenue</td><td><span style="color:var(--gold)">Student keeps portfolio</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -664,7 +756,6 @@ const opportunities = [
   {type:'hackathon',icon:'<svg width="19" height="19" fill="none" stroke="#7a5a1a" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',title:'Smart India Hackathon 2025',desc:'National 36-hour hackathon. Build solutions for government problems.',deadline:'15 May',reward:'Prizes available',tag:'hackathon'},
   {type:'internship',icon:'<svg width="19" height="19" fill="none" stroke="#2a3f6a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',title:'ISRO Summer Internship',desc:'2-month research internship. Open for final-year B.Tech students.',deadline:'20 Apr',reward:'Stipend + experience',tag:'internship'},
   {type:'fest',icon:'<svg width="19" height="19" fill="none" stroke="#6a2a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',title:'Techniche — IIT Guwahati',desc:'Annual tech fest. Competitions, workshops, pro-shows.',deadline:'12 Aug',reward:'Register Free',tag:'fest'},
-  // ... (other opportunities remain similar with generic rewards)
 ];
 
 function openWhatsApp(phone, name) {
