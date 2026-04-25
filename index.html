@@ -1,896 +1,2826 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<meta name="theme-color" content="#080a0f"/>
-<title>StudentHub — NE India's Student Economy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>StudentHub | NE India's Student Economy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    :root {
+      --ink: #111318;
+      --ink-soft: #4e5664;
+      --muted: #7b8290;
+      --line: #e5e0d5;
+      --line-dark: rgba(255, 255, 255, 0.12);
+      --paper: #fbfaf6;
+      --panel: #ffffff;
+      --night: #0b0d12;
+      --night-2: #141821;
+      --gold: #bd9851;
+      --gold-2: #d7b46b;
+      --champagne: #f6e6bd;
+      --green: #2e8b78;
+      --wine: #8a4f66;
+      --moss: #5e7d48;
+      --blue: #496f9a;
+      --shadow: 0 20px 60px rgba(22, 19, 12, 0.10);
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 18px;
+      --nav-h: 70px;
+      --bottom-h: 70px;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+    }
 
-:root{
-  --bg:        #080a0f;
-  --bg2:       #0d1018;
-  --bg3:       #12151e;
-  --surface:   #ffffff;
-  --cream:     #f7f5f0;
-  --parchment: #ece9e1;
-  --border:    #e4e1d8;
-  --text:      #0d0e12;
-  --muted:     #8a8880;
-  --gold:      #c8a84b;
-  --gold2:     #e2c46d;
-  --gold-pale: rgba(200,168,75,0.10);
-  --gold-bdr:  rgba(200,168,75,0.28);
-  --teal:      #2d9b8a;
-  --teal-pale: rgba(45,155,138,0.10);
-  --teal-bdr:  rgba(45,155,138,0.28);
-  --purple:    #7c5cbf;
-  --purple-pale:rgba(124,92,191,0.10);
-  --r-sm:6px;--r-md:12px;--r-lg:18px;--r-xl:24px;
-  --nav-h:62px;--bot-h:68px;
-  --safe-b:env(safe-area-inset-bottom,0px);
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);min-height:100dvh;overscroll-behavior:none}
-img,svg{display:block}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-input,select,textarea{font-family:inherit}
-::-webkit-scrollbar{width:2px}
-::-webkit-scrollbar-thumb{background:#ccc9bf;border-radius:2px}
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Instrument Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-rendering: optimizeLegibility;
+    }
 
-.search-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,10,15,0.93);backdrop-filter:blur(12px);padding:1.5rem;flex-direction:column;gap:10px}
-.search-overlay.open{display:flex;animation:fd .2s ease}
-@keyframes fd{from{opacity:0}to{opacity:1}}
-.search-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:var(--r-lg);padding:12px 16px;border:1px solid var(--gold-bdr)}
-.search-bar input{flex:1;border:none;font-size:15px;outline:none;color:var(--text);background:transparent}
-.search-bar input::placeholder{color:var(--muted)}
-.search-cancel{font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap}
-.search-results{background:var(--surface);border-radius:var(--r-md);overflow:hidden;max-height:60vh;overflow-y:auto;border:1px solid var(--border)}
-.sri{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
-.sri:last-child{border-bottom:none}
-.sri:active{background:var(--cream)}
-.sri-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--cream);flex-shrink:0}
-.sri-name{font-size:13px;font-weight:600;color:var(--text)}
-.sri-meta{font-size:11px;color:var(--muted);margin-top:1px}
-.sri-price{font-size:13px;font-weight:700;color:var(--gold)}
+    button, input, select, textarea {
+      font: inherit;
+    }
 
-.top-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:var(--nav-h);background:var(--bg);position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(200,168,75,0.12)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:0.2px;user-select:none}
-.nav-logo span{color:var(--gold)}
-.nav-links{display:flex;gap:2px}
-.nav-pill{font-size:12px;font-weight:500;letter-spacing:0.3px;padding:7px 16px;border-radius:40px;color:rgba(255,255,255,0.45);border:1px solid transparent;transition:all .22s;white-space:nowrap}
-.nav-pill:hover{color:rgba(255,255,255,0.8);border-color:rgba(200,168,75,0.2)}
-.nav-pill.active{background:var(--gold-pale);color:var(--gold);border-color:var(--gold-bdr);font-weight:600}
+    button {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
 
-.mob-header{display:none;align-items:center;justify-content:space-between;padding:0 1.25rem;height:var(--nav-h);background:var(--bg);position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(200,168,75,0.12)}
-.mob-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
-.mob-logo span{color:var(--gold)}
-.mob-search-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(200,168,75,0.18);display:flex;align-items:center;justify-content:center}
+    svg {
+      display: block;
+      flex: 0 0 auto;
+    }
 
-.bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:calc(var(--bot-h) + var(--safe-b));padding-bottom:var(--safe-b);background:var(--bg);border-top:1px solid rgba(200,168,75,0.1);z-index:300;justify-content:space-around;align-items:center}
-.bni{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;padding:8px 0;color:rgba(255,255,255,0.3);transition:color .22s;position:relative}
-.bni.active{color:var(--gold)}
-.bni-icon{line-height:1;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
-.bni.active .bni-icon{transform:scale(1.1) translateY(-1px)}
-.bni-label{font-size:10px;font-weight:500;letter-spacing:0.3px}
-.bni-dot{position:absolute;top:6px;right:calc(50% - 14px);width:5px;height:5px;background:#e05a5a;border-radius:50%;border:1.5px solid var(--bg);animation:pdot 2.5s ease infinite}
-@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
+    .app-shell {
+      min-height: 100dvh;
+      padding-bottom: 0;
+    }
 
-.page{display:none}
-.page.active{display:block;animation:pgIn .4s cubic-bezier(.22,1,.36,1)}
-@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 max(24px, calc((100vw - 1180px) / 2));
+      background: rgba(11, 13, 18, 0.94);
+      border-bottom: 1px solid rgba(215, 180, 107, 0.18);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+    }
 
-.hero{background:var(--bg);padding:5rem 1.5rem 5.5rem;text-align:center;position:relative;overflow:hidden}
-.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(200,168,75,.03)1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.03)1px,transparent 1px);background-size:52px 52px}
-.hero-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 80% at 50% 110%,transparent 40%,var(--bg) 100%)}
-.hero-glow{position:absolute;left:50%;top:0;transform:translateX(-50%);width:500px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4}
-.hero-orb{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,75,.06) 0%,transparent 70%);pointer-events:none}
-.hero-content{position:relative;z-index:1}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem;opacity:0;animation:fu .7s .1s cubic-bezier(.22,1,.36,1) forwards}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;height:1px;width:28px;background:currentColor;opacity:.4}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,10vw,6rem);font-weight:700;color:#fff;line-height:1.02;margin-bottom:1.25rem;letter-spacing:-1.5px;opacity:0;animation:fu .8s .2s cubic-bezier(.22,1,.36,1) forwards}
-.hero h1 em{color:var(--gold);font-style:italic}
-.hero-sub{font-size:15px;color:rgba(255,255,255,.38);max-width:380px;margin:0 auto 2.75rem;line-height:1.8;font-weight:300;opacity:0;animation:fu .8s .3s cubic-bezier(.22,1,.36,1) forwards}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu .8s .4s cubic-bezier(.22,1,.36,1) forwards}
-@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1px;
+      color: #fff;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
 
-.btn-primary{background:var(--gold);color:var(--bg);font-weight:700;font-size:13px;letter-spacing:0.5px;padding:14px 28px;border-radius:var(--r-sm);transition:all .22s;min-height:48px;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
-.btn-primary:active{transform:scale(.97)}
-.btn-outline{background:transparent;color:rgba(255,255,255,.7);font-weight:500;font-size:13px;padding:14px 28px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);transition:all .22s;min-height:48px;display:inline-flex;align-items:center;gap:8px}
-.btn-outline:hover{border-color:var(--gold-bdr);color:var(--gold)}
-.btn-outline:active{background:rgba(255,255,255,.05)}
+    .brand span {
+      color: var(--gold-2);
+    }
 
-.section{padding:2rem 1.5rem;max-width:1040px;margin:0 auto}
-.sh{margin-bottom:1.5rem}
-.st{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:-.3px;line-height:1.2;margin-bottom:.3rem}
-.ss{font-size:13px;color:var(--muted);line-height:1.6}
-.sdiv{height:1px;background:var(--border)}
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-.cat-chips{display:flex;gap:10px;overflow-x:auto;padding:0 1.5rem .25rem;margin:0 -1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.cat-chips::-webkit-scrollbar{display:none}
-.cc{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
-.cc:active{transform:scale(.92)}
-.cc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);transition:all .22s}
-.cc:hover .cc-icon{border-color:var(--gold-bdr);background:var(--gold-pale);transform:translateY(-2px)}
-.cc-label{font-size:10px;font-weight:500;color:var(--muted);white-space:nowrap;letter-spacing:.3px}
-.cc:hover .cc-label{color:var(--text)}
+    .nav-link {
+      min-height: 38px;
+      padding: 0 16px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 13px;
+      font-weight: 600;
+      transition: 160ms ease;
+    }
 
-.featured-card{background:var(--bg);border-radius:var(--r-xl);padding:1.75rem;color:#fff;margin-bottom:1.5rem;position:relative;overflow:hidden;border:1px solid rgba(200,168,75,.14);transition:border-color .3s}
-.featured-card:hover{border-color:rgba(200,168,75,.28)}
-.featured-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.45}
-.fc-glow{position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,75,.1)0%,transparent 70%)}
-.fc-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold-pale);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:40px;margin-bottom:.875rem;border:1px solid var(--gold-bdr)}
-.fc-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pdot 2s ease infinite}
-.fc-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:.4rem;line-height:1.2}
-.fc-desc{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:1.25rem;line-height:1.65}
-.fc-btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--bg);font-weight:700;font-size:12px;letter-spacing:.3px;padding:10px 20px;border-radius:var(--r-sm);transition:all .2s}
-.fc-btn:hover{background:var(--gold2)}
+    .nav-link:hover {
+      color: rgba(255, 255, 255, 0.88);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
 
-.ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden}
-.idea-card{background:var(--surface);padding:1.5rem;cursor:pointer;transition:background .22s;position:relative;overflow:hidden}
-.idea-card:hover{background:#faf9f4}
-.idea-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent 0%,rgba(200,168,75,.04) 50%,transparent 100%);transition:left .5s ease}
-.idea-card:hover::after{left:100%}
-.idea-card-accent{position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .22s}
-.idea-card:hover .idea-card-accent{opacity:1}
-.idea-card[data-c="gold"] .idea-card-accent{background:var(--gold)}
-.idea-card[data-c="teal"] .idea-card-accent{background:var(--teal)}
-.idea-card[data-c="purple"] .idea-card-accent{background:var(--purple)}
-.idea-card[data-c="slate"] .idea-card-accent{background:#64748b}
-.idea-card[data-c="rose"] .idea-card-accent{background:#b06070}
-.idea-card[data-c="moss"] .idea-card-accent{background:#7a8f64}
-.idea-card[data-c="amber"] .idea-card-accent{background:#c07030}
-.iw{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--border);margin-bottom:.875rem;transition:all .22s}
-.idea-card:hover .iw{border-color:var(--gold-bdr);background:var(--gold-pale)}
-.i-cat{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-.i-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.5rem}
-.i-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.875rem}
-.i-foot{display:flex;align-items:center;justify-content:space-between}
-.earn-badge{font-size:11px;font-weight:600;color:var(--gold);background:var(--gold-pale);border:1px solid var(--gold-bdr);padding:4px 10px;border-radius:4px}
-.idea-arr{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;transition:all .22s}
-.idea-card:hover .idea-arr{border-color:var(--gold-bdr);color:var(--gold);transform:translateX(2px)}
+    .nav-link.active {
+      color: var(--gold-2);
+      background: rgba(215, 180, 107, 0.10);
+      border-color: rgba(215, 180, 107, 0.24);
+    }
 
-.h-scroll{overflow-x:auto;margin:0 -1.5rem;padding:0 1.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.h-scroll::-webkit-scrollbar{display:none}
-.h-row{display:flex;gap:10px;padding-bottom:4px}
-.qc{flex-shrink:0;width:140px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.125rem;cursor:pointer;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);border-top:2px solid transparent}
-.qc[data-c="gold"]{border-top-color:var(--gold)}
-.qc[data-c="teal"]{border-top-color:var(--teal)}
-.qc[data-c="purple"]{border-top-color:var(--purple)}
-.qc[data-c="slate"]{border-top-color:#64748b}
-.qc[data-c="rose"]{border-top-color:#b06070}
-.qc[data-c="moss"]{border-top-color:#7a8f64}
-.qc[data-c="amber"]{border-top-color:#c07030}
-.qc:active{transform:scale(.95)}
-.qc-iw{width:34px;height:34px;border-radius:9px;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
-.qc-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
-.qc-earn{font-size:10px;font-weight:600;color:var(--gold)}
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.06);
+      transition: 160ms ease;
+    }
 
-.filter-bar{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:1.5rem;scrollbar-width:none}
-.filter-bar::-webkit-scrollbar{display:none}
-.fchip{font-size:12px;font-weight:500;padding:7px 18px;border-radius:40px;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all .2s;white-space:nowrap;flex-shrink:0;min-height:36px;display:flex;align-items:center;gap:5px}
-.fchip.active,.fchip:active{background:var(--bg);color:rgba(255,255,255,.85);border-color:var(--bg)}
-.fchip:hover:not(.active){border-color:var(--gold-bdr);color:var(--text)}
+    .icon-button:hover {
+      color: #fff;
+      border-color: rgba(215, 180, 107, 0.36);
+    }
 
-.listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
-.lcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;display:flex;flex-direction:column}
-.lcard:hover{transform:translateY(-3px);border-color:var(--gold-bdr);box-shadow:0 10px 28px rgba(0,0,0,.06),0 0 0 1px rgba(200,168,75,.08)}
-.lcard-img{height:84px;display:flex;align-items:center;justify-content:center;background:var(--cream);border-bottom:1px solid var(--border)}
-.lcard-body{padding:1rem;flex:1;display:flex;flex-direction:column}
-.lcard-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.3}
-.lcard-by{font-size:10px;color:var(--muted);margin-bottom:2px}
-.lcard-meta{font-size:10px;color:var(--muted);margin-bottom:6px}
-.lcard-price{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;font-family:'Playfair Display',serif}
-.lcard-tag{display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;margin-bottom:8px;letter-spacing:.3px}
-.lcard-tag.new{background:var(--teal-pale);color:#1a6b5e;border:1px solid var(--teal-bdr)}
-.lcard-tag.swap{background:var(--purple-pale);color:#5a3f9a;border:1px solid rgba(124,92,191,.28)}
-.lcard-action{width:100%;background:var(--bg);color:rgba(255,255,255,.85);border-radius:6px;padding:9px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;transition:all .2s;min-height:36px;margin-top:auto}
-.lcard-action:hover{background:var(--bg2);color:#fff}
-.lcard-action.swap-btn{background:var(--purple-pale);color:var(--purple);border:1px solid rgba(124,92,191,.28)}
-.lcard-action.swap-btn:hover{background:var(--purple);color:#fff}
+    .account-button {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: none;
+      place-items: center;
+      border: 1px solid rgba(215, 180, 107, 0.42);
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04)),
+        linear-gradient(135deg, #d7b46b, #7d5c24);
+      color: #fff7df;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      box-shadow: 0 10px 28px rgba(189, 152, 81, 0.24);
+      overflow: hidden;
+      animation: avatarIn 420ms cubic-bezier(.22,1,.36,1) both;
+    }
 
-.opp-grid{display:grid;gap:8px}
-.ocard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1rem 1.125rem;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:all .22s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
-.ocard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .3s cubic-bezier(.22,1,.36,1)}
-.ocard:hover{border-color:var(--gold-bdr);transform:translateX(2px)}
-.ocard:hover::before{transform:scaleY(1)}
-.otype{min-width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--border);flex-shrink:0}
-.o-body{flex:1;min-width:0}
-.o-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.o-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:7px}
-.o-tags{display:flex;gap:5px;flex-wrap:wrap}
-.otag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px}
-.tag-dl{background:#fdf6ed;color:#7a5a1a;border:1px solid #e8d4a0}
-.tag-rw{background:#f0f4f0;color:#3a5a3a;border:1px solid #bcd3bc}
-.tag-ty{background:#eff2f7;color:#2a3f6a;border:1px solid #b8c6df}
-.ochev{color:var(--muted);font-size:16px;flex-shrink:0;align-self:center;transition:transform .22s}
-.ocard:hover .ochev{transform:translateX(3px);color:var(--gold)}
+    .account-button.show {
+      display: inline-grid;
+    }
 
-.swap-banner{background:linear-gradient(135deg,rgba(124,92,191,.12),rgba(45,155,138,.08));border:1px solid rgba(124,92,191,.2);border-radius:var(--r-xl);padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
-.swap-banner::after{content:'⇄';position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:48px;color:rgba(124,92,191,.08);pointer-events:none}
-.sb-badge{display:inline-flex;align-items:center;gap:5px;background:var(--purple-pale);color:var(--purple);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;border-radius:40px;margin-bottom:.75rem;border:1px solid rgba(124,92,191,.28)}
-.sb-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:.35rem;line-height:1.2}
-.sb-desc{font-size:12px;color:var(--muted);margin-bottom:1rem;line-height:1.65}
-.sb-btn{display:inline-flex;align-items:center;gap:6px;background:var(--bg);color:rgba(255,255,255,.85);font-weight:700;font-size:12px;letter-spacing:.3px;padding:10px 20px;border-radius:var(--r-sm);transition:all .2s;border:1px solid rgba(124,92,191,.3)}
-.sb-btn:hover{border-color:var(--purple);color:#fff}
+    .account-button::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.34), transparent 65%);
+      transform: translateX(-70%) rotate(18deg);
+      animation: avatarSheen 3.8s ease-in-out infinite;
+    }
 
-.register-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;max-width:960px;margin:0 auto}
-.form-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem}
-.form-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:1.5rem}
-.fg{margin-bottom:.875rem}
-.flabel{display:block;font-size:11px;font-weight:600;color:var(--text);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase}
-.finput,.fselect{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:14px;color:var(--text);background:#fafaf8;outline:none;transition:all .2s;-webkit-appearance:none;min-height:46px}
-.finput:focus,.fselect:focus{border-color:var(--gold);background:var(--surface);box-shadow:0 0 0 3px var(--gold-pale)}
-.fselect{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
-.fsubmit{width:100%;background:var(--bg);color:rgba(255,255,255,.9);font-weight:600;font-size:14px;letter-spacing:.4px;padding:15px;border-radius:var(--r-sm);transition:all .22s;min-height:50px;margin-top:.4rem}
-.fsubmit:hover{background:var(--bg2);color:#fff}
-.fsubmit:active{transform:scale(.98)}
+    .account-button span {
+      position: relative;
+      z-index: 1;
+    }
 
-.perk-card{background:var(--bg);border-radius:var(--r-lg);padding:1.75rem;color:#fff;border:1px solid rgba(200,168,75,.1)}
-.perk-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:1.5rem}
-.pitem{display:flex;gap:12px;align-items:flex-start;margin-bottom:1.125rem;opacity:0;transform:translateX(-10px);animation:sI .5s cubic-bezier(.22,1,.36,1) forwards}
-.pitem:nth-child(2){animation-delay:.05s}.pitem:nth-child(3){animation-delay:.1s}.pitem:nth-child(4){animation-delay:.15s}.pitem:nth-child(5){animation-delay:.2s}.pitem:nth-child(6){animation-delay:.25s}
-@keyframes sI{to{opacity:1;transform:translateX(0)}}
-.pdot{width:30px;height:30px;border-radius:8px;background:var(--gold-pale);border:1px solid var(--gold-bdr);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ptext{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5}
-.ptext strong{color:rgba(255,255,255,.9);font-weight:600;display:block;margin-bottom:2px}
+    @keyframes avatarIn {
+      from {
+        opacity: 0;
+        transform: scale(0.82) translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
 
-.steps-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1.25rem;
-  background:transparent;
-  border:none;
-  border-radius:0;
-  overflow:visible;
-  margin-bottom:0.75rem;
-}
-.step-card{
-  background:var(--surface);
-  padding:1.5rem;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  transition:background .22s,box-shadow .22s;
-  opacity:0;
-  animation:fu .6s cubic-bezier(.22,1,.36,1) forwards;
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  box-shadow:0 4px 12px rgba(0,0,0,.04)
-}
-.step-card:hover{
-  background:#faf9f4;
-  box-shadow:0 8px 20px rgba(0,0,0,.08)
-}
-.step-card:nth-child(1){animation-delay:0s}
-.step-card:nth-child(2){animation-delay:.07s}
-.step-card:nth-child(3){animation-delay:.14s}
-.step-card:nth-child(4){animation-delay:.21s}
-.step-n{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--parchment);line-height:1;margin-bottom:.3rem}
-.step-iw{width:38px;height:38px;border-radius:11px;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto .5rem;transition:all .22s}
-.step-card:hover .step-iw{border-color:var(--gold-bdr);background:var(--gold-pale)}
-.step-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
-.step-desc{font-size:11px;color:var(--muted);line-height:1.5}
+    @keyframes avatarSheen {
+      0%, 58% {
+        transform: translateX(-78%) rotate(18deg);
+      }
+      76%, 100% {
+        transform: translateX(78%) rotate(18deg);
+      }
+    }
 
-/* Commission table – compact & edge-to-edge */
-.comm-section {
-  margin-top: 0;
-  padding: 0;
-}
-.comm-table{
-  width:100%;
-  border-collapse:collapse;
-  background:var(--surface);
-  border-radius:var(--r-lg);
-  overflow:hidden;
-  border:1px solid var(--border);
-  display:table;
-  margin:0;
-}
-.comm-table th{
-  background:#111;
-  color:rgba(255,255,255,.85);
-  font-family:'Outfit',sans-serif;
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-  padding:12px 16px;
-  text-align:left;
-  white-space:nowrap
-}
-.comm-table th:first-child{color:var(--gold)}
-.comm-table td{
-  padding:11px 16px;
-  font-size:12px;
-  color:var(--text);
-  border-bottom:1px solid #f0efe8;
-  white-space:nowrap
-}
-.comm-table tr:last-child td{border-bottom:none}
-.comm-table tr:hover td{background:#faf9f4}
-.comm-table td:nth-child(4){color:var(--gold);font-weight:700}
+    .mobile-head,
+    .bottom-nav {
+      display: none;
+    }
 
-.cta-band{background:var(--bg);border-radius:var(--r-xl);padding:2rem;text-align:center;border:1px solid rgba(200,168,75,.1);position:relative;overflow:hidden}
-.cta-band::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.35}
-.cta-band-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:.4rem}
-.cta-band-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:1.25rem}
+    .page {
+      display: none;
+    }
 
-.toast{position:fixed;bottom:calc(var(--bot-h) + var(--safe-b) + 14px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg);color:rgba(255,255,255,.9);padding:11px 20px;border-radius:40px;font-size:12px;font-weight:500;display:none;animation:toastIn .3s cubic-bezier(.22,1,.36,1) forwards;z-index:999;white-space:nowrap;border:1px solid rgba(200,168,75,.22);max-width:calc(100vw - 2rem);overflow:hidden;text-overflow:ellipsis}
-@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+    .page.active {
+      display: block;
+      animation: pageIn 280ms ease both;
+    }
 
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-1{transition-delay:.05s}.reveal-2{transition-delay:.1s}.reveal-3{transition-delay:.15s}.reveal-4{transition-delay:.2s}
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.new-tag{font-size:9px;font-weight:700;background:var(--teal-pale);color:var(--teal);border:1px solid var(--teal-bdr);padding:2px 6px;border-radius:3px;letter-spacing:.3px;vertical-align:middle;margin-left:5px}
-.swap-tag{font-size:9px;font-weight:700;background:var(--purple-pale);color:var(--purple);border:1px solid rgba(124,92,191,.3);padding:2px 6px;border-radius:3px;letter-spacing:.3px;vertical-align:middle;margin-left:5px}
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(189, 152, 81, 0.20), transparent 34%),
+        linear-gradient(180deg, var(--night), var(--night-2));
+      color: #fff;
+      border-bottom: 1px solid rgba(189, 152, 81, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
 
-@media(max-width:640px){
-  .top-nav{display:none}.mob-header{display:flex}.bot-nav{display:flex}
-  #app{padding-bottom:calc(var(--bot-h) + var(--safe-b))}
-  .toast{bottom:calc(var(--bot-h) + var(--safe-b) + 14px)}
-  .hero{padding:3.5rem 1.25rem 4rem}
-  .ideas-grid{display:none}.ideas-mobile{display:block}
-  .listings-grid{grid-template-columns:repeat(2,1fr)}
-  .register-wrap{grid-template-columns:1fr}
-  .steps-row{grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:0.75rem}
-  .section{padding:1.75rem 1.25rem}
-  .cat-chips{padding:0 1.25rem .25rem;margin:0 -1.25rem}
-  .h-scroll{margin:0 -1.25rem;padding:0 1.25rem}
-  .comm-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-}
-@media(min-width:641px){
-  .ideas-mobile{display:none}
-  .mob-header{display:none}
-  .bot-nav{display:none !important}
-  .comm-table{display:table;overflow-x:visible}
-}
-</style>
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(246, 230, 189, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(246, 230, 189, 0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent 88%);
+    }
+
+    .hero-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      min-height: calc(100dvh - var(--nav-h) - 86px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 72px 24px 58px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--gold-2);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    .hero-title {
+      max-width: 760px;
+      margin: 0 0 20px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(48px, 7.4vw, 90px);
+      line-height: 0.98;
+      letter-spacing: -1.4px;
+      animation: luxuryRise 700ms cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .hero-title em {
+      color: var(--gold-2);
+      font-style: italic;
+    }
+
+    .hero-copy {
+      max-width: 570px;
+      margin: 0 auto 34px;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 17px;
+      line-height: 1.75;
+      animation: luxuryRise 780ms 80ms cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      animation: luxuryRise 820ms 140ms cubic-bezier(.22,1,.36,1) both;
+    }
+
+    @keyframes luxuryRise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border-radius: var(--r-sm);
+      font-size: 14px;
+      font-weight: 700;
+      transition: 160ms ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .btn::after,
+    .submit-button::after,
+    .market-add-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      transform: translateX(-120%);
+      transition: transform 520ms ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .btn:hover::after,
+    .submit-button:hover::after,
+    .market-add-card:hover::after {
+      transform: translateX(120%);
+    }
+
+    .btn.primary {
+      background: var(--gold-2);
+      color: #161109;
+    }
+
+    .btn.primary:hover {
+      background: #e5c57a;
+      transform: translateY(-1px);
+    }
+
+    .btn.ghost {
+      color: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn.ghost:hover {
+      color: #fff;
+      border-color: rgba(215, 180, 107, 0.38);
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    .section.compact {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      margin: 0 0 7px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .section-copy {
+      max-width: 620px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .category-card {
+      min-height: 236px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--panel);
+      box-shadow: 0 10px 30px rgba(22, 19, 12, 0.045);
+      transition: 180ms ease;
+      text-align: left;
+    }
+
+    .category-card:hover {
+      border-color: rgba(189, 152, 81, 0.42);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #f4efe5;
+      color: #7e6330;
+    }
+
+    .category-card.fitness .category-icon {
+      background: #f6eef2;
+      color: var(--wine);
+    }
+
+    .category-card.merch .category-icon {
+      background: #eef4e9;
+      color: var(--moss);
+    }
+
+    .category-title {
+      display: block;
+      margin: 20px 0 8px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 24px;
+      line-height: 1.12;
+    }
+
+    .category-desc {
+      display: block;
+      margin: 0 0 18px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .category-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border: 1px solid rgba(189, 152, 81, 0.24);
+      border-radius: 999px;
+      background: rgba(189, 152, 81, 0.08);
+      color: #7a5a22;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--panel);
+    }
+
+    .step-number {
+      margin-bottom: 16px;
+      color: #cfc7b8;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .market-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--panel);
+    }
+
+    .sidebar-title {
+      margin-bottom: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .filter-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .filter-button {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ink-soft);
+      background: #fcfbf8;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      transition: 160ms ease;
+    }
+
+    .filter-button.active,
+    .filter-button:hover {
+      color: var(--ink);
+      border-color: rgba(189, 152, 81, 0.38);
+      background: rgba(189, 152, 81, 0.08);
+    }
+
+    .market-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .search-field {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: min(420px, 100%);
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+    }
+
+    .search-field input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      color: var(--ink);
+      background: transparent;
+      font-size: 14px;
+    }
+
+    .listing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .listing-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 268px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--panel);
+      transition: 180ms ease;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(189, 152, 81, 0.42);
+      box-shadow: 0 14px 36px rgba(22, 19, 12, 0.08);
+    }
+
+    .listing-media {
+      height: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(135deg, #f8f3e8, #fbfaf6);
+    }
+
+    .listing-card.fitness .listing-media {
+      background: linear-gradient(135deg, #f8eef3, #fbfaf6);
+    }
+
+    .listing-card.merch .listing-media {
+      background: linear-gradient(135deg, #eff6ea, #fbfaf6);
+    }
+
+    .listing-symbol {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #7e6330;
+      border: 1px solid rgba(126, 99, 48, 0.16);
+    }
+
+    .listing-card.fitness .listing-symbol {
+      color: var(--wine);
+      border-color: rgba(138, 79, 102, 0.18);
+    }
+
+    .listing-card.merch .listing-symbol {
+      color: var(--moss);
+      border-color: rgba(94, 125, 72, 0.18);
+    }
+
+    .rating {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: rgba(17, 19, 24, 0.08);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .listing-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 17px;
+    }
+
+    .listing-category {
+      margin-bottom: 7px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .listing-name {
+      margin: 0 0 7px;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .listing-provider,
+    .listing-meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .listing-meta {
+      margin-top: 4px;
+    }
+
+    .listing-action {
+      width: 100%;
+      min-height: 42px;
+      margin-top: auto;
+      border-radius: 9px;
+      background: var(--night);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      transition: 160ms ease;
+    }
+
+    .listing-action:hover {
+      background: #1a1f2a;
+    }
+
+    .add-card {
+      border: 1px dashed rgba(189, 152, 81, 0.48);
+      background: rgba(189, 152, 81, 0.07);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 22px;
+    }
+
+    .add-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      border-radius: 14px;
+      background: var(--panel);
+      color: var(--gold);
+      border: 1px solid rgba(189, 152, 81, 0.24);
+    }
+
+    .market-categories {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .market-category {
+      min-width: 0;
+    }
+
+    .market-category-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .market-category-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(126, 99, 48, 0.20);
+      border-radius: 14px;
+      background: #f4efe5;
+      color: #7e6330;
+    }
+
+    .market-category.fitness .market-category-icon {
+      border-color: rgba(138, 79, 102, 0.20);
+      background: #f6eef2;
+      color: var(--wine);
+    }
+
+    .market-category.merch .market-category-icon {
+      border-color: rgba(94, 125, 72, 0.20);
+      background: #eef4e9;
+      color: var(--moss);
+    }
+
+    .market-category-title {
+      margin: 0 0 3px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .market-category-sub {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .market-add-card {
+      min-height: 248px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 28px 18px;
+      border: 1px solid rgba(126, 99, 48, 0.20);
+      border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(126, 99, 48, 0.08), rgba(126, 99, 48, 0.035));
+      color: #7e6330;
+      text-align: center;
+      transition: 180ms ease;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .market-add-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(126, 99, 48, 0.12);
+    }
+
+    .market-category.fitness .market-add-card {
+      border-color: rgba(138, 79, 102, 0.20);
+      background: linear-gradient(135deg, rgba(138, 79, 102, 0.08), rgba(138, 79, 102, 0.035));
+      color: var(--wine);
+    }
+
+    .market-category.merch .market-add-card {
+      border-color: rgba(94, 125, 72, 0.20);
+      background: linear-gradient(135deg, rgba(94, 125, 72, 0.08), rgba(94, 125, 72, 0.035));
+      color: var(--moss);
+    }
+
+    .market-add-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border: 2px solid currentColor;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.55);
+      opacity: 0.88;
+    }
+
+    .market-add-title {
+      margin-bottom: 7px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .market-add-copy {
+      max-width: 190px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .market-add-button {
+      min-height: 36px;
+      padding: 0 15px;
+      border-radius: 8px;
+      background: currentColor;
+    }
+
+    .market-add-button span {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) 0.92fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .form-panel,
+    .info-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--panel);
+      box-shadow: 0 10px 30px rgba(22, 19, 12, 0.045);
+    }
+
+    .form-panel {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(215, 180, 107, 0.86), transparent);
+    }
+
+    .role-toggle {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f5f0e6;
+    }
+
+    .role-option {
+      position: relative;
+      min-height: 54px;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--ink-soft);
+      text-align: left;
+      transition: 180ms ease;
+      overflow: hidden;
+    }
+
+    .role-option.active {
+      color: var(--ink);
+      background: var(--panel);
+      box-shadow: 0 12px 28px rgba(22, 19, 12, 0.08);
+    }
+
+    .role-option strong {
+      font-size: 13px;
+    }
+
+    .role-option span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .role-option.active::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold-2), transparent);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .input,
+    .select,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      outline: 0;
+      background: #fcfbf8;
+      color: var(--ink);
+      padding: 11px 12px;
+      font-size: 14px;
+      transition: 160ms ease;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .input:focus,
+    .select:focus,
+    textarea:focus {
+      border-color: rgba(189, 152, 81, 0.72);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(189, 152, 81, 0.12);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold);
+    }
+
+    .conditional {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 18px;
+      border: 1px solid rgba(189, 152, 81, 0.22);
+      border-radius: 12px;
+      background: rgba(189, 152, 81, 0.06);
+    }
+
+    .conditional.show {
+      display: block;
+    }
+
+    .conditional .form-grid {
+      margin-top: 0;
+    }
+
+    .conditional-title {
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .other-detail {
+      display: none;
+    }
+
+    .other-detail.show {
+      display: grid;
+    }
+
+    .role-panel {
+      display: none;
+      grid-column: 1 / -1;
+    }
+
+    .role-panel.show {
+      display: block;
+      animation: panelIn 320ms cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .experience-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 130px;
+      gap: 8px;
+    }
+
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .submit-row {
+      margin-top: 18px;
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 10px;
+      background: var(--night);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      transition: 160ms ease;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .submit-button:hover {
+      background: #1a1f2a;
+    }
+
+    .info-panel {
+      overflow: hidden;
+      background: var(--night);
+      color: #fff;
+    }
+
+    .info-panel-head {
+      padding: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .info-panel-head h3 {
+      margin: 0 0 8px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 28px;
+    }
+
+    .info-panel-head p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .benefits {
+      display: grid;
+      gap: 0;
+    }
+
+    .benefit {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 13px;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .benefit:last-child {
+      border-bottom: 0;
+    }
+
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--gold-2);
+      background: rgba(215, 180, 107, 0.10);
+      border: 1px solid rgba(215, 180, 107, 0.22);
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 4px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 14px;
+    }
+
+    .benefit span {
+      color: rgba(255, 255, 255, 0.54);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .account-popover {
+      position: fixed;
+      top: calc(var(--nav-h) + 12px);
+      right: max(18px, calc((100vw - 1180px) / 2));
+      z-index: 76;
+      display: none;
+      width: min(320px, calc(100vw - 32px));
+      overflow: hidden;
+      border: 1px solid rgba(215, 180, 107, 0.25);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 28px 70px rgba(22, 19, 12, 0.18);
+      backdrop-filter: blur(18px);
+      animation: popoverIn 220ms cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .account-popover.open {
+      display: block;
+    }
+
+    .account-popover-head {
+      display: flex;
+      gap: 13px;
+      align-items: center;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(215, 180, 107, 0.16), rgba(255, 255, 255, 0));
+    }
+
+    .account-popover-avatar {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d7b46b, #7d5c24);
+      color: #fff7df;
+      font-weight: 900;
+      box-shadow: 0 12px 30px rgba(189, 152, 81, 0.24);
+    }
+
+    .account-popover-name {
+      margin-bottom: 3px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .account-popover-role {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .account-popover-body {
+      padding: 14px 18px 18px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    @keyframes popoverIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .commission {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--panel);
+      border-collapse: collapse;
+    }
+
+    .commission th,
+    .commission td {
+      padding: 15px 18px;
+      border-bottom: 1px solid #efebe2;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .commission th {
+      background: var(--night);
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 11px;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+    }
+
+    .commission th:first-child,
+    .commission td.keep {
+      color: var(--gold-2);
+    }
+
+    .commission td {
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .commission tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      z-index: 80;
+      display: none;
+      max-width: calc(100vw - 32px);
+      transform: translateX(-50%);
+      padding: 12px 18px;
+      border: 1px solid rgba(215, 180, 107, 0.26);
+      border-radius: 999px;
+      background: var(--night);
+      color: #fff;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: none;
+      padding: 24px;
+      background: rgba(11, 13, 18, 0.94);
+      backdrop-filter: blur(18px);
+    }
+
+    .search-overlay.open {
+      display: block;
+    }
+
+    .requirement-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 75;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(11, 13, 18, 0.68);
+      backdrop-filter: blur(12px);
+    }
+
+    .requirement-overlay.open {
+      display: flex;
+    }
+
+    .requirement-dialog {
+      width: min(560px, 100%);
+      overflow: hidden;
+      border: 1px solid rgba(215, 180, 107, 0.24);
+      border-radius: var(--r-lg);
+      background: var(--panel);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+    }
+
+    .requirement-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 22px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .requirement-kicker {
+      margin-bottom: 5px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .requirement-title {
+      margin: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 27px;
+      line-height: 1.12;
+    }
+
+    .requirement-close {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: #fcfbf8;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .requirement-body {
+      padding: 20px 22px 22px;
+    }
+
+    .requirement-copy {
+      margin: 0 0 14px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .requirement-list {
+      display: grid;
+      gap: 9px;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .requirement-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .requirement-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .requirement-action {
+      width: 100%;
+      min-height: 46px;
+      border-radius: 10px;
+      background: var(--night);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .search-dialog {
+      max-width: 680px;
+      margin: 7vh auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--r-lg);
+      background: var(--panel);
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.35);
+    }
+
+    .search-dialog-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .search-dialog-head input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      font-size: 16px;
+    }
+
+    .search-cancel {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .search-results {
+      max-height: 55vh;
+      overflow-y: auto;
+    }
+
+    .result-item {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      padding: 14px 16px;
+      border-bottom: 1px solid #efebe2;
+      text-align: left;
+    }
+
+    .result-item:hover {
+      background: #fcfbf8;
+    }
+
+    .result-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #f4efe5;
+      color: var(--gold);
+    }
+
+    .result-name {
+      margin-bottom: 3px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .result-meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 46px 20px;
+      border: 1px dashed var(--line);
+      border-radius: var(--r-md);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.55);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .form-layout,
+      .market-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        min-height: auto;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .listing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .market-categories {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        display: none;
+      }
+
+      .mobile-head {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        background: rgba(11, 13, 18, 0.96);
+        border-bottom: 1px solid rgba(215, 180, 107, 0.18);
+        backdrop-filter: blur(16px);
+      }
+
+      .mobile-head-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 45;
+        height: calc(var(--bottom-h) + var(--safe-b));
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding-bottom: var(--safe-b);
+        border-top: 1px solid rgba(215, 180, 107, 0.18);
+        background: rgba(11, 13, 18, 0.97);
+      }
+
+      .bottom-button {
+        display: grid;
+        place-items: center;
+        align-content: center;
+        gap: 4px;
+        color: rgba(255, 255, 255, 0.42);
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .bottom-button.active {
+        color: var(--gold-2);
+      }
+
+      .app-shell {
+        padding-bottom: calc(var(--bottom-h) + var(--safe-b));
+      }
+
+      .hero-inner {
+        padding: 54px 18px 38px;
+        gap: 34px;
+      }
+
+      .hero-title {
+        font-size: clamp(44px, 15vw, 64px);
+      }
+
+      .category-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 42px 18px;
+      }
+
+      .section-head,
+      .market-tools {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .role-toggle {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-row {
+        grid-template-columns: 1fr;
+      }
+
+      .account-popover {
+        top: 76px;
+        right: 16px;
+      }
+
+      .listing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .commission-wrap {
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .toast {
+        bottom: calc(var(--bottom-h) + var(--safe-b) + 16px);
+      }
+    }
+  </style>
 </head>
 <body>
-
-<!-- SEARCH OVERLAY -->
-<div class="search-overlay" id="searchOverlay">
-  <div class="search-bar">
-    <svg width="15" height="15" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input type="search" id="searchInput" placeholder="Search services, skills, opportunities…" oninput="doSearch(this.value)"/>
-    <button class="search-cancel" onclick="closeSearch()">Cancel</button>
-  </div>
-  <div class="search-results" id="searchResults"></div>
-</div>
-
-<!-- MOBILE HEADER -->
-<header class="mob-header">
-  <div class="mob-logo">Student<span>Hub</span></div>
-  <button class="mob-search-btn" onclick="openSearch()">
-    <svg width="15" height="15" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-  </button>
-</header>
-
-<!-- TOP NAV -->
-<nav class="top-nav">
-  <div class="nav-logo">Student<span>Hub</span></div>
-  <div class="nav-links">
-    <button class="nav-pill active" onclick="showPage('home')">Home</button>
-    <button class="nav-pill" onclick="showPage('marketplace')">Marketplace</button>
-    <button class="nav-pill" onclick="showPage('opportunities')">Opportunities</button>
-    <button class="nav-pill" onclick="showPage('register')">Join</button>
-    <button class="nav-pill" onclick="showPage('howto')">How It Works</button>
-  </div>
-</nav>
-
-<div id="app">
-
-<!-- HOME PAGE -->
-<div id="home" class="page active">
-
-  <div class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-vignette"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-orb"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Northeast India's Student Economy</div>
-      <h1>Earn While<br>You <em>Learn</em></h1>
-      <p class="hero-sub">Seven sustainable paths to real income as a student — tutoring, freelancing, fitness, merchandise, skills & more.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="showPage('marketplace')">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Browse Services
-        </button>
-        <button class="btn-outline" onclick="showPage('register')">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Join Free
-        </button>
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+    <div class="search-dialog" role="dialog" aria-label="Search services">
+      <div class="search-dialog-head">
+        <svg width="18" height="18" fill="none" stroke="#7b8290" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="globalSearch" type="search" placeholder="Search tutoring, fitness, merchandise..." autocomplete="off" />
+        <button class="search-cancel" type="button" data-close-search>Cancel</button>
       </div>
+      <div class="search-results" id="searchResults"></div>
     </div>
   </div>
 
-  <div class="section" style="padding-bottom:.5rem">
-    <div class="sh"><div class="st reveal">Browse Categories</div></div>
-    <div class="cat-chips">
-      <div class="cc" onclick="showPage('marketplace');filterListings('tutoring',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div class="cc-label">Tutoring</div></div>
-      <div class="cc" onclick="showPage('marketplace');filterListings('freelance',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="cc-label">Freelance</div></div>
-      <div class="cc" onclick="showPage('marketplace');filterListings('fitness',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg></div><div class="cc-label">Fitness</div></div>
-      <div class="cc" onclick="showPage('marketplace');filterListings('merch',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div><div class="cc-label">Merchandise</div></div>
-      <div class="cc" onclick="showPage('marketplace');filterListings('swap',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="cc-label">Skill Swap</div></div>
-      <div class="cc" onclick="showPage('marketplace');filterListings('portfolio',null)"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="cc-label">Portfolio</div></div>
-      <div class="cc" onclick="showPage('opportunities')"><div class="cc-icon"><svg width="20" height="20" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="cc-label">Opps</div></div>
-    </div>
-  </div>
-
-  <div class="sdiv" style="margin-top:1.25rem"></div>
-
-  <div class="section" style="padding-bottom:0">
-    <div class="featured-card reveal">
-      <div class="fc-glow"></div>
-      <div class="fc-badge">Live Now</div>
-      <div class="fc-title">ISRO Summer Internship — Apply Now</div>
-      <div class="fc-desc">2-month research internship open to final-year B.Tech students across NE India. Deadline: April 20.</div>
-      <button class="fc-btn" onclick="showPage('opportunities')">View Details <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-    </div>
-  </div>
-
-  <div class="section" style="padding-bottom:0">
-    <div class="swap-banner reveal">
-      <div class="sb-badge">New Feature</div>
-      <div class="sb-title">SkillSwap — No Cash? No Problem.</div>
-      <div class="sb-desc">Teach what you know, earn credits, learn what you need. Design student teaches coding student — both win, no money changes hands.</div>
-      <button class="sb-btn" onclick="showPage('marketplace');filterListings('swap',null)">Explore Skill Swaps <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-    </div>
-  </div>
-
-  <!-- Mobile Quick Cards -->
-  <div class="section ideas-mobile" style="padding-bottom:0">
-    <div class="sh" style="display:flex;align-items:center;justify-content:space-between">
-      <div class="st">7 Startup Ideas</div>
-      <button style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.3px" onclick="showPage('marketplace')">See all →</button>
-    </div>
-    <div class="h-scroll"><div class="h-row">
-      <div class="qc" data-c="gold" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div class="qc-name">Peer Tutoring</div><div class="qc-earn">Earn per session</div></div>
-      <div class="qc" data-c="slate" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="qc-name">Freelance Hub</div><div class="qc-earn">Earn per project</div></div>
-      <div class="qc" data-c="rose" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg></div><div class="qc-name">Fitness Coach</div><div class="qc-earn">Earn per session</div></div>
-      <div class="qc" data-c="moss" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div><div class="qc-name">Merchandise</div><div class="qc-earn">Earn per item</div></div>
-      <div class="qc" data-c="purple" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="qc-name">Skill Swap</div><div class="qc-earn">Credits based</div></div>
-      <div class="qc" data-c="teal" onclick="showPage('marketplace')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="qc-name">Portfolio</div><div class="qc-earn">Freemium</div></div>
-      <div class="qc" data-c="amber" onclick="showPage('opportunities')"><div class="qc-iw"><svg width="15" height="15" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="qc-name">Campus Alerts</div><div class="qc-earn">Various rewards</div></div>
-    </div></div>
-  </div>
-
-  <!-- Desktop Ideas Grid -->
-  <div class="section" style="padding-top:1.75rem">
-    <div class="sh">
-      <div class="st reveal">All 7 Startup Ideas</div>
-      <div class="ss reveal">Carefully selected for long-term sustainability — each scales with time and student numbers.</div>
-    </div>
-
-    <div class="ideas-grid reveal">
-      <div class="idea-card" data-c="gold" onclick="showPage('marketplace')">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-        <div class="i-cat">Education · Web/App</div>
-        <div class="i-title">Peer Tutoring Marketplace</div>
-        <div class="i-desc">Tutor juniors in subjects you excel at. Constant demand for NEET, JEE, APSC & UPSC.</div>
-        <div class="i-foot"><div class="earn-badge">Earn per session</div><div class="idea-arr">→</div></div>
-      </div>
-
-      <div class="idea-card" data-c="slate" onclick="showPage('marketplace')">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="i-cat">Freelance · Skill-Based</div>
-        <div class="i-title">Student Freelance Hub</div>
-        <div class="i-desc">Design, coding, content, video editing — connect student talent with local businesses.</div>
-        <div class="i-foot"><div class="earn-badge">Earn per project</div><div class="idea-arr">→</div></div>
-      </div>
-
-      <div class="idea-card" data-c="rose" onclick="showPage('marketplace')">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg></div>
-        <div class="i-cat">Health · Coaching</div>
-        <div class="i-title">Fitness & Yoga Coaching</div>
-        <div class="i-desc">Certified students coach small groups online or on campus. Zero equipment to start.</div>
-        <div class="i-foot"><div class="earn-badge">Earn per session</div><div class="idea-arr">→</div></div>
-      </div>
-
-      <div class="idea-card" data-c="moss" onclick="showPage('marketplace')">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div>
-        <div class="i-cat">E-Commerce · Print-on-Demand</div>
-        <div class="i-title">College Merchandise Store</div>
-        <div class="i-desc">Custom hoodies, tees, mugs with college branding. Pre-order = zero inventory risk.</div>
-        <div class="i-foot"><div class="earn-badge">Earn per item</div><div class="idea-arr">→</div></div>
-      </div>
-
-      <div class="idea-card" data-c="amber" onclick="showPage('opportunities')">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
-        <div class="i-cat">Aggregator · Freemium</div>
-        <div class="i-title">Campus Opportunity Alerts</div>
-        <div class="i-desc">Scholarships, hackathons, internships, fests — all aggregated for NE students daily.</div>
-        <div class="i-foot"><div class="earn-badge">Various rewards</div><div class="idea-arr">→</div></div>
-      </div>
-
-      <div class="idea-card" data-c="purple" onclick="showPage('marketplace');filterListings('swap',null)">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
-        <div class="i-cat">Barter · Skill Exchange</div>
-        <div class="i-title">SkillSwap<span class="new-tag">New</span></div>
-        <div class="i-desc">Teach one skill, earn credits, spend credits to learn another. No cash needed to start.</div>
-        <div class="i-foot"><div class="earn-badge">Credits based</div><div class="idea-arr">→</div></div>
-      </div>
-
-      <div class="idea-card" data-c="teal" onclick="showPage('marketplace');filterListings('portfolio',null)">
-        <div class="idea-card-accent"></div>
-        <div class="iw"><svg width="19" height="19" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
-        <div class="i-cat">Tool · Freemium</div>
-        <div class="i-title">Student Portfolio Builder<span class="new-tag">New</span></div>
-        <div class="i-desc">Free resume & portfolio page for every student. Premium exports and custom domains.</div>
-        <div class="i-foot"><div class="earn-badge">Freemium model</div><div class="idea-arr">→</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sdiv"></div>
-
-  <div class="section">
-    <div class="sh" style="display:flex;align-items:center;justify-content:space-between">
-      <div><div class="st reveal">How It Works</div><div class="ss reveal">Start earning in four steps.</div></div>
-      <button style="font-size:12px;color:var(--gold);font-weight:600;white-space:nowrap" onclick="showPage('howto')">Full guide →</button>
-    </div>
-    <div class="steps-row">
-      <div class="step-card"><div class="step-n">01</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="step-title">Register</div><div class="step-desc">List your skill in under 3 minutes.</div></div>
-      <div class="step-card"><div class="step-n">02</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="step-title">Get Found</div><div class="step-desc">Appear in search and WhatsApp.</div></div>
-      <div class="step-card"><div class="step-n">03</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="step-title">Accept</div><div class="step-desc">Confirm time and details.</div></div>
-      <div class="step-card"><div class="step-n">04</div><div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="step-title">Earn</div><div class="step-desc">Get paid. Build reviews.</div></div>
-    </div>
-    <div class="cta-band reveal">
-      <div class="cta-band-title">Ready to Start Earning?</div>
-      <div class="cta-band-sub">Join students already on the platform.</div>
-      <button class="btn-primary" onclick="showPage('register')">Create Your Profile <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-    </div>
-  </div>
-</div>
-
-<!-- MARKETPLACE -->
-<div id="marketplace" class="page">
-  <div class="section">
-    <div class="sh" style="display:flex;align-items:center;justify-content:space-between">
-      <div><div class="st">Browse Services</div><div class="ss">Find student talent or list your own skills.</div></div>
-      <button onclick="openSearch()" style="display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:40px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--muted);transition:all .2s" onmouseover="this.style.borderColor='rgba(200,168,75,.28)'" onmouseout="this.style.borderColor='var(--border)'">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search
+  <header class="mobile-head">
+    <button class="brand" type="button" data-page="home">Student<span>Hub</span></button>
+    <div class="mobile-head-actions">
+      <button class="icon-button" type="button" data-open-search aria-label="Search services">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
+      <button class="account-button" type="button" data-account-button aria-label="Account"><span data-account-initials>SH</span></button>
     </div>
+  </header>
 
-    <div class="swap-banner" style="margin-bottom:1.25rem">
-      <div class="sb-badge">No Cash Needed</div>
-      <div class="sb-title">SkillSwap is Live</div>
-      <div class="sb-desc">Browse swap offers below — or post your skill and request what you need in return.</div>
+  <nav class="topbar" aria-label="Primary">
+    <button class="brand" type="button" data-page="home">Student<span>Hub</span></button>
+    <div class="nav-actions">
+      <button class="nav-link active" type="button" data-page="home">Home</button>
+      <button class="nav-link" type="button" data-page="marketplace">Marketplace</button>
+      <button class="nav-link" type="button" data-page="register">Join</button>
+      <button class="nav-link" type="button" data-page="howto">How It Works</button>
+      <button class="icon-button" type="button" data-open-search aria-label="Search services">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="account-button" type="button" data-account-button aria-label="Account"><span data-account-initials>SH</span></button>
     </div>
+  </nav>
 
-    <div class="filter-bar" id="mkt-filters">
-      <button class="fchip active" onclick="filterListings('all',this)">All</button>
-      <button class="fchip" onclick="filterListings('tutoring',this)">Tutoring</button>
-      <button class="fchip" onclick="filterListings('freelance',this)">Freelance</button>
-      <button class="fchip" onclick="filterListings('fitness',this)">Fitness</button>
-      <button class="fchip" onclick="filterListings('merch',this)">Merchandise</button>
-      <button class="fchip" onclick="filterListings('swap',this)">⇄ SkillSwap</button>
-      <button class="fchip" onclick="filterListings('portfolio',this)">Portfolio</button>
-      <button class="fchip" onclick="filterListings('alerts',this)">Alerts</button>
-    </div>
-
-    <div class="listings-grid" id="listings-grid"></div>
-  </div>
-</div>
-
-<!-- OPPORTUNITIES -->
-<div id="opportunities" class="page">
-  <div class="section">
-    <div class="sh"><div class="st">Campus Opportunities</div><div class="ss">Scholarships, hackathons, internships and fests — all in one place.</div></div>
-    <div class="filter-bar">
-      <button class="fchip active" onclick="filterOpps('all',this)">All</button>
-      <button class="fchip" onclick="filterOpps('scholarship',this)">Scholarships</button>
-      <button class="fchip" onclick="filterOpps('hackathon',this)">Hackathons</button>
-      <button class="fchip" onclick="filterOpps('internship',this)">Internships</button>
-      <button class="fchip" onclick="filterOpps('fest',this)">Fests</button>
-    </div>
-    <div class="opp-grid" id="opp-grid"></div>
-  </div>
-</div>
-
-<!-- REGISTER -->
-<div id="register" class="page">
-  <div class="section">
-    <div class="sh"><div class="st">Join StudentHub</div><div class="ss">Register as a service provider and start earning today.</div></div>
-    <div class="register-wrap">
-      <div class="form-card">
-        <div class="form-title">Create Your Profile</div>
-        <div class="fg"><label class="flabel">Full Name</label><input class="finput" type="text" placeholder="e.g. Priyanka Borah" id="reg-name" autocomplete="name"/></div>
-        <div class="fg"><label class="flabel">College / University</label><input class="finput" type="text" placeholder="e.g. XYZ College" id="reg-college" autocomplete="organization"/></div>
-        <div class="fg">
-          <label class="flabel">Service Category</label>
-          <select class="fselect" id="reg-category">
-            <option value="">Select a category</option>
-            <option>Peer Tutoring</option>
-            <option>Freelance Skills (Design / Code / Writing)</option>
-            <option>Fitness &amp; Yoga Coaching</option>
-            <option>College Merchandise</option>
-            <option>Campus Alert Channel</option>
-            <option>SkillSwap (Barter your skills)</option>
-            <option>Student Portfolio Builder</option>
-          </select>
-        </div>
-        <div class="fg"><label class="flabel">Your Skill / Offering</label><input class="finput" type="text" placeholder="e.g. Physics tutoring for JEE" id="reg-skill"/></div>
-        <div class="fg"><label class="flabel">WhatsApp Number</label><input class="finput" type="tel" placeholder="+91 98765 43210" id="reg-phone" autocomplete="tel" inputmode="tel"/></div>
-        <div class="fg"><label class="flabel">Rate / Details</label><input class="finput" type="text" placeholder="e.g. Contact for details" id="reg-rate" inputmode="decimal"/></div>
-        <button class="fsubmit" onclick="submitRegistration()">Submit &amp; Join Platform</button>
-      </div>
-
-      <div class="perk-card">
-        <div class="perk-title">Why Join StudentHub?</div>
-        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="ptext"><strong>Instant Visibility</strong>Live to students and local businesses across NE India instantly.</div></div>
-        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="ptext"><strong>Low Commission</strong>Only 10–15% per booking — the rest is yours to keep.</div></div>
-        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="ptext"><strong>WhatsApp Integration</strong>Booking requests delivered straight to your phone.</div></div>
-        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="ptext"><strong>SkillSwap Access</strong>No cash? Start with credits. Trade skills, build experience first.</div></div>
-        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ptext"><strong>Top Earner Rewards</strong>Monthly recognition for the highest-rated students.</div></div>
-        <div class="pitem"><div class="pdot"><svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="ptext"><strong>Free Portfolio Page</strong>Every registered student gets a shareable portfolio link automatically.</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HOW IT WORKS (Commission table only, no extra spacing) -->
-<div id="howto" class="page">
-  <div class="section">
-    <div class="sh"><div class="st">How It Works</div><div class="ss">Four simple steps from signup to your first earning.</div></div>
-    
-    <div class="steps-row">
-      <div class="step-card">
-        <div class="step-n">01</div>
-        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <div class="step-title">Register Your Skill</div>
-        <div class="step-desc">Fill the form and list your service — takes less than 3 minutes.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-n">02</div>
-        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-        <div class="step-title">Get Discovered</div>
-        <div class="step-desc">Profile appears in search results and our WhatsApp network.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-n">03</div>
-        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <div class="step-title">Accept a Booking</div>
-        <div class="step-desc">Client contacts you. Confirm time, mode, and details.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-n">04</div>
-        <div class="step-iw"><svg width="17" height="17" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-        <div class="step-title">Earn &amp; Grow</div>
-        <div class="step-desc">Get paid directly. Build reviews. Expand categories.</div>
-      </div>
-    </div>
-
-    <!-- Commission Structure — no extra whitespace; table fills container -->
-    <div class="sh" style="margin-top:0; margin-bottom:0.5rem;">
-      <div class="st">Commission Structure</div>
-      <div class="ss">Transparent pricing — no hidden charges.</div>
-    </div>
-    
-    <table class="comm-table">
-      <thead>
-        <tr>
-          <th>SERVICE</th>
-          <th>TYPICAL EARNING</th>
-          <th>PLATFORM CUT</th>
-          <th>YOU KEEP</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Peer Tutoring</td><td>Earn per session</td><td>10%</td><td>90%</td></tr>
-        <tr><td>Freelance Projects</td><td>Earn per project</td><td>15–20%</td><td>80–85%</td></tr>
-        <tr><td>Fitness Coaching</td><td>Earn per session</td><td>10%</td><td>90%</td></tr>
-        <tr><td>College Merchandise</td><td>Earn per item</td><td>Vendor managed</td><td><span style="color:var(--gold)">Margin kept</span></td></tr>
-        <tr><td>Opportunity Listing</td><td>Various rewards</td><td>Platform revenue</td><td>N/A</td></tr>
-        <tr><td>SkillSwap</td><td>Credits → earnings</td><td>5% on cash conversions</td><td>95%</td></tr>
-        <tr><td>Portfolio (Premium)</td><td>Freemium upsell</td><td>Platform revenue</td><td><span style="color:var(--gold)">Student keeps portfolio</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-</div>
-
-<!-- BOTTOM NAV -->
-<nav class="bot-nav" id="botNav">
-  <button class="bni active" onclick="showPage('home')" id="bni-home"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bni-label">Home</div></button>
-  <button class="bni" onclick="showPage('marketplace')" id="bni-marketplace"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg></div><div class="bni-label">Market</div></button>
-  <button class="bni" onclick="showPage('opportunities')" id="bni-opportunities"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="bni-label">Opps</div><div class="bni-dot"></div></button>
-  <button class="bni" onclick="showPage('register')" id="bni-register"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div><div class="bni-label">Join</div></button>
-  <button class="bni" onclick="showPage('howto')" id="bni-howto"><div class="bni-icon"><svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg></div><div class="bni-label">Guide</div></button>
-</nav>
-
-<div class="toast" id="toast"></div>
-
-<script>
-// LISTINGS DATA (No prices)
-const listings = [
-  {id:1,cat:'tutoring',phone:'919876543210',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'JEE Physics Crash Course',by:'Student Tutor',meta:'4.9 · Many sessions',tag:''},
-  {id:2,cat:'tutoring',phone:'919876543211',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'UPSC Prelims Coaching',by:'Senior Mentor',meta:'4.8 · Experienced',tag:''},
-  {id:3,cat:'tutoring',phone:'919876543212',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'NEET Biology Prep',by:'Med Student',meta:'5.0 · Popular',tag:''},
-  {id:4,cat:'tutoring',phone:'919876543212',icon:'<svg width="26" height="26" fill="none" stroke="#7a6840" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',name:'APSC GS Paper 1',by:'APSC Qualified',meta:'4.9 · Many sessions',tag:''},
-
-  {id:5,cat:'freelance',phone:'919876543213',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Logo & Brand Design',by:'Design Student',meta:'4.7 · Many projects',tag:''},
-  {id:6,cat:'freelance',phone:'919876543214',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'React Web App Dev',by:'CS Senior',meta:'4.9 · Many projects',tag:''},
-  {id:7,cat:'freelance',phone:'919876543215',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Content Writing & SEO',by:'Communications Major',meta:'4.6 · Many articles',tag:''},
-  {id:8,cat:'freelance',phone:'919876543216',icon:'<svg width="26" height="26" fill="none" stroke="#4a5568" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',name:'Video Editing & Reels',by:'Media Arts Student',meta:'4.8 · Many videos',tag:''},
-
-  {id:9,cat:'fitness',phone:'919876543218',icon:'<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Morning Yoga',by:'Certified Coach',meta:'4.9 · Many sessions',tag:''},
-  {id:10,cat:'fitness',phone:'919876543219',icon:'<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Zumba Fitness Group',by:'Dance & Fitness',meta:'5.0 · Many sessions',tag:''},
-  {id:11,cat:'fitness',phone:'919876543220',icon:'<svg width="26" height="26" fill="none" stroke="#6a4a5a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M2 12h20M8 12v-2a4 4 0 018 0v8a4 4 0 01-8 0v-2"/></svg>',name:'Strength & Conditioning',by:'Sports Dept. Senior',meta:'4.7 · Many sessions',tag:''},
-
-  {id:12,cat:'merch',phone:'919876543222',icon:'<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'Custom College Hoodies',by:'PrintCampus Store',meta:'Popular designs',tag:''},
-  {id:13,cat:'merch',phone:'919876543223',icon:'<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'Merchandise',by:'MemoraBatch Co.',meta:'Custom items',tag:''},
-  {id:14,cat:'merch',phone:'919876543224',icon:'<svg width="26" height="26" fill="none" stroke="#4a6a34" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H7v10a2 2 0 002 2h6a2 2 0 002-2V10h3.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>',name:'Batch Farewell Tees',by:'College PrintSquad',meta:'Pre-order open',tag:''},
-
-  {id:15,cat:'swap',phone:'919876543225',icon:'<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',name:'Python Basics ↔ Graphic Design',by:'SkillSwap User',meta:'Barter · No cash needed',tag:'swap'},
-  {id:16,cat:'swap',phone:'919876543226',icon:'<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',name:'English Speaking ↔ Math Tutor',by:'SkillSwap User',meta:'Barter · No cash needed',tag:'swap'},
-  {id:17,cat:'swap',phone:'919876543227',icon:'<svg width="26" height="26" fill="none" stroke="#7c5cbf" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',name:'Video Editing ↔ SEO Writing',by:'SkillSwap User',meta:'Barter · No cash needed',tag:'swap'},
-
-  {id:18,cat:'portfolio',phone:'919876543228',icon:'<svg width="26" height="26" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',name:'Student Resume Builder',by:'StudentHub Tool',meta:'Build in 5 minutes',tag:'new'},
-  {id:19,cat:'portfolio',phone:'919876543229',icon:'<svg width="26" height="26" fill="none" stroke="#2d9b8a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',name:'Portfolio Pro Export',by:'StudentHub Premium',meta:'Premium features',tag:'new'},
-
-  {id:20,cat:'alerts',phone:'919876543230',icon:'<svg width="26" height="26" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>',name:'NE India Opportunities Feed',by:'Campus Alerts Team',meta:'3–5 new opps daily',tag:''},
-  {id:21,cat:'alerts',phone:'919876543231',icon:'<svg width="26" height="26" fill="none" stroke="#7a5030" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>',name:'Featured Listing Slot',by:'For Coaching Centres',meta:'Reach many students',tag:''},
-];
-
-const opportunities = [
-  {type:'scholarship',icon:'<svg width="19" height="19" fill="none" stroke="#3a5a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',title:'NEC Merit Scholarship 2025',desc:'For science & engineering students across NE India.',deadline:'30 Apr',reward:'Merit based',tag:'scholarship'},
-  {type:'hackathon',icon:'<svg width="19" height="19" fill="none" stroke="#7a5a1a" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',title:'Smart India Hackathon 2025',desc:'National 36-hour hackathon. Build solutions for government problems.',deadline:'15 May',reward:'Prizes available',tag:'hackathon'},
-  {type:'internship',icon:'<svg width="19" height="19" fill="none" stroke="#2a3f6a" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',title:'ISRO Summer Internship',desc:'2-month research internship. Open for final-year B.Tech students.',deadline:'20 Apr',reward:'Stipend + experience',tag:'internship'},
-  {type:'fest',icon:'<svg width="19" height="19" fill="none" stroke="#6a2a3a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',title:'Techniche — IIT Guwahati',desc:'Annual tech fest. Competitions, workshops, pro-shows.',deadline:'12 Aug',reward:'Register Free',tag:'fest'},
-];
-
-function openWhatsApp(phone, name) {
-  const msg = encodeURIComponent(`Hi! I'm interested in: *${name}*. Is it available?`);
-  window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-}
-
-function openWhatsAppAdmin(adminPhone, userName) {
-  const msg = encodeURIComponent(`👋 Hi StudentHub! I just registered: *${userName}*. Please review my profile.`);
-  window.open(`https://wa.me/${adminPhone}?text=${msg}`, '_blank');
-}
-
-function renderListings(filter) {
-  const grid = document.getElementById('listings-grid');
-  const all = [...listings, ...(JSON.parse(localStorage.getItem('customListings')||'[]'))];
-  const f = filter === 'all' ? all : all.filter(l => l.cat === filter);
-  if (!f.length) {
-    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--muted);font-size:13px">No services in this category yet.</div>`;
-    return;
-  }
-  grid.innerHTML = f.map((l,i) => {
-    const tagHtml = l.tag === 'new' ? `<span class="lcard-tag new">New</span>` : l.tag === 'swap' ? `<span class="lcard-tag swap">⇄ Swap</span>` : '';
-    const isSwap = l.cat === 'swap';
-    const isPortfolio = l.cat === 'portfolio';
-    const btnLabel = isSwap ? 'Request Swap' : (isPortfolio) ? 'Build Now' : 'Contact Now';
-    const btnClass = isSwap ? 'lcard-action swap-btn' : 'lcard-action';
-    return `<div class="lcard" style="animation:pgIn .35s ${i*.04}s cubic-bezier(.22,1,.36,1) both">
-      <div class="lcard-img">${l.icon}</div>
-      <div class="lcard-body">
-        ${tagHtml}
-        <div class="lcard-name">${l.name}</div>
-        <div class="lcard-by">${l.by}</div>
-        <div class="lcard-meta">${l.meta}</div>
-        <button class="${btnClass}" onclick="openWhatsApp('${l.phone}','${l.name.replace(/'/g,"\\'")}')">${btnLabel}</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filterListings(cat, btn) {
-  document.querySelectorAll('#mkt-filters .fchip').forEach(c => c.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  renderListings(cat);
-}
-
-function renderOpps(filter) {
-  const grid = document.getElementById('opp-grid');
-  const f = filter === 'all' ? opportunities : opportunities.filter(o => o.type === filter);
-  grid.innerHTML = f.map((o,i) => `
-    <div class="ocard" style="animation:pgIn .35s ${i*.04}s cubic-bezier(.22,1,.36,1) both">
-      <div class="otype">${o.icon}</div>
-      <div class="o-body">
-        <div class="o-title">${o.title}</div>
-        <div class="o-desc">${o.desc}</div>
-        <div class="o-tags">
-          <span class="otag tag-dl">${o.deadline}</span>
-          <span class="otag tag-rw">${o.reward}</span>
-          <span class="otag tag-ty">${o.tag}</span>
+  <main class="app-shell">
+    <section class="page active" id="home">
+      <div class="hero">
+        <div class="hero-inner">
+          <div>
+            <div class="eyebrow">Northeast India's student economy</div>
+            <h1 class="hero-title">Earn while you <em>learn.</em></h1>
+            <p class="hero-copy">StudentHub connects students who teach, coach, and sell with learners looking for trusted campus talent.</p>
+            <div class="hero-actions">
+              <button class="btn primary" type="button" data-page="marketplace">
+                Browse services
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <button class="btn ghost" type="button" data-page="register">
+                Join free
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ochev">›</div>
-    </div>`).join('');
-}
 
-function filterOpps(type, btn) {
-  document.querySelectorAll('#opportunities .fchip').forEach(c => c.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  renderOpps(type);
-}
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Built for students on both sides</h2>
+            <p class="section-copy">Providers get a credible place to list skills. Learners get a focused way to find academic, fitness, and merchandise support.</p>
+          </div>
+          <button class="text-link" type="button" data-page="marketplace">See marketplace <span aria-hidden="true">-></span></button>
+        </div>
 
-const pages = ['home','marketplace','opportunities','register','howto'];
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-  pages.forEach(p => document.getElementById('bni-'+p)?.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  const idx = pages.indexOf(id);
-  if (idx >= 0) {
-    document.querySelectorAll('.nav-pill')[idx]?.classList.add('active');
-    document.getElementById('bni-'+id)?.classList.add('active');
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
-  if (id === 'marketplace') renderListings('all');
-  if (id === 'opportunities') renderOpps('all');
-  setTimeout(setupReveal, 80);
-}
+        <div class="category-grid">
+          <button class="category-card" type="button" data-page="marketplace" data-filter="tutoring">
+            <span class="category-icon" data-icon="book"></span>
+            <span>
+              <span class="category-title">Peer tutoring</span>
+              <span class="category-desc">Offer exam preparation, class support, and subject mentoring to juniors or local learners.</span>
+            </span>
+            <span class="category-meta"><span class="tag">Session based</span><span class="tag">Repeatable</span></span>
+          </button>
 
-function openSearch() { document.getElementById('searchOverlay').classList.add('open'); setTimeout(()=>document.getElementById('searchInput').focus(),50); }
-function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); document.getElementById('searchInput').value=''; document.getElementById('searchResults').innerHTML=''; }
-function doSearch(q) {
-  q = q.toLowerCase().trim();
-  const cont = document.getElementById('searchResults');
-  if (!q) { cont.innerHTML=''; return; }
-  const res = listings.filter(l => l.name.toLowerCase().includes(q)||l.by.toLowerCase().includes(q)||l.cat.includes(q));
-  if (!res.length) { cont.innerHTML=`<div style="padding:1rem 1.25rem;font-size:13px;color:var(--muted)">No results for "${q}"</div>`; return; }
-  cont.innerHTML = res.map(l=>`<div class="sri" onclick="closeSearch();showPage('marketplace')"><div class="sri-icon">${l.icon}</div><div style="flex:1"><div class="sri-name">${l.name}</div><div class="sri-meta">${l.by} · ${l.meta}</div></div></div>`).join('');
-}
+          <button class="category-card fitness" type="button" data-page="marketplace" data-filter="fitness">
+            <span class="category-icon" data-icon="fitness"></span>
+            <span>
+              <span class="category-title">Fitness coaching</span>
+              <span class="category-desc">Run yoga, dance fitness, mobility, or strength sessions for campus and local groups.</span>
+            </span>
+            <span class="category-meta"><span class="tag">Low cost</span><span class="tag">Group friendly</span></span>
+          </button>
 
-let toastTimer;
-function showToast(msg) {
-  clearTimeout(toastTimer);
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.style.display='block';
-  t.style.animation='none'; t.offsetHeight;
-  t.style.animation='toastIn .3s cubic-bezier(.22,1,.36,1) forwards';
-  toastTimer = setTimeout(()=>t.style.display='none',3200);
-}
+          <button class="category-card merch" type="button" data-page="marketplace" data-filter="merch">
+            <span class="category-icon" data-icon="shirt"></span>
+            <span>
+              <span class="category-title">College merchandise</span>
+              <span class="category-desc">Sell pre-order hoodies, batch tees, mugs, and mementos without holding stock.</span>
+            </span>
+            <span class="category-meta"><span class="tag">Pre-order</span><span class="tag">Margin led</span></span>
+          </button>
+        </div>
+      </section>
 
-function submitRegistration() {
-  const name = document.getElementById('reg-name').value.trim();
-  const category = document.getElementById('reg-category').value;
-  const phone = document.getElementById('reg-phone').value.trim();
-  const skill = document.getElementById('reg-skill').value.trim();
-  const college = document.getElementById('reg-college').value.trim() || "XYZ College";
-  if (!name) { showToast('Please enter your name.'); return; }
-  if (!category) { showToast('Please select a category.'); return; }
-  if (!phone) { showToast('Please enter your WhatsApp number.'); return; }
-  const cleanPhone = phone.replace(/[+\-\s]/g,'');
-  const newEntry = {id:Date.now(),cat:'freelance',phone:cleanPhone,icon:'<svg width="26" height="26" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>',name:skill||category,by:name+` · ${college}`,meta:'New provider',tag:''};
-  let stored = JSON.parse(localStorage.getItem('customListings')||'[]');
-  stored.push(newEntry); localStorage.setItem('customListings',JSON.stringify(stored));
-  openWhatsAppAdmin('918399925904', name);
-  showToast(`Welcome, ${name}! Check WhatsApp to complete registration.`);
-  ['reg-name','reg-college','reg-skill','reg-phone','reg-rate'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('reg-category').value='';
-}
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">How it works</h2>
+            <p class="section-copy">From profile to first booking in four practical steps.</p>
+          </div>
+          <button class="text-link" type="button" data-page="howto">Full guide <span aria-hidden="true">-></span></button>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="step-number">01</div><h3>Register</h3><p>Create a provider or learner profile with your college and WhatsApp details.</p></article>
+          <article class="step"><div class="step-number">02</div><h3>Match</h3><p>Providers list services. Learners share goals, schedule, and preferred mode.</p></article>
+          <article class="step"><div class="step-number">03</div><h3>Confirm</h3><p>Agree on time, expectations, payment, and final details through WhatsApp.</p></article>
+          <article class="step"><div class="step-number">04</div><h3>Grow</h3><p>Earn, learn, build trust, and improve your profile over time.</p></article>
+        </div>
+      </section>
+    </section>
 
-function setupReveal() {
-  const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
-}
+    <section class="page" id="marketplace">
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h1 class="section-title">Marketplace</h1>
+            <p class="section-copy">Browse student-led services or add your own profile to the platform.</p>
+          </div>
+          <button class="btn primary" type="button" data-page="register">Add your service</button>
+        </div>
 
-setupReveal();
-renderListings('all');
-renderOpps('all');
-</script>
+        <div class="market-categories">
+          <div class="market-category">
+            <div class="market-category-head">
+              <div class="market-category-icon" data-icon="book"></div>
+              <div>
+                <h2 class="market-category-title">Tutoring</h2>
+                <div class="market-category-sub">Learn from peer experts</div>
+              </div>
+            </div>
+            <button class="market-add-card" type="button" data-page="register">
+              <span class="market-add-icon" data-icon="plus"></span>
+              <span class="market-add-title">Add Yours</span>
+              <span class="market-add-copy">List your tutoring service</span>
+              <span class="market-add-button"><span>Add Course</span></span>
+            </button>
+          </div>
+
+          <div class="market-category fitness">
+            <div class="market-category-head">
+              <div class="market-category-icon" data-icon="fitness"></div>
+              <div>
+                <h2 class="market-category-title">Fitness</h2>
+                <div class="market-category-sub">Coaching and wellness</div>
+              </div>
+            </div>
+            <button class="market-add-card" type="button" data-page="register">
+              <span class="market-add-icon" data-icon="plus"></span>
+              <span class="market-add-title">Add Yours</span>
+              <span class="market-add-copy">List your fitness service</span>
+              <span class="market-add-button"><span>Add Session</span></span>
+            </button>
+          </div>
+
+          <div class="market-category merch">
+            <div class="market-category-head">
+              <div class="market-category-icon" data-icon="shirt"></div>
+              <div>
+                <h2 class="market-category-title">Merchandise</h2>
+                <div class="market-category-sub">E-commerce and print</div>
+              </div>
+            </div>
+            <button class="market-add-card" type="button" data-page="register">
+              <span class="market-add-icon" data-icon="plus"></span>
+              <span class="market-add-title">Add Yours</span>
+              <span class="market-add-copy">List your merchandise</span>
+              <span class="market-add-button"><span>Add Product</span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" id="register">
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h1 class="section-title">Join StudentHub</h1>
+            <p class="section-copy">Create a premium profile as a service provider or as a learner looking for the right support.</p>
+          </div>
+        </div>
+
+        <div class="form-layout">
+          <form class="form-panel" id="registrationForm">
+            <div class="form-grid">
+              <div class="role-toggle" aria-label="Choose account type">
+                <button class="role-option active" type="button" data-role-option="provider">
+                  <strong>Teacher / Provider</strong>
+                  <span>List tutoring, fitness, or merchandise services.</span>
+                </button>
+                <button class="role-option" type="button" data-role-option="learner">
+                  <strong>Learner</strong>
+                  <span>Tell us what you want to learn or buy.</span>
+                </button>
+              </div>
+              <div class="field">
+                <label for="reg-name">Full name</label>
+                <input class="input" id="reg-name" type="text" placeholder="Priyanka Borah" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="reg-college">College or university</label>
+                <input class="input" id="reg-college" type="text" placeholder="XYZ College" autocomplete="organization" />
+              </div>
+              <div class="field">
+                <label for="reg-phone">WhatsApp number</label>
+                <input class="input" id="reg-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
+              </div>
+
+              <div class="role-panel show" id="providerFields">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="reg-category">Service category</label>
+                    <select class="select" id="reg-category">
+                      <option value="">Select category</option>
+                      <option value="Tutoring">Tutoring</option>
+                      <option value="Fitness">Fitness</option>
+                      <option value="Merchandise">Merchandise</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="reg-rate">Rate or service details</label>
+                    <input class="input" id="reg-rate" type="text" placeholder="Contact for details, or mention your starting price" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="conditional" id="tutoringFields">
+                <div class="conditional-title">Tutoring profile details</div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="reg-education">Qualification</label>
+                    <select class="select" id="reg-education">
+                      <option value="">Select qualification</option>
+                      <option>Bachelor's Degree</option>
+                      <option>Master's Degree</option>
+                      <option>PhD</option>
+                      <option>Pursuing Degree</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-education">
+                    <label for="reg-education-other">Other qualification details</label>
+                    <input class="input" id="reg-education-other" type="text" placeholder="Describe your qualification" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-language">Teaching language</label>
+                    <select class="select" id="reg-language">
+                      <option value="">Select language</option>
+                      <option>English</option>
+                      <option>Hindi</option>
+                      <option>Assamese</option>
+                      <option>Bengali</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-language">
+                    <label for="reg-language-other">Other language details</label>
+                    <input class="input" id="reg-language-other" type="text" placeholder="Mention the language" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-subjects">Subjects</label>
+                    <input class="input" id="reg-subjects" type="text" placeholder="Physics, Chemistry, Mathematics" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-grades">Classes or exams</label>
+                    <input class="input" id="reg-grades" type="text" placeholder="Class 9-12, JEE, NEET" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-experience">Experience</label>
+                    <div class="experience-row">
+                      <input class="input" id="reg-experience" type="number" min="0" placeholder="2" />
+                      <select class="select" id="reg-experience-unit">
+                        <option>Years</option>
+                        <option>Months</option>
+                        <option>Days</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="reg-tech">Technical setup</label>
+                    <select class="select" id="reg-tech">
+                      <option value="">Select setup</option>
+                      <option>Laptop/Desktop with stable internet</option>
+                      <option>Smartphone only</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-tech">
+                    <label for="reg-tech-other">Other setup details</label>
+                    <input class="input" id="reg-tech-other" type="text" placeholder="Describe your setup" />
+                  </div>
+                  <div class="field full">
+                    <label for="reg-availability">Availability</label>
+                    <textarea id="reg-availability" placeholder="Monday-Friday: 6-9 PM, Saturday: 10 AM-2 PM"></textarea>
+                  </div>
+                  <label class="checkbox-row field full" for="reg-demo">
+                    <input type="checkbox" id="reg-demo" />
+                    Available for a demo class
+                  </label>
+                </div>
+              </div>
+
+              <div class="conditional" id="fitnessFields">
+                <div class="conditional-title">Fitness profile details</div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="reg-fitness-type">Coaching type</label>
+                    <select class="select" id="reg-fitness-type">
+                      <option value="">Select coaching type</option>
+                      <option>Yoga</option>
+                      <option>Zumba / Dance Fitness</option>
+                      <option>Strength Training</option>
+                      <option>Weight Loss Coaching</option>
+                      <option>Mobility / Flexibility</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-fitness-type">
+                    <label for="reg-fitness-type-other">Other coaching details</label>
+                    <input class="input" id="reg-fitness-type-other" type="text" placeholder="Describe the coaching type" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-fitness-cert">Certification level</label>
+                    <select class="select" id="reg-fitness-cert">
+                      <option value="">Select certification</option>
+                      <option>Certified trainer</option>
+                      <option>College sports team / department experience</option>
+                      <option>Self-trained with portfolio</option>
+                      <option>Currently pursuing certification</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-fitness-cert">
+                    <label for="reg-fitness-cert-other">Other certification details</label>
+                    <input class="input" id="reg-fitness-cert-other" type="text" placeholder="Mention your experience or proof" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-fitness-mode">Session mode</label>
+                    <select class="select" id="reg-fitness-mode">
+                      <option value="">Select mode</option>
+                      <option>Online</option>
+                      <option>On-campus</option>
+                      <option>Home / local outdoor sessions</option>
+                      <option>Hybrid</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-fitness-mode">
+                    <label for="reg-fitness-mode-other">Other mode details</label>
+                    <input class="input" id="reg-fitness-mode-other" type="text" placeholder="Describe how sessions will run" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-fitness-capacity">Batch size</label>
+                    <input class="input" id="reg-fitness-capacity" type="text" placeholder="1-on-1, 5-10 students, etc." />
+                  </div>
+                  <div class="field">
+                    <label for="reg-fitness-equipment">Equipment needed</label>
+                    <input class="input" id="reg-fitness-equipment" type="text" placeholder="Yoga mat, dumbbells, none, etc." />
+                  </div>
+                  <div class="field full">
+                    <label for="reg-fitness-availability">Availability</label>
+                    <textarea id="reg-fitness-availability" placeholder="Morning batches, weekends, evening slots, etc."></textarea>
+                  </div>
+                  <label class="checkbox-row field full" for="reg-fitness-safety">
+                    <input type="checkbox" id="reg-fitness-safety" />
+                    I can guide beginners safely and avoid medical/diet claims beyond my expertise
+                  </label>
+                </div>
+              </div>
+
+              <div class="conditional" id="merchFields">
+                <div class="conditional-title">Merchandise profile details</div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="reg-merch-type">Product type</label>
+                    <select class="select" id="reg-merch-type">
+                      <option value="">Select product type</option>
+                      <option>Hoodies / Sweatshirts</option>
+                      <option>T-shirts</option>
+                      <option>Mugs / Mementos</option>
+                      <option>Stickers / Stationery</option>
+                      <option>Combo packs</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-merch-type">
+                    <label for="reg-merch-type-other">Other product details</label>
+                    <input class="input" id="reg-merch-type-other" type="text" placeholder="Describe your product" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-merch-method">Production method</label>
+                    <select class="select" id="reg-merch-method">
+                      <option value="">Select method</option>
+                      <option>Print-on-demand</option>
+                      <option>Local vendor partnership</option>
+                      <option>Pre-order batch production</option>
+                      <option>Ready stock</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="reg-merch-method">
+                    <label for="reg-merch-method-other">Other production details</label>
+                    <input class="input" id="reg-merch-method-other" type="text" placeholder="Explain your production method" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-merch-min-order">Minimum order</label>
+                    <input class="input" id="reg-merch-min-order" type="text" placeholder="e.g. 20 pieces or no minimum" />
+                  </div>
+                  <div class="field">
+                    <label for="reg-merch-delivery">Delivery timeline</label>
+                    <input class="input" id="reg-merch-delivery" type="text" placeholder="e.g. 7-10 days after payment" />
+                  </div>
+                  <div class="field full">
+                    <label for="reg-merch-notes">Design and payment details</label>
+                    <textarea id="reg-merch-notes" placeholder="Mention design support, advance payment, sample policy, delivery area, etc."></textarea>
+                  </div>
+                  <label class="checkbox-row field full" for="reg-merch-permission">
+                    <input type="checkbox" id="reg-merch-permission" />
+                    I will use college names/logos only with proper permission
+                  </label>
+                </div>
+              </div>
+
+              <div class="role-panel" id="learnerFields">
+                <div class="conditional-title">Learner profile details</div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="learn-category">I want to learn / explore</label>
+                    <select class="select" id="learn-category">
+                      <option value="">Select interest</option>
+                      <option>Tutoring</option>
+                      <option>Fitness Coaching</option>
+                      <option>Merchandise / Custom Products</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="learn-category">
+                    <label for="learn-category-other">Other interest details</label>
+                    <input class="input" id="learn-category-other" type="text" placeholder="Tell us what you are looking for" />
+                  </div>
+                  <div class="field">
+                    <label for="learn-mode">Preferred mode</label>
+                    <select class="select" id="learn-mode">
+                      <option value="">Select mode</option>
+                      <option>Online</option>
+                      <option>On-campus</option>
+                      <option>Offline nearby</option>
+                      <option>Hybrid</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field other-detail" data-other-for="learn-mode">
+                    <label for="learn-mode-other">Other mode details</label>
+                    <input class="input" id="learn-mode-other" type="text" placeholder="Describe your preferred mode" />
+                  </div>
+                  <div class="field">
+                    <label for="learn-schedule">Preferred schedule</label>
+                    <input class="input" id="learn-schedule" type="text" placeholder="Weekends, evenings, mornings, etc." />
+                  </div>
+                  <div class="field full">
+                    <label for="learn-goal">Learning goal</label>
+                    <textarea id="learn-goal" placeholder="Tell us your exam, fitness goal, product need, deadline, or any specific expectation."></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="submit-row">
+              <button class="submit-button" type="submit">Submit and join platform</button>
+            </div>
+          </form>
+
+          <aside class="info-panel">
+            <div class="info-panel-head">
+              <h3>Why join?</h3>
+              <p>Designed for learners and student providers who want trust, clarity, and a premium first impression.</p>
+            </div>
+            <div class="benefits">
+              <div class="benefit"><span class="benefit-icon" data-icon="search"></span><div><strong>Better discovery</strong><span>Providers get found. Learners describe exactly what they need.</span></div></div>
+              <div class="benefit"><span class="benefit-icon" data-icon="whatsapp"></span><div><strong>WhatsApp first</strong><span>Conversations stay direct, fast, and easy to coordinate.</span></div></div>
+              <div class="benefit"><span class="benefit-icon" data-icon="wallet"></span><div><strong>Clear terms</strong><span>Rates, schedules, delivery timelines, and requirements are captured upfront.</span></div></div>
+              <div class="benefit"><span class="benefit-icon" data-icon="star"></span><div><strong>Premium profile</strong><span>The account avatar appears after signup and stores your profile locally.</span></div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" id="howto">
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h1 class="section-title">How it works</h1>
+            <p class="section-copy">A practical operating model for student providers and learners.</p>
+          </div>
+          <button class="btn primary" type="button" data-page="register">Create profile</button>
+        </div>
+
+        <div class="steps">
+          <article class="step"><div class="step-number">01</div><h3>Choose your role</h3><p>Register as a teacher/provider or as a learner looking for help.</p></article>
+          <article class="step"><div class="step-number">02</div><h3>Add details</h3><p>Providers add service requirements. Learners add goals, schedule, and preferred mode.</p></article>
+          <article class="step"><div class="step-number">03</div><h3>Connect</h3><p>Use WhatsApp to confirm availability, expectations, and next steps directly.</p></article>
+          <article class="step"><div class="step-number">04</div><h3>Continue</h3><p>Learn, earn, reorder, improve, and keep building your campus network.</p></article>
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Commission structure</h2>
+            <p class="section-copy">Transparent enough to explain in one message.</p>
+          </div>
+        </div>
+        <div class="commission-wrap">
+          <table class="commission">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Typical earning</th>
+                <th>Platform cut</th>
+                <th>You keep</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Peer tutoring</td><td>Earn per session</td><td>10%</td><td class="keep">90%</td></tr>
+              <tr><td>Fitness coaching</td><td>Earn per session</td><td>10%</td><td class="keep">90%</td></tr>
+              <tr><td>College merchandise</td><td>Earn per item</td><td>Vendor managed</td><td class="keep">Margin kept</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Mobile primary">
+    <button class="bottom-button active" type="button" data-page="home"><span data-icon="home"></span><span>Home</span></button>
+    <button class="bottom-button" type="button" data-page="marketplace"><span data-icon="bag"></span><span>Market</span></button>
+    <button class="bottom-button" type="button" data-page="register"><span data-icon="user"></span><span>Join</span></button>
+    <button class="bottom-button" type="button" data-page="howto"><span data-icon="help"></span><span>Guide</span></button>
+  </nav>
+
+  <div class="requirement-overlay" id="requirementOverlay" aria-hidden="true">
+    <div class="requirement-dialog" role="dialog" aria-modal="true" aria-labelledby="requirementTitle">
+      <div class="requirement-head">
+        <div>
+          <div class="requirement-kicker">Before you register</div>
+          <h2 class="requirement-title" id="requirementTitle">Category requirements</h2>
+        </div>
+        <button class="requirement-close" type="button" data-close-requirements aria-label="Close requirements">x</button>
+      </div>
+      <div class="requirement-body">
+        <p class="requirement-copy" id="requirementCopy"></p>
+        <ul class="requirement-list" id="requirementList"></ul>
+        <button class="requirement-action" type="button" data-close-requirements>I understand</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="account-popover" id="accountPopover" aria-hidden="true">
+    <div class="account-popover-head">
+      <div class="account-popover-avatar" data-account-initials>SH</div>
+      <div>
+        <div class="account-popover-name" id="accountName">StudentHub user</div>
+        <div class="account-popover-role" id="accountRole">Registered account</div>
+      </div>
+    </div>
+    <div class="account-popover-body" id="accountSummary">Your account is ready.</div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const icons = {
+      book: '<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+      fitness: '<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M5 8H4a4 4 0 0 0 0 8h1M2 12h20M8 12v-2a4 4 0 0 1 8 0v8a4 4 0 0 1-8 0v-2"/></svg>',
+      shirt: '<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H7v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V10h3.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>',
+      search: '<svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>',
+      whatsapp: '<svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 8.8c.2 3.5 3.1 6.3 6.7 6.7"/></svg>',
+      wallet: '<svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 7H5a2 2 0 0 1 0-4h12"/><path d="M20 7v14H5a2 2 0 0 1-2-2V5"/><path d="M16 14h4"/></svg>',
+      star: '<svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2L5.8 21 7 14.2 2 9.3l6.9-1z"/></svg>',
+      home: '<svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>',
+      bag: '<svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+      user: '<svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>',
+      help: '<svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>',
+      plus: '<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>'
+    };
+
+    const seedListings = [
+      { id: 1, cat: 'tutoring', phone: '919876543210', name: 'JEE Physics Crash Course', by: 'Student Tutor', meta: 'Concept revision and problem solving', rating: '4.9' },
+      { id: 2, cat: 'tutoring', phone: '919876543211', name: 'UPSC Prelims Mentoring', by: 'Senior Mentor', meta: 'Study plan, polity, history, CSAT', rating: '4.8' },
+      { id: 3, cat: 'tutoring', phone: '919876543212', name: 'NEET Biology Prep', by: 'Medical Student', meta: 'NCERT focus and weekly tests', rating: '5.0' },
+      { id: 4, cat: 'tutoring', phone: '919876543213', name: 'APSC GS Paper 1', by: 'APSC Qualified', meta: 'Foundation and current affairs', rating: '4.9' },
+      { id: 5, cat: 'fitness', phone: '919876543218', name: 'Morning Yoga', by: 'Certified Coach', meta: 'Beginner-friendly online batches', rating: '4.9' },
+      { id: 6, cat: 'fitness', phone: '919876543219', name: 'Zumba Fitness Group', by: 'Dance and Fitness', meta: 'Weekend campus sessions', rating: '5.0' },
+      { id: 7, cat: 'fitness', phone: '919876543220', name: 'Strength and Conditioning', by: 'Sports Department Senior', meta: 'No-equipment training plans', rating: '4.7' },
+      { id: 8, cat: 'merch', phone: '919876543222', name: 'Custom College Hoodies', by: 'PrintCampus Store', meta: 'Batch pre-orders open', rating: 'New' },
+      { id: 9, cat: 'merch', phone: '919876543223', name: 'Graduation Mugs', by: 'MemoraBatch Co.', meta: 'Custom names and departments', rating: 'New' },
+      { id: 10, cat: 'merch', phone: '919876543224', name: 'Farewell Batch Tees', by: 'College PrintSquad', meta: 'Bulk design support included', rating: 'New' }
+    ];
+
+    const categoryLabels = {
+      all: 'All services',
+      tutoring: 'Tutoring',
+      fitness: 'Fitness',
+      merch: 'Merchandise'
+    };
+
+    const categoryRequirements = {
+      Tutoring: {
+        title: 'Simple tutoring role requirements',
+        copy: 'A tutoring profile should show that you can teach clearly, stay reachable, and run sessions without basic technical issues.',
+        items: [
+          'Good internet connectivity for online classes and quick WhatsApp responses.',
+          'Strong command of the subjects, classes, or exams you want to teach.',
+          'A quiet study space, notebook or digital writing setup, and working audio.',
+          'Clear weekly availability and willingness to offer a short demo class.',
+          'Basic lesson planning, punctuality, and respectful communication with learners.'
+        ]
+      },
+      Fitness: {
+        title: 'Fitness coaching role requirements',
+        copy: 'A fitness listing needs enough detail for students to understand safety, session style, batch size, and equipment needs.',
+        items: [
+          'Relevant certification, sports experience, or a clear fitness portfolio.',
+          'Ability to guide beginners safely and avoid medical or diet claims beyond your expertise.',
+          'A suitable space or online setup with stable internet, clear video, and audible instructions.',
+          'Clear session type, batch size, warm-up/cool-down plan, and required equipment.',
+          'Emergency awareness, punctuality, and permission for any on-campus or shared-space sessions.'
+        ]
+      },
+      Merchandise: {
+        title: 'Merchandise seller requirements',
+        copy: 'A merchandise listing should make production, pricing, payment, delivery, and permissions clear before orders are accepted.',
+        items: [
+          'Reliable vendor, print-on-demand setup, or documented production method.',
+          'Clear product samples, sizes, colors, minimum order quantity, and delivery timeline.',
+          'Transparent advance payment, refund, and replacement policy for damaged items.',
+          'Permission to use college names, logos, batch names, or copyrighted artwork.',
+          'A simple order-tracking process and WhatsApp availability for customer updates.'
+        ]
+      }
+    };
+
+    let currentPage = 'home';
+    let currentFilter = 'all';
+    let currentRole = 'provider';
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+    function hydrateIcons() {
+      $$('[data-icon]').forEach((node) => {
+        const icon = icons[node.dataset.icon];
+        if (icon) node.innerHTML = icon;
+      });
+    }
+
+    function storedListings() {
+      try {
+        return JSON.parse(localStorage.getItem('studenthubListings') || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function storedAccount() {
+      try {
+        return JSON.parse(localStorage.getItem('studenthubAccount') || 'null');
+      } catch {
+        return null;
+      }
+    }
+
+    function allListings() {
+      return [...seedListings, ...storedListings()];
+    }
+
+    function normalize(value) {
+      return String(value || '').toLowerCase().trim();
+    }
+
+    function listingIcon(cat) {
+      if (cat === 'fitness') return icons.fitness;
+      if (cat === 'merch') return icons.shirt;
+      return icons.book;
+    }
+
+    function openWhatsApp(phone, name) {
+      const message = encodeURIComponent(`Hi! I am interested in: ${name}. Is it available?`);
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank', 'noopener');
+    }
+
+    function openAdminWhatsApp(name) {
+      const message = encodeURIComponent(`Hi StudentHub! I just registered: ${name}. Please review my profile.`);
+      window.open(`https://wa.me/918399925904?text=${message}`, '_blank', 'noopener');
+    }
+
+    function initialsFromName(name) {
+      const parts = String(name || 'StudentHub').trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return 'SH';
+      return parts.slice(0, 2).map((part) => part[0]).join('').toUpperCase();
+    }
+
+    function saveAccount(account) {
+      localStorage.setItem('studenthubAccount', JSON.stringify(account));
+      applyAccount(account);
+    }
+
+    function applyAccount(account = storedAccount()) {
+      if (!account) return;
+      const initials = initialsFromName(account.name);
+      $$('[data-account-initials]').forEach((node) => {
+        node.textContent = initials;
+      });
+      $$('[data-account-button]').forEach((button) => {
+        button.classList.add('show');
+        button.setAttribute('title', `${account.name} - ${account.roleLabel}`);
+      });
+      $('#accountName').textContent = account.name;
+      $('#accountRole').textContent = account.roleLabel;
+      $('#accountSummary').textContent = account.summary;
+    }
+
+    function toggleAccountPopover() {
+      const popover = $('#accountPopover');
+      const shouldOpen = !popover.classList.contains('open');
+      popover.classList.toggle('open', shouldOpen);
+      popover.setAttribute('aria-hidden', String(!shouldOpen));
+    }
+
+    function closeAccountPopover() {
+      $('#accountPopover').classList.remove('open');
+      $('#accountPopover').setAttribute('aria-hidden', 'true');
+    }
+
+    function setPage(page, options = {}) {
+      currentPage = page;
+      $$('.page').forEach((node) => node.classList.toggle('active', node.id === page));
+      $$('[data-page]').forEach((node) => {
+        const isActive = node.dataset.page === page;
+        node.classList.toggle('active', isActive);
+      });
+
+      if (options.filter) {
+        setFilter(options.filter);
+      } else if (page === 'marketplace') {
+        renderListings();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      $$('[data-filter-button]').forEach((node) => {
+        node.classList.toggle('active', node.dataset.filterButton === filter);
+      });
+      const activeFilterLabel = $('#activeFilterLabel');
+      if (activeFilterLabel) activeFilterLabel.textContent = categoryLabels[filter] || 'All services';
+      renderListings();
+    }
+
+    function renderCounts() {
+      const all = allListings();
+      const counts = {
+        all: all.length,
+        tutoring: all.filter((item) => item.cat === 'tutoring').length,
+        fitness: all.filter((item) => item.cat === 'fitness').length,
+        merch: all.filter((item) => item.cat === 'merch').length
+      };
+      Object.entries(counts).forEach(([key, value]) => {
+        const node = $(`#count-${key}`);
+        if (node) node.textContent = value;
+      });
+    }
+
+    function filteredListings() {
+      const query = normalize($('#marketSearch')?.value);
+      return allListings().filter((item) => {
+        const matchesFilter = currentFilter === 'all' || item.cat === currentFilter;
+        const searchable = normalize(`${item.name} ${item.by} ${item.meta} ${item.cat}`);
+        return matchesFilter && (!query || searchable.includes(query));
+      });
+    }
+
+    function renderListings() {
+      renderCounts();
+      const grid = $('#listingGrid');
+      if (!grid) return;
+      const items = filteredListings();
+      const cards = items.map((item) => `
+        <article class="listing-card ${item.cat}">
+          <div class="listing-media">
+            <span class="listing-symbol">${listingIcon(item.cat)}</span>
+            <span class="rating">${item.rating || 'New'}</span>
+          </div>
+          <div class="listing-body">
+            <div class="listing-category">${categoryLabels[item.cat] || 'Service'}</div>
+            <h3 class="listing-name">${escapeHtml(item.name)}</h3>
+            <div class="listing-provider">${escapeHtml(item.by)}</div>
+            <div class="listing-meta">${escapeHtml(item.meta)}</div>
+            <button class="listing-action" type="button" data-contact="${item.id}">Contact now</button>
+          </div>
+        </article>
+      `).join('');
+
+      const addCard = `
+        <button class="listing-card add-card" type="button" data-page="register">
+          <span class="add-icon">${icons.plus}</span>
+          <strong>Add your service</strong>
+          <span class="listing-meta">Create a listing in under 3 minutes.</span>
+        </button>
+      `;
+
+      grid.innerHTML = items.length ? cards + addCard : `<div class="empty-state">No matching services yet. Try another search or add the first listing.</div>${addCard}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      })[char]);
+    }
+
+    function openSearch() {
+      $('#searchOverlay').classList.add('open');
+      $('#searchOverlay').setAttribute('aria-hidden', 'false');
+      $('#globalSearch').value = '';
+      renderSearchResults('');
+      setTimeout(() => $('#globalSearch').focus(), 40);
+    }
+
+    function closeSearch() {
+      $('#searchOverlay').classList.remove('open');
+      $('#searchOverlay').setAttribute('aria-hidden', 'true');
+    }
+
+    function renderSearchResults(query) {
+      const normalized = normalize(query);
+      const results = allListings().filter((item) => {
+        const searchable = normalize(`${item.name} ${item.by} ${item.meta} ${item.cat}`);
+        return !normalized || searchable.includes(normalized);
+      }).slice(0, 8);
+
+      $('#searchResults').innerHTML = results.length
+        ? results.map((item) => `
+          <button class="result-item" type="button" data-result-filter="${item.cat}">
+            <span class="result-icon">${listingIcon(item.cat)}</span>
+            <span>
+              <span class="result-name">${escapeHtml(item.name)}</span>
+              <span class="result-meta">${escapeHtml(item.by)} - ${categoryLabels[item.cat]}</span>
+            </span>
+          </button>
+        `).join('')
+        : '<div class="empty-state">No matching services found.</div>';
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      clearTimeout(toastTimer);
+      const toast = $('#toast');
+      toast.textContent = message;
+      toast.style.display = 'block';
+      toastTimer = setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3200);
+    }
+
+    function showRequirements(category) {
+      const details = categoryRequirements[category];
+      if (!details) return;
+      $('#requirementTitle').textContent = details.title;
+      $('#requirementCopy').textContent = details.copy;
+      $('#requirementList').innerHTML = details.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+      $('#requirementOverlay').classList.add('open');
+      $('#requirementOverlay').setAttribute('aria-hidden', 'false');
+    }
+
+    function closeRequirements() {
+      $('#requirementOverlay').classList.remove('open');
+      $('#requirementOverlay').setAttribute('aria-hidden', 'true');
+    }
+
+    function setCategoryFields(category) {
+      const panels = {
+        Tutoring: '#tutoringFields',
+        Fitness: '#fitnessFields',
+        Merchandise: '#merchFields'
+      };
+      Object.values(panels).forEach((selector) => $(selector).classList.remove('show'));
+      if (panels[category]) $(panels[category]).classList.add('show');
+    }
+
+    function setRole(role) {
+      currentRole = role;
+      $$('[data-role-option]').forEach((button) => {
+        button.classList.toggle('active', button.dataset.roleOption === role);
+      });
+
+      $('#providerFields').classList.toggle('show', role === 'provider');
+      $('#learnerFields').classList.toggle('show', role === 'learner');
+      $('.submit-button').textContent = role === 'learner' ? 'Create learner account' : 'Submit and join platform';
+
+      if (role === 'learner') {
+        setCategoryFields('');
+      } else {
+        setCategoryFields($('#reg-category').value);
+      }
+    }
+
+    function toggleOtherDetail(select) {
+      const field = $(`[data-other-for="${select.id}"]`);
+      if (!field) return;
+      const shouldShow = select.value === 'Other';
+      field.classList.toggle('show', shouldShow);
+      const input = $('input, textarea', field);
+      if (input && !shouldShow) input.value = '';
+    }
+
+    function validateRequiredFields(required) {
+      for (const [id, message] of required) {
+        const node = $('#' + id);
+        if (!node || !node.value.trim()) {
+          showToast(message);
+          node?.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function validateOtherDetails(selectIds) {
+      for (const id of selectIds) {
+        const select = $('#' + id);
+        if (select?.value === 'Other') {
+          const field = $(`[data-other-for="${id}"]`);
+          const input = field ? $('input, textarea', field) : null;
+          if (!input?.value.trim()) {
+            showToast('Please enter the details for your Other selection.');
+            input?.focus();
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    function validateTutoringFields() {
+      return validateRequiredFields([
+        ['reg-education', 'Please select your qualification.'],
+        ['reg-language', 'Please select your teaching language.'],
+        ['reg-subjects', 'Please enter the subjects you can teach.'],
+        ['reg-grades', 'Please enter classes or exams you teach.'],
+        ['reg-tech', 'Please select your technical setup.'],
+        ['reg-availability', 'Please enter your availability.']
+      ]) && validateOtherDetails(['reg-education', 'reg-language', 'reg-tech']);
+    }
+
+    function validateFitnessFields() {
+      if (!validateRequiredFields([
+        ['reg-fitness-type', 'Please select your coaching type.'],
+        ['reg-fitness-cert', 'Please select your certification or experience level.'],
+        ['reg-fitness-mode', 'Please select your session mode.'],
+        ['reg-fitness-capacity', 'Please enter your batch size.'],
+        ['reg-fitness-equipment', 'Please mention equipment needed.'],
+        ['reg-fitness-availability', 'Please enter your fitness session availability.']
+      ])) return false;
+      if (!$('#reg-fitness-safety').checked) {
+        showToast('Please confirm the fitness safety statement.');
+        $('#reg-fitness-safety').focus();
+        return false;
+      }
+      return validateOtherDetails(['reg-fitness-type', 'reg-fitness-cert', 'reg-fitness-mode']);
+    }
+
+    function validateMerchFields() {
+      if (!validateRequiredFields([
+        ['reg-merch-type', 'Please select your product type.'],
+        ['reg-merch-method', 'Please select your production method.'],
+        ['reg-merch-min-order', 'Please enter your minimum order.'],
+        ['reg-merch-delivery', 'Please enter your delivery timeline.'],
+        ['reg-merch-notes', 'Please enter design and payment details.']
+      ])) return false;
+      if (!$('#reg-merch-permission').checked) {
+        showToast('Please confirm the merchandise permission statement.');
+        $('#reg-merch-permission').focus();
+        return false;
+      }
+      return validateOtherDetails(['reg-merch-type', 'reg-merch-method']);
+    }
+
+    function validateLearnerFields() {
+      return validateRequiredFields([
+        ['learn-category', 'Please select what you want to learn or explore.'],
+        ['learn-mode', 'Please select your preferred mode.'],
+        ['learn-schedule', 'Please enter your preferred schedule.'],
+        ['learn-goal', 'Please enter your learning goal.']
+      ]) && validateOtherDetails(['learn-category', 'learn-mode']);
+    }
+
+    function validateCategoryFields(category) {
+      if (category === 'Tutoring') return validateTutoringFields();
+      if (category === 'Fitness') return validateFitnessFields();
+      if (category === 'Merchandise') return validateMerchFields();
+      return true;
+    }
+
+    function submitRegistration(event) {
+      event.preventDefault();
+      const name = $('#reg-name').value.trim();
+      const college = $('#reg-college').value.trim() || 'StudentHub member';
+      const category = $('#reg-category').value;
+      const phone = $('#reg-phone').value.trim();
+      const details = $('#reg-rate').value.trim();
+
+      if (!name) return showToast('Please enter your full name.');
+      if (!phone) return showToast('Please enter your WhatsApp number.');
+
+      if (currentRole === 'learner') {
+        if (!validateLearnerFields()) return;
+        const interest = $('#learn-category').value === 'Other' ? $('#learn-category-other').value.trim() : $('#learn-category').value;
+        const account = {
+          name,
+          phone: phone.replace(/[^\d]/g, ''),
+          role: 'learner',
+          roleLabel: 'Learner account',
+          summary: `${interest} learner - ${$('#learn-mode').value}, ${$('#learn-schedule').value}.`
+        };
+        saveAccount(account);
+        event.currentTarget.reset();
+        setRole('learner');
+        $$('.other-detail').forEach((field) => field.classList.remove('show'));
+        openAdminWhatsApp(name);
+        showToast(`Welcome, ${name}. Your learner account is ready.`);
+        return;
+      }
+
+      if (!category) return showToast('Please select a service category.');
+      if (!validateCategoryFields(category)) return;
+
+      const categoryMap = { Tutoring: 'tutoring', Fitness: 'fitness', Merchandise: 'merch' };
+      const cat = categoryMap[category] || 'tutoring';
+      const cleanPhone = phone.replace(/[^\d]/g, '');
+      const experience = $('#reg-experience').value ? `${$('#reg-experience').value} ${$('#reg-experience-unit').value}` : '';
+      const newListing = {
+        id: Date.now(),
+        cat,
+        phone: cleanPhone,
+        name: category === 'Tutoring' ? `${$('#reg-subjects').value.trim()} Tutoring` : category,
+        by: `${name} - ${college}`,
+        meta: details || (experience ? `${experience} experience` : 'New provider'),
+        rating: 'New'
+      };
+
+      const stored = storedListings();
+      stored.push(newListing);
+      localStorage.setItem('studenthubListings', JSON.stringify(stored));
+      saveAccount({
+        name,
+        phone: cleanPhone,
+        role: 'provider',
+        roleLabel: `${category} provider`,
+        summary: `${category} profile - ${newListing.meta}.`
+      });
+
+      event.currentTarget.reset();
+      setRole('provider');
+      $('#tutoringFields').classList.remove('show');
+      $('#fitnessFields').classList.remove('show');
+      $('#merchFields').classList.remove('show');
+      $$('.other-detail').forEach((field) => field.classList.remove('show'));
+      renderListings();
+      openAdminWhatsApp(name);
+      showToast(`Welcome, ${name}. Your listing has been added.`);
+      setPage('marketplace', { filter: cat });
+    }
+
+    document.addEventListener('click', (event) => {
+      const pageButton = event.target.closest('[data-page]');
+      if (pageButton) {
+        const options = pageButton.dataset.filter ? { filter: pageButton.dataset.filter } : {};
+        setPage(pageButton.dataset.page, options);
+      }
+
+      const filterButton = event.target.closest('[data-filter-button]');
+      if (filterButton) setFilter(filterButton.dataset.filterButton);
+
+      const contactButton = event.target.closest('[data-contact]');
+      if (contactButton) {
+        const item = allListings().find((listing) => String(listing.id) === contactButton.dataset.contact);
+        if (item) openWhatsApp(item.phone, item.name);
+      }
+
+      if (event.target.closest('[data-open-search]')) openSearch();
+      if (event.target.closest('[data-close-search]')) closeSearch();
+      if (event.target.closest('[data-close-requirements]')) closeRequirements();
+      if (event.target.closest('[data-account-button]')) toggleAccountPopover();
+
+      const roleButton = event.target.closest('[data-role-option]');
+      if (roleButton) setRole(roleButton.dataset.roleOption);
+
+      const result = event.target.closest('[data-result-filter]');
+      if (result) {
+        closeSearch();
+        setPage('marketplace', { filter: result.dataset.resultFilter });
+      }
+
+      if (event.target === $('#searchOverlay')) closeSearch();
+      if (event.target === $('#requirementOverlay')) closeRequirements();
+      if (!event.target.closest('[data-account-button]') && !event.target.closest('#accountPopover')) closeAccountPopover();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeSearch();
+      if (event.key === 'Escape') closeRequirements();
+      if (event.key === 'Escape') closeAccountPopover();
+    });
+
+    $('#marketSearch')?.addEventListener('input', renderListings);
+    $('#globalSearch').addEventListener('input', (event) => renderSearchResults(event.target.value));
+    $('#registrationForm').addEventListener('submit', submitRegistration);
+    $('#reg-category').addEventListener('change', (event) => {
+      setCategoryFields(event.target.value);
+      showRequirements(event.target.value);
+    });
+    $$('.select').forEach((select) => {
+      select.addEventListener('change', () => toggleOtherDetail(select));
+    });
+
+    hydrateIcons();
+    applyAccount();
+    renderListings();
+  </script>
 </body>
 </html>
