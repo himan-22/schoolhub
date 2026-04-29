@@ -1983,6 +1983,10 @@
     }
 
     @media (max-width: 720px) {
+      .about-stats-grid {
+        grid-template-columns: 1fr !important;
+      }
+
       .topbar {
         display: none;
       }
@@ -2123,8 +2127,8 @@
       <button class="nav-link active" type="button" data-page="home">Home</button>
       <button class="nav-link" type="button" data-page="marketplace">Marketplace</button>
       <button class="nav-link" type="button" data-page="store">Store</button>
-      <button class="nav-link" type="button" data-page="register">Join</button>
-      <button class="nav-link" type="button" data-page="howto">How It Works</button>
+      <button class="nav-link" type="button" data-page="register" id="navJoinBtn">Join</button>
+      <button class="nav-link" type="button" data-page="howto">About</button>
       <button class="icon-button" type="button" data-open-search aria-label="Search services">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
@@ -2217,7 +2221,7 @@
             <h1 class="section-title">Marketplace</h1>
             <p class="section-copy">Browse student-led services or add your own profile to the platform.</p>
           </div>
-          <button class="btn primary" type="button" data-page="register">Add your service</button>
+          <button class="btn primary" type="button" id="addYourServiceBtn" onclick="handleAddService()">Add your service</button>
         </div>
 
         <div class="market-categories">
@@ -2303,62 +2307,12 @@
         </div>
 
         <!-- T-SHIRT CUSTOMIZER -->
-        <div style="margin-bottom:36px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);overflow:hidden;box-shadow:var(--shadow)">
-          <div style="padding:22px 24px 18px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(94,125,72,0.08),rgba(255,255,255,0))">
-            <div style="color:var(--moss);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">✦ New feature</div>
-            <h2 style="margin:0 0 6px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(22px,3vw,32px)">Design Your Own T-Shirt</h2>
-            <p style="margin:0;color:var(--ink-soft);font-size:14px;line-height:1.6">Choose colour, size, and add your custom text or college name. Place a pre-order and a student seller will fulfil it.</p>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0" id="tshirtCustomizer">
+        
             <!-- Preview panel -->
-            <div style="padding:30px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f9f7f2;min-height:340px">
-              <div id="tshirtPreview" style="position:relative;width:180px;height:200px">
-                <svg viewBox="0 0 180 200" width="180" height="200" xmlns="http://www.w3.org/2000/svg">
-                  <path id="tshirtBody" d="M55 30 L10 70 L30 80 L30 180 L150 180 L150 80 L170 70 L125 30 Q110 50 90 50 Q70 50 55 30Z" fill="#4a7c59" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
-                  <path id="tshirtSleeve1" d="M10 70 L30 80 L30 100 L5 90Z" fill="#4a7c59" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
-                  <path id="tshirtSleeve2" d="M170 70 L150 80 L150 100 L175 90Z" fill="#4a7c59" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
-                </svg>
-                <div id="tshirtText" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-30%);color:rgba(255,255,255,0.92);font-size:13px;font-weight:800;text-align:center;letter-spacing:0.5px;max-width:120px;word-break:break-word;line-height:1.3"></div>
-              </div>
-              <div style="margin-top:14px;color:var(--muted);font-size:12px;font-weight:600">Live preview</div>
-            </div>
+            
             <!-- Controls panel -->
-            <div style="padding:26px 24px;display:grid;gap:18px;align-content:start">
-              <div>
-                <div style="font-size:11px;font-weight:800;letter-spacing:0.7px;text-transform:uppercase;color:var(--ink);margin-bottom:10px">Colour</div>
-                <div style="display:flex;flex-wrap:wrap;gap:10px" id="colorPicker">
-                  <button onclick="setTshirtColor('#4a7c59','#4a7c59')" title="Forest Green" style="width:30px;height:30px;border-radius:50%;background:#4a7c59;border:2px solid #4a7c59;outline:2px solid #4a7c59;outline-offset:2px;cursor:pointer"></button>
-                  <button onclick="setTshirtColor('#2c3e6b','#2c3e6b')" title="Navy Blue" style="width:30px;height:30px;border-radius:50%;background:#2c3e6b;border:2px solid transparent;cursor:pointer"></button>
-                  <button onclick="setTshirtColor('#8a2222','#8a2222')" title="Deep Red" style="width:30px;height:30px;border-radius:50%;background:#8a2222;border:2px solid transparent;cursor:pointer"></button>
-                  <button onclick="setTshirtColor('#1a1a1a','#1a1a1a')" title="Black" style="width:30px;height:30px;border-radius:50%;background:#1a1a1a;border:2px solid transparent;cursor:pointer"></button>
-                  <button onclick="setTshirtColor('#b5863d','#b5863d')" title="Gold" style="width:30px;height:30px;border-radius:50%;background:#b5863d;border:2px solid transparent;cursor:pointer"></button>
-                  <button onclick="setTshirtColor('#c8c8c8','#c8c8c8')" title="Silver/Grey" style="width:30px;height:30px;border-radius:50%;background:#c8c8c8;border:2px solid transparent;cursor:pointer"></button>
-                  <button onclick="setTshirtColor('#fff','#ccc')" title="White" style="width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid #ccc;cursor:pointer"></button>
-                </div>
-              </div>
-              <div>
-                <div style="font-size:11px;font-weight:800;letter-spacing:0.7px;text-transform:uppercase;color:var(--ink);margin-bottom:8px">Custom text (college name, quote, batch year…)</div>
-                <input id="tshirtTextInput" class="input" type="text" placeholder="e.g. JEC 2025, Batch of Legends..." oninput="updateTshirtText(this.value)" maxlength="40" style="font-size:14px"/>
-              </div>
-              <div>
-                <div style="font-size:11px;font-weight:800;letter-spacing:0.7px;text-transform:uppercase;color:var(--ink);margin-bottom:8px">Size</div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap" id="sizePicker">
-                  <button onclick="selectSize(this)" style="min-width:42px;min-height:36px;border:1.5px solid rgba(94,125,72,0.5);border-radius:8px;background:rgba(94,125,72,0.12);color:var(--moss);font-size:13px;font-weight:700;padding:0 10px">S</button>
-                  <button onclick="selectSize(this)" style="min-width:42px;min-height:36px;border:1.5px solid rgba(94,125,72,0.5);border-radius:8px;background:rgba(94,125,72,0.12);color:var(--moss);font-size:13px;font-weight:700;padding:0 10px">M</button>
-                  <button onclick="selectSize(this)" style="min-width:42px;min-height:36px;border:1.5px solid var(--moss);border-radius:8px;background:var(--moss);color:#fff;font-size:13px;font-weight:700;padding:0 10px">L</button>
-                  <button onclick="selectSize(this)" style="min-width:42px;min-height:36px;border:1.5px solid rgba(94,125,72,0.5);border-radius:8px;background:rgba(94,125,72,0.12);color:var(--moss);font-size:13px;font-weight:700;padding:0 10px">XL</button>
-                  <button onclick="selectSize(this)" style="min-width:42px;min-height:36px;border:1.5px solid rgba(94,125,72,0.5);border-radius:8px;background:rgba(94,125,72,0.12);color:var(--moss);font-size:13px;font-weight:700;padding:0 10px">XXL</button>
-                </div>
-              </div>
-              <div>
-                <div style="font-size:11px;font-weight:800;letter-spacing:0.7px;text-transform:uppercase;color:var(--ink);margin-bottom:8px">Quantity</div>
-                <input id="tshirtQty" class="input" type="number" min="1" value="1" style="max-width:100px;font-size:14px"/>
-              </div>
-              <button onclick="orderCustomTshirt()" style="min-height:46px;border-radius:10px;background:var(--moss);color:#fff;font-size:14px;font-weight:800;border:0;cursor:pointer;transition:160px ease">
-                Order via WhatsApp →
-              </button>
-            </div>
-          </div>
+            
+              
           <style>
             @media(max-width:680px){
               #tshirtCustomizer{grid-template-columns:1fr!important}
@@ -2408,7 +2362,7 @@
             <p style="margin:0 0 22px;color:var(--muted);font-size:14px">Sign in to access your StudentHub account.</p>
             <div style="display:grid;gap:14px">
               <div class="field">
-                <label for="login-username">Username or WhatsApp number</label>
+                <label for="login-username">Username or Email id</label>
                 <input class="input" id="login-username" type="text" placeholder="yourname or +91 98765 43210" autocomplete="username" />
               </div>
               <div class="field">
@@ -3032,13 +2986,49 @@
     </section>
 
     <section class="page" id="howto">
+
+      <!-- ABOUT SECTION -->
+      <section class="section" style="border-bottom: 1px solid var(--line);">
+        <div style="max-width: 780px;">
+          <div class="eyebrow" style="color: var(--gold); margin-bottom: 16px;">About StudentHub</div>
+          <h1 class="section-title" style="margin-bottom: 20px;">NE India's student economy, <em style="font-style:italic; color: var(--gold);">built by students.</em></h1>
+          <p style="color: var(--ink-soft); font-size: 16px; line-height: 1.85; margin: 0 0 18px;">
+            StudentHub is a peer-to-peer platform built specifically for students across Northeast India. We connect students who have skills — in tutoring, fitness coaching, or merchandise — with learners and buyers on their own campuses and beyond.
+          </p>
+          <p style="color: var(--ink-soft); font-size: 16px; line-height: 1.85; margin: 0 0 18px;">
+            The idea is simple: college students are already teaching, training, and selling. StudentHub gives them a credible, structured place to do it — with clean profiles, transparent pricing, and direct WhatsApp communication that keeps things fast and personal.
+          </p>
+          <p style="color: var(--ink-soft); font-size: 16px; line-height: 1.85; margin: 0;">
+            Whether you're a learner looking for affordable, reliable support from someone who actually gets campus life — or a provider ready to turn your skills into consistent income — StudentHub is built for both sides of that conversation.
+          </p>
+        </div>
+
+        <div class="about-stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px;">
+          <div style="padding: 22px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel);">
+            <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--gold-2); line-height: 1; margin-bottom: 8px;">NE India</div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">Region focused</div>
+            <div style="font-size: 13px; color: var(--muted); line-height: 1.5;">Built for the students, colleges, and communities of Northeast India.</div>
+          </div>
+          <div style="padding: 22px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel);">
+            <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--gold-2); line-height: 1; margin-bottom: 8px;">90%</div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">Earnings kept</div>
+            <div style="font-size: 13px; color: var(--muted); line-height: 1.5;">Providers keep the majority of every session, sale, or order they complete.</div>
+          </div>
+          <div style="padding: 22px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel);">
+            <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--gold-2); line-height: 1; margin-bottom: 8px;">3 min</div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">To get listed</div>
+            <div style="font-size: 13px; color: var(--muted); line-height: 1.5;">Fill in your profile once and start receiving interest from learners right away.</div>
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="section-head">
           <div>
             <h1 class="section-title">How it works</h1>
             <p class="section-copy">A practical operating model for student providers and learners.</p>
           </div>
-          <button class="btn primary" type="button" data-page="register">Create profile</button>
+          <button class="btn primary" type="button" data-page="register" id="howtoCreateProfileBtn">Create profile</button>
         </div>
 
         <div class="steps">
@@ -3117,7 +3107,7 @@
     <button class="bottom-button active" type="button" data-page="home"><span data-icon="home"></span><span>Home</span></button>
     <button class="bottom-button" type="button" data-page="marketplace"><span data-icon="bag"></span><span>Market</span></button>
     <button class="bottom-button" type="button" data-page="store"><span data-icon="shirt"></span><span>Store</span></button>
-    <button class="bottom-button" type="button" data-page="register"><span data-icon="user"></span><span>Join</span></button>
+    <button class="bottom-button" type="button" data-page="register" id="bottomJoinBtn"><span data-icon="user"></span><span>Join</span></button>
     <button class="bottom-button" type="button" data-page="howto"><span data-icon="help"></span><span>Guide</span></button>
   </nav>
 
@@ -3374,6 +3364,16 @@
       applyAccount(account);
     }
 
+    function handleAddService() {
+      if (storedAccount()) {
+        setPage('register', { _force: true });
+        showSignup();
+        startSignup('provider');
+      } else {
+        setPage('register');
+      }
+    }
+
     function applyAccount(account = storedAccount()) {
       if (!account) return;
       const initials = initialsFromName(account.name);
@@ -3387,6 +3387,8 @@
       $('#accountName').textContent = account.name;
       $('#accountRole').textContent = account.roleLabel;
       $('#accountSummary').textContent = account.summary;
+      // Hide Join/Create-profile elements now that a profile exists
+      hideJoinElements();
     }
 
     function toggleAccountPopover() {
@@ -3401,13 +3403,39 @@
       $('#accountPopover').setAttribute('aria-hidden', 'true');
     }
 
+    function hideJoinElements() {
+      const howtoBtn = document.getElementById('howtoCreateProfileBtn');
+      if (howtoBtn) howtoBtn.style.display = 'none';
+      const navJoin = document.getElementById('navJoinBtn');
+      if (navJoin) navJoin.style.display = 'none';
+      const bottomJoin = document.getElementById('bottomJoinBtn');
+      if (bottomJoin) bottomJoin.style.display = 'none';
+    }
+
+    function showJoinElements() {
+      const howtoBtn = document.getElementById('howtoCreateProfileBtn');
+      if (howtoBtn) howtoBtn.style.display = '';
+      const navJoin = document.getElementById('navJoinBtn');
+      if (navJoin) navJoin.style.display = '';
+      const bottomJoin = document.getElementById('bottomJoinBtn');
+      if (bottomJoin) bottomJoin.style.display = '';
+    }
+
     function setPage(page, options = {}) {
+      // Block navigation to register page if profile exists (unless forced)
+      if (page === 'register' && storedAccount() && !options._force) {
+        return;
+      }
+
       currentPage = page;
       $$('.page').forEach((node) => node.classList.toggle('active', node.id === page));
       $$('[data-page]').forEach((node) => {
         const isActive = node.dataset.page === page;
         node.classList.toggle('active', isActive);
       });
+
+      // Re-enforce hidden state after class toggling (loop above can re-show hidden items)
+      if (storedAccount()) hideJoinElements();
 
       if (options.filter) {
         setFilter(options.filter);
@@ -3479,8 +3507,9 @@
         </article>
       `).join('');
 
+      const hasProfile = !!storedAccount();
       const addCard = `
-        <button class="listing-card add-card" type="button" data-page="register">
+        <button class="listing-card add-card" type="button" onclick="handleAddService()">
           <span class="add-icon">${icons.plus}</span>
           <strong>Add your service</strong>
           <span class="listing-meta">Create a listing in under 3 minutes.</span>
@@ -4188,6 +4217,9 @@
       $$('[data-account-initials]').forEach(n => { n.textContent = 'SH'; });
       document.getElementById('accountName').textContent = 'StudentHub user';
       document.getElementById('accountRole').textContent = 'Registered account';
+      // Restore Join/Create-profile elements after logout
+      showJoinElements();
+      renderListings();
       setPage('home');
       showToast('You have been logged out.');
     }
